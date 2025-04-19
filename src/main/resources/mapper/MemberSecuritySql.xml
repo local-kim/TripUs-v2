@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.MemberSecurityMapper">
+	<!-- 로그인 -->
+	<select id="getMemberById" parameterType="String" resultType="member_security">
+		select num, name, id, password, type, isAccountNonexpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled from member where id=#{id}
+	</select>
+	
+	<select id="getMemberAuthorityById" parameterType="String" resultType="String">
+		select authority_name from authority where id=#{id}
+	</select>
+	
+	<select id="getLoginInfo" parameterType="String" resultType="member_security">
+		select member.num, name, id, type, file_name as profile from member left outer join profile_photo on member.num=profile_photo.member_num where id=#{id}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="saveMember" parameterType="member_security">
+		insert into member (id, password, name, type, email, tel, birthday, zonecode, address1, address2, registered_at, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled)
+		values (#{id},#{password},#{name},#{type},#{email},#{tel},#{birthday},#{zonecode},#{address1},#{address2},now(),#{isAccountNonExpired},#{isAccountNonLocked},#{isCredentialsNonExpired},#{isEnabled})
+	</insert>
+	
+	<!-- 권한 부여 -->
+	<insert id="saveAuthority" parameterType="Map">
+		insert into authority (id, authority_name) values (#{id}, #{authority_name})
+	</insert>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="checkId" parameterType="String" resultType="int">
+		select count(*) from member where id=#{id}
+	</select>
+	
+	<select id="checkEmail" parameterType="String" resultType="int">
+		select count(*) from member where email=#{email}
+	</select>
+	
+	<update id="changePassword" parameterType="String">
+		update member set password=#{password} where id=#{id}
+	</update>
+</mapper>

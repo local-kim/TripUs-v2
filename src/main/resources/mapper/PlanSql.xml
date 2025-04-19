@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.PlanMapper">
+	<!-- 일정 만들기 페이지 -->
+	<select id="getCityCode" parameterType="int" resultType="city">
+		select * from city where num=#{cityNum}
+	</select>
+	<select id="getMyPlaceList" parameterType="Map" resultType="place">
+		select * from `like`, place where `like`.place_id=place.contentid and place.city_num=#{city_num} and `check`=1 and member_num=#{member_num}
+	</select>
+	<insert id="insertTrip" parameterType="trip">
+		insert into trip (member_num, city_num, start_date, end_date, days, name) 
+		values (#{memberNum}, #{cityNum}, #{startDate}, #{endDate}, #{days}, #{name}) 
+		<selectKey resultType="int" keyProperty="num" order="AFTER">
+    	select max(num) from trip
+    </selectKey>
+	</insert>
+	<insert id="insertItinerary" parameterType="itinerary">
+		insert into itinerary (trip_num, `day`, `order`, place_id) values (#{trip_num}, #{day}, #{order}, #{place_id})
+	</insert>
+	<select id="checkPlace" parameterType="String" resultType="int">
+		select count(*) from place where contentid=#{contentid}
+	</select>
+	<insert id="insertPlace" parameterType="place">
+		insert into place values 
+		(#{city_num}, #{contentid}, #{contenttypeid}, #{title}, #{cat3}, #{addr1}, #{addr2}, #{firstimage}, #{mapx}, #{mapy})
+	</insert>
+	
+	<!-- 일정 수정 페이지 -->
+	<select id="getTripInfo" parameterType="int" resultType="citytrip">
+		select trip.num as tripNum, trip.name as tripName, member_num as memberNum, city_num as cityNum, start_date as startDate, end_date as endDate, days, city.name as cityName, area_code, sigungu_code, x, y 
+		from trip, city where city_num=city.num and trip.num=#{tripNum}
+	</select>
+	<select id="getPlaceList" parameterType="int" resultType="plan-place">
+		select * from itinerary, place 
+		where itinerary.place_id=place.contentid and trip_num=#{tripNum} 
+		order by `day`, `order`
+	</select>
+	<delete id="deleteAllItinerary" parameterType="int">
+		delete from itinerary where trip_num=#{tripNum}
+	</delete>
+	
+	<!-- 인기 일정 -->
+	<select id="getTripRank" resultType="trip-rank">
+		<!-- select trip.num as tripNum, trip.name as tripName, start_date, end_date, days, member.num as memberNum, member.name as memberName, city.name as cityName, city.num as cityNum, city.image from trip, member, city where member_num=member.num and city_num=city.num order by trip.num desc -->
+		select trip_num as tripNum, trip.name as tripName, start_date, end_date, days, member.num as memberNum, member.name as memberName, city.num as cityNum, city.name as cityName, image, count(*) as count from plan_like, trip, member, city where plan_like.trip_num=trip.num and trip.member_num=member.num and trip.city_num=city.num group by trip_num order by count(*) desc
+	</select>
+	
+		<select id="getTripRank3" resultType="trip-rank">
+		<!-- select trip.num as tripNum, trip.name as tripName, start_date, end_date, days, member.num as memberNum, member.name as memberName, city.name as cityName, city.num as cityNum, city.image from trip, member, city where member_num=member.num and city_num=city.num order by trip.num desc -->
+		select trip_num as tripNum, trip.name as tripName, start_date, end_date, days, member.num as memberNum, member.name as memberName, city.num as cityNum, city.name as cityName, image, count(*) as count from plan_like, trip, member, city where plan_like.trip_num=trip.num and trip.member_num=member.num and trip.city_num=city.num group by trip_num order by count(*) desc limit 3
+	</select>
+	
+<!--                                                -->
+
+	<select id="getNavNum" resultType="plan">
+		select * from itinerary, place where trip_num=#{num} and place_id=contentid group by `day` order by `day`;
+	</select>
+
+	<select id="getPlanDatas" parameterType="int" resultType="plan">
+		select * from (select num, trip_num, day, `order`, place_id, contentid, city_num, cat2_name, mapx, mapy, image, `name`, firstimage, `type`, title, place.cat3, cat3_name from itinerary, place, service_type_code, city where trip_num=#{num} and place_id=contentid and place.cat3 = service_type_code.cat3 and place.city_num = city.num order by `day`, `order`) main left outer join (select place_id, truncate(avg(stars), 2) as avg_star from review group by place_id) stars on main.place_id = stars.place_id;
+	</select>
+	
+	<select id="getDate" parameterType="int" resultType="pdate">
+		SELECT * FROM final_project.trip, city where city_num=city.num and trip.num=#{num};
+	</select>
+	
+	<select id="getPlanMember" parameterType="int" resultType="pdate">
+		select * from trip, member, profile_photo where member.num=trip.member_num and member.num=profile_photo.member_num and trip.num=#{num};
+	</select>
+	<select id="mapKakao" parameterType="int" resultType="planMap">
+		SELECT `day`, `order`, mapx, mapy, days, title FROM itinerary, place, trip where place_id = contentid and trip_num=#{num} and itinerary.trip_num = trip.num order by `day`, `order`;
+	</select>
+	
+	
+	<!-- Like 관련 -->
+	<select id="getPlanLike" parameterType="Map" resultType="int">
+		SELECT count(*) FROM final_project.plan_like where trip_num = #{num} and member_num = #{loginNum};
+	</select>
+	<insert id="insertPlanLike" parameterType="Map">
+		Insert into plan_like (trip_num, member_num) values (#{num}, #{loginNum});
+	</insert>
+	<delete id="deletePlanLike" parameterType="Map">
+		Delete from plan_like where trip_num = #{num} and member_num = #{loginNum};
+   	</delete>
+   	<select id="getTotalLike" resultType="int">
+   		SELECT count(*) FROM final_project.plan_like where trip_num = #{num};
+   	</select>
+</mapper>
