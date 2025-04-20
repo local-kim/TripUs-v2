@@ -14,7 +14,7 @@ import org.project.tripus.dto.ProfileDto;
 import org.project.tripus.dto.ReviewPlaceDto;
 import org.project.tripus.dto.TripDto;
 import org.project.tripus.mapper.MyPageMapper;
-import org.project.tripus.service.CustomMemberDetailsService;
+import org.project.tripus.service.MemberService;
 import org.project.tripus.service.MypageService;
 import org.project.tripus.service.UserPageService;
 import org.project.tripus.util.FileUtil;
@@ -40,7 +40,7 @@ public class MypageController {
 	private UserPageService userPageService;
 	
 	@Autowired
-	private CustomMemberDetailsService memberService;
+	private MemberService memberService;
 	
 	@Autowired
 	MyPageMapper mapper;
@@ -156,8 +156,8 @@ public class MypageController {
 		
 		System.out.println(dto);
 		service.updateProfile2(dto);
-		
-		MemberSecurityDto member = memberService.getLoginInfo(id);	// 프로필 사진도 같이 받아옴
+
+		MemberSecurityDto member = memberService.getLoginInfo2(id);    // 프로필 사진도 같이 받아옴
 //      System.out.println(member);
       
 		return member;

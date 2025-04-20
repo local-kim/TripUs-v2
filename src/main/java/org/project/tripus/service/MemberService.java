@@ -1,81 +1,39 @@
 package org.project.tripus.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.project.tripus.dto.MemberDto;
-import org.project.tripus.mapper.MemberMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.project.tripus.dto.MemberSecurityDto;
 
-@Service
-public class MemberService implements MemberServiceInter {
+public interface MemberService {
 
-	@Autowired
-	private MemberMapper memberMapper;
+	void insertMember(MemberDto dto);
 
-	@Override
-	public void insertMember(MemberDto dto) {
-		// TODO Auto-generated method stub
-		memberMapper.insertMember(dto);
-		
-	}
+	String getName(String id);
 
-	@Override
-	public String getName(String id) {
-		// TODO Auto-generated method stub
-		return memberMapper.getName(id);
-	}
+	//	int loginCheck(String id,String pass);
+	void deleteMember(int num);
 
-//	@Override
-//	public int loginCheck(String id, String password) {
-//		// TODO Auto-generated method stub
-//		Map<String, String> map=new HashMap<>();
-//		map.put("id", id);
-//		map.put("password", password);
-//		return memberMapper.logincheck(map);
-//	}
+	int idcheck(String id);
 
-	@Override
-	public void deleteMember(int num) {
-		// TODO Auto-generated method stub
-		memberMapper.deleteMember(num);
-		
-	}
+	int emailcheck(String email);
 
-	@Override
-	public int idcheck(String id) {
-		// TODO Auto-generated method stub
-		return memberMapper.idcheck(id);
-	}
+	boolean login(String id, String password);
 
-	@Override
-	public int emailcheck(String email) {
-		// TODO Auto-generated method stub
-		return memberMapper.emailcheck(email);
-	}
+	List<Map<String, Object>> getLoginInfo(String id);
 
-	@Override
-	public boolean login(String id, String password) {
-		// TODO Auto-generated method stub
-		Map<String, String> map = new HashMap<>();
-		map.put("id", id);
-		map.put("password", password);
-		
-		return memberMapper.login(map) == 1 ? true : false;
-	}
+	int checkKakaoMember(MemberDto dto);
 
-	@Override
-	public List<Map<String, Object>> getLoginInfo(String id) {
-		// TODO Auto-generated method stub
-		return memberMapper.getLoginInfo(id);
-	}
+	///
+	void join(MemberSecurityDto member, String role);
 
-	@Override
-	public int checkKakaoMember(MemberDto dto) {
-		// TODO Auto-generated method stub
-		return memberMapper.checkKakaoMember(dto);
-	}
+	void kakaoJoin(MemberSecurityDto member, String role);
 
+	int checkId(String id);
+
+	int checkEmail(String email);
+
+	void changePassword(String id, String password);
+
+	MemberSecurityDto getLoginInfo2(String id);
 }

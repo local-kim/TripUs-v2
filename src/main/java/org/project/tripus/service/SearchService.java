@@ -2,20 +2,10 @@ package org.project.tripus.service;
 
 import java.util.List;
 import org.project.tripus.dto.CityDto;
-import org.project.tripus.mapper.SearchMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class SearchService implements SearchServiceInter {
-	
-	@Autowired
-	SearchMapper mapper;
+public interface SearchService {
 
-	@Override
-	public List<CityDto> searchAuto(String searchWord) {
-		// TODO Auto-generated method stub
-		return mapper.searchAuto(searchWord);
-	}
-
+	public List<CityDto> searchAuto(String searchWord);
 }
+
+
