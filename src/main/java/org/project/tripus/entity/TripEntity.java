@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import lombok.AccessLevel;
@@ -21,41 +23,25 @@ import org.project.tripus.global.entity.BaseEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "member")
+@Table(name = "trip")
 @Entity
-public class MemberEntity extends BaseEntity {
+public class TripEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private CityEntity city;
 
-    private String username;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private MemberEntity member;
 
-    private String password;
+    private String title;
 
-    private int type;
+    private LocalDate startDate;
 
-    private String email;
-
-    private String tel;
-
-    private LocalDate birthday;
-
-    private String zonecode;
-
-    private String address1;
-
-    private String address2;
-
-    private String profileFileUrl;
-
-//    private int isAccountNonexpired;
-//
-//    private int isAccountNonLocked;
-//
-//    private int isCredentialsNonExpired;
-//
-//    private int isEnabled;
+    private LocalDate endDate;
 }
