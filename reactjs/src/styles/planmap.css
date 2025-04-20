@@ -1,0 +1,83 @@
+#detail-map .label {
+    overflow: hidden;
+}
+#detail-map .label:hover {
+    overflow: visible;
+}
+#detail-map .label-num{
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    background-color: rgb(152, 221, 227);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    color: white;
+}
+#detail-map .label-title{
+    width: 0px;
+    height: 0px;
+    margin-bottom: 20px;
+    /* border-radius: 100px; */
+    display: flex;
+    justify-content: center;
+    text-shadow: 1px 1px 4px #125fa2, -1px -1px 4px black;
+    color: white;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    font-weight: 1000;
+    /* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4); */
+    color: whitesmoke;
+    overflow:inherit;
+}
+
+.map-box {
+    height: 100%;
+    width: 1092px;
+    padding-right: 25px;
+    margin-bottom: 400px;
+
+    border: 0px solid hotpink;
+}
+  
+#detail-map {
+    width: 100%;
+    height: 700px;
+    margin-bottom: 100px;
+    /* border: 1px solid gray; */
+    box-shadow: 0px 2px 4px #e5e5e5;
+}
+
+#detail-map .map-day-box {
+    float: right;
+}
+
+#detail-map .map-day-list:hover {
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+#detail-map .map-day-list {
+    background: #3a6670;
+    color: #f0fffe;
+    position: relative;
+    top: 10px;
+    right: 30px;
+    margin-bottom: 5px;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 30px;
+    opacity: 0.6;
+    text-align: center;
+    margin-right: -20px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px white;
+}
+
+#detail-map .scroll-item-list {
+    display: none;
+}

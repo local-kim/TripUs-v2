@@ -1,0 +1,28 @@
+#main-footer {
+    margin-top: 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#main-footer .foot-box-wrap {
+    /* position: relative; */
+    /* bottom: 0; */
+    /* width: 1291; */
+    height: 100%;
+    width: 1291px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#main-footer .foot-icons img {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin-left: 5px;
+}
+
+#main-footer .foot-text-1 {
+    /* float: left; */
+}

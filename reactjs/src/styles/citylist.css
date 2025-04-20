@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+#city-list{
+  max-width: 1100px;
+  text-align: center;
+  margin: 100px auto;
+}
+
+#city-list .title{
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+#city-list .city-item-wrap{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 220px);
+  justify-content: center;
+  justify-items: center;
+  row-gap: 60px;
+  column-gap: 70px;
+}
+
+#city-list .city-item{
+  /* margin: 10px 15px;
+  text-align: center; */
+}
+
+#city-list .city-item .city-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 220px;
+  border-radius: 100%;
+  margin-bottom: 10px;
+  background-size: cover;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+#city-list .city-item .city-name{
+  font-size: 18px;
+}
+
+#city-list .city-item a{
+  color: black;
+  font-weight: normal;
+}
+
+#city-list .city-item a:hover{
+  color: black;
+}

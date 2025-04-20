@@ -1,0 +1,725 @@
+.swiper{
+  overflow: initial !important;
+}
+
+.css-19r6kue-MuiContainer-root {
+  width: 100%;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.MuiBox-root.css-1t6c9ts > button {
+  color: black;
+}
+
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+  left: 20px;
+  right: auto;
+}
+
+header.css-11b3ww9-MuiPaper-root-MuiAppBar-root{
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+  color: black;
+}
+
+.swiper .swiper-wrapper .swiper-slide{
+  margin-right: 30px;
+  box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
+}
+
+  
+  .main_top{
+     /* background-image:url(./assets/images/cloude.gif);  */
+    
+  
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    scroll-snap-type: mandatory;
+    background-repeat: no-repeat;
+    background-position: center center;
+  
+    background-size: cover;
+  } 
+  
+  
+  
+  .wrap {
+  
+    width: 1092px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  
+  
+  
+  
+  .search_area {
+    width: 640px;
+    height: 170px;
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-top: 60px;
+    padding: 20px;
+    position: relative;
+    background: url(https://www.earthtory.com/res/img/component/bg/bgb_60.png);
+  }
+  
+  .city_autocomplete{
+    width: 600px;
+    border: solid 1px #c8c8ca;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    z-index: 9;
+    display: none;
+  }
+  
+  .search_input{
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    border: none;
+    font-size: 20px;
+    color: #b3b3b3;
+    background-position: center right;
+    margin-bottom: 10px;
+    background: url(https://www.earthtory.com/res/img/area/area_search_ico.gif) no-repeat white;
+    background-position: center right;
+  
+  
+   
+  }
+  
+  
+  
+  .latest_search{
+    float: left;
+    font-size: 14px;
+    color:white;
+  }
+  
+  
+  /* div.title{
+    text-align: center;
+  }  */
+  
+  /* div.menu{
+    
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+  }  */
+  
+  
+  /* div, input, label, a, select, ul, li { 
+     box-sizing: border-box;
+  } */
+  
+  .main_top_title{
+    color: white;
+    font-size: 44px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 150px;
+  }
+  
+  .main_top_desc{
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    
+  }
+  
+  .page.white {
+    background: white;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+  
+  
+    background-size: cover;
+    text-align: center;
+    
+  
+    
+  
+    
+  }
+  
+  .page {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+  }
+  
+  
+  
+  .page_title {
+    padding-top: 50px;
+    color: #363636;
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    
+   
+  }
+  
+  
+  .intro_box:hover img {
+    box-shadow: 0px 0px 7px rgb(0 0 0 / 50%);
+  }
+  
+  .intro_box img {
+    transition: all 1s;
+    -webkit-transition: all 1s;
+  }
+  
+  .intro_title {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: #1a7ad9;
+    padding-top: 30px;
+    width: 348px;
+    height: 48px;
+  }
+  
+  .intro_desc {
+    padding-top: 23px;
+    font-weight: bold;
+    color: #555555;
+    font-size: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+    line-height: 22px;
+    width: 348px;
+    height: 100px;
+    display: flex;
+  }
+  
+  
+  .intro_link {
+    display: block;
+    text-align: center;
+    margin-top: 60px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #ff9320;
+    text-decoration: underline;
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 30px;
+   
+  }
+  
+  img.imgphoto{
+    position: absolute; 
+    left: 500px;
+    top: 100px; 
+    max-width: 250px; 
+  }
+  
+  img.photo_photo_small{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    margin-right:10px;
+  }
+  
+  .intro_box li img {
+    text-align: center;
+  } 
+  
+  .intro_list{
+    padding-top: 40px;
+    width: 1116px;
+    overflow: hidden;
+  }
+  
+  
+  .page.silver {
+    background: white;
+    height: 100%;
+  }
+  
+  .page_desc {
+    font-size: 16px;
+    color: #808080;
+    text-align: center;
+    padding-top: 13px;
+    
+  }
+  
+  
+  
+  /* .main_top_title .a{
+    color:black;
+    margin: 10px;
+    font-size: 20px;
+    
+    text-decoration-line: none;
+    font-weight: bolder;
+ 
+  } 
+   */
+
+
+  
+  .intro_box {
+    width: 348px;
+    height: 295px;
+    margin-right: 24px;
+    display: block;
+    cursor: pointer;
+    float: left;
+  }
+  
+  .more_btn {
+    width: 348px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 13px;
+    color: #808080;
+    font-weight: bold;
+    border: 1px solid #dfdfdf;
+    cursor: pointer;
+    text-align: center;
+    background: white;
+    margin: 0 auto;
+    margin-left: 430px;
+    border: 1px solid white;
+  }
+  
+  .plan_list .box {
+    display: block;
+    width: 348px;
+    height: 296px;
+    border: 1px solid #dfdfdf;
+    position: relative;
+    float: left;
+    margin-right: 24px;
+    margin-bottom: 30px;
+    background: #fff;
+  }
+  
+  .plan_list .plan_bg {
+    width: 346px;
+    height: 100px;
+    background: linear-gradient( to bottom, rgba(0,0,0,0), rgba(0,0,0,1));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 100px;
+  }
+  
+  .plan_list .plan_bg_inner {
+    padding: 15px;
+    margin-top: 35px;
+    font-size: 16px;
+    color: white;
+    line-height: 20px;
+    width: 346px;
+    height: 70px;
+  }
+  
+  .plan_list .plan_img_box {
+    width: 346px;
+    height: 200px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 0;
+    overflow: hidden;
+  }
+  
+  .plan_list .plan_img {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 0;
+    transition: all 3.6s;
+    -webkit-transition: all 3.6s;
+  }
+  
+  .plan_list .plan_bg_inner2 {
+    width: 100%;
+    padding: 15px;
+    position: absolute;
+    top: 200px;
+    font-size: 14px;
+    color: #6f6f6f;
+    line-height: 20px;
+  }
+  
+  .plan_list .box {
+    display: block;
+    width: 348px;
+    height: 296px;
+    border: 1px solid #dfdfdf;
+    position: relative;
+    float: left;
+    margin-right: 24px;
+    margin-bottom: 30px;
+    background: #fff;
+  }
+  
+  .span{
+    
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+  
+  }
+  .plan_list .plan_bg_inner span {
+    color: #1a7ad9;
+    font-size: 14px;
+  }
+  
+  .plan_list .tour_day {
+    margin-left: 10px;
+    color: #b3b3b3 !important;
+    font-size: 14px;
+  }
+  
+  .plan_list .pn_list_spot_icon {
+    background: url(https://www.earthtory.com/res/img/mypage/plan/pn_list_spot_icon.png) no-repeat 0px 1px;
+    padding-left: 17px;
+  }
+  
+  .plan_list .pn_list_view_icon {
+    background: url(https://www.earthtory.com/res/img/mypage/plan/pn_list_view_icon.png) no-repeat 0px 3.5px;
+    padding-left: 21px;
+    margin-left: 10px;
+  }
+  
+  
+  .plan_list .pn_list_copy_icon {
+    background: url(https://www.earthtory.com/res/img/mypage/plan/pn_list_copy_icon.png) no-repeat 0px 2px;
+    padding-left: 15px;
+    margin-left: 10px;
+  }
+  
+  .plan_list .pn_list_user {
+    margin-top: 4px;
+    padding-left: 20px;
+    background: url(https://www.earthtory.com/res/img/mypage/plan/pn_list_user_icon.png) no-repeat 0px 2px;
+  }
+  
+  .fr {
+      float: right;
+  }
+  
+  .top_city_title {
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-shadow: 0px 0px 5px rgb(0 0 0 / 75%);
+    font-size: 24px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    font-weight: bold;
+  }
+  
+  .top_city_list {
+    padding-top: 10px;
+    width: 1112px;
+    height: 500px;
+    overflow: hidden;
+    
+  }
+  
+  .top_city.w2 {
+    width: 537px;
+  }
+  
+  .top_city {
+    width: 260px;
+    height: 260px;
+    float: left;
+    margin-right: 8px;
+    margin-bottom: 18px;
+    line-height: 260px;
+    display: block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .top_city.h2 {
+    height: 600px;
+    float: right;
+    line-height: 538px;
+    
+  }
+
+  #searchAuto{
+  
+      background: url(https://www.earthtory.com/res/img/common/mobile/ic_catea6.png) no-repeat;
+      background-size: 20px;
+      background-origin: content-box;
+      background-position: 0px;
+      font-size: large;
+      color: white;
+      cursor: pointer;
+      display: block;
+  }
+  
+  .h_search_cicu {
+   
+    display: block;
+    width: 100%;
+    color: white;
+    font-size: 12px;
+    font-family: 'nanum';
+    
+    height: 12px;
+    line-height: 12px;
+}
+
+.video{
+  z-index: -999;
+}
+
+.css-14ajw3y {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  
+  height: auto;
+  margin: 10px auto;
+  border-radius: 30px;
+  box-sizing: border-box;
+}
+
+.css-14ajw3y .css-1or64il-MuiButtonGroup-root .MuiButtonGroup-grouped:not(:last-of-type) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 1px solid #F6F6F6;
+  border-color: #F6F6F6;
+  /* border-color: rgba(25, 118, 210, 0.5); */
+  color: black;
+}
+
+
+.css-1or64il-MuiButtonGroup-root .MuiButtonGroup-grouped:not(:last-of-type) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 1px solid #F6F6F6;
+  border-color: #F6F6F6;
+  /* border-color: rgba(25, 118, 210, 0.5); */
+  color: black;
+}
+.css-1or64il-MuiButtonGroup-root .MuiButtonGroup-grouped:not(:first-of-type) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  color:black;
+  border-right: 1px solid #F6F6F6;
+  border-color: #F6F6F6;
+}
+
+
+.MuiButtonGroup-root.MuiButtonGroup-contained.css-zqcytf-MuiButtonGroup-root .MuiButtonGroup-grouped:not(:last-of-type) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 1px solid #f6f6f6;
+  border-color: #f6f6f6;
+  float: right;
+  color: black;
+  background-color: #f6f6f6;
+}
+
+.css-zqcytf-MuiButtonGroup-root .MuiButtonGroup-grouped {
+  min-width: 40px;
+  box-shadow: none;
+  background-color: #f6f6f6;
+  border-color: #f6f6f6;
+  color: black;
+  border-left: #F6F6F6;
+}
+
+.css-zqcytf-MuiButtonGroup-root .MuiButtonGroup-grouped {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  
+  border-color: #f6f6f6;
+}
+
+.MuiButtonGroup-root.MuiButtonGroup-contained.css-zqcytf-MuiButtonGroup-root .css-11qr2p8-MuiButtonBase-root-MuiButton-root:hover{
+  background-color: #1565c000;
+}
+
+.uk-text-meta {
+  margin-top: 5px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #999;
+  text-align: center;
+  
+}
+
+
+.css-1gjgmky-MuiToggleButtonGroup-root .MuiToggleButtonGroup-grouped:not(:last-of-type) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-color: #f6f6f6;
+  color: black;
+}
+
+.css-1gjgmky-MuiToggleButtonGroup-root .MuiToggleButtonGroup-grouped:not(:first-of-type) {
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-color: #f6f6f6;
+  color: black;
+}
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  list-style: none;
+}
+
+
+.css-19r6kue-MuiContainer-root {
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: white;
+}
+
+.latest_search:hover{
+  cursor: pointer;
+}
+
+.animated-container{
+  display: inline-flex;
+
+}
+
+.uk-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+.uk-grid-match > * > :not([class*='uk-width']) {
+  box-sizing: border-box;
+  width: 100%;
+  flex: auto;
+}
+
+
+.row .col.m4 {
+    width: 33.3333333333%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
+
+.uk-width-3-5\@m {
+    width: 60%;
+}
+
+[class*='uk-width'] {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+.uk-grid-item-match, .uk-grid-match > * {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.uk-grid > * > :last-child {
+  margin-bottom: 0;
+}
+
+.uk-grid-match > * > :not([class*='uk-width']) {
+  box-sizing: border-box;
+  width: 100%;
+  flex: auto;
+}
+
+
+
+.page2Wrap{
+  display: flex;
+  
+}
+
+.page2img{
+  background-image:url(./assets/images/seoul2.jpg);  
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  z-index: 1000;
+  
+ 
+
+}
+
+.page3img{
+  background-image:url(./assets/images/seoul6.jpg);  
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  z-index: 1000;
+
+}
+
+.MuiToolbar-root .MuiToolbar-regular .css-r6ewbb-MuiToolbar-root .a{
+  
+  text-decoration: none;
+
+}
+
+.css-1e4e1qc-MuiButtonBase-root-MuiButton-root .a{
+  text-decoration: none;
+
+} 
+
+.MuiBox-root .css-1t6c9ts .a{
+
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.animated-container{
+  justify-content: center;
+}
+

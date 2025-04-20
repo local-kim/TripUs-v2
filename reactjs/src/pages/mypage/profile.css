@@ -1,0 +1,112 @@
+.wrapper2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    min-height: 100vh;
+   
+}
+
+.container2 {
+    width: 100vw;
+    display: block;
+    background: #fff;
+    max-width: 1400px;
+    /* padding: 40px 0; */
+    /* box-shadow: 0 0 8px rgb(0 0 0 / 10%); */
+}
+
+.form-container {
+    width: 600px;
+    
+}
+
+div{
+    display: block;
+}
+
+.section-title-container {
+    border-left: 5px solid #98dde3;
+    padding-left: 8px;
+}
+
+.data {
+    height: 45px;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.data label {
+    font-size: 14px;
+}
+
+.data input {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: 'Montserrat';
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.btn-normal {
+    display: block;
+   
+    padding: 16px 24px;
+    margin: 8px;
+    border-radius: 4;
+    border: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+#fatkun-drop-panel {
+    user-select: none;
+    position: fixed;
+    top: -1e+10px;
+    color: rgb(255, 255, 255);
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    z-index: 2147483647;
+    background: rgb(64, 158, 255);
+    overflow: hidden;
+    border-radius: 5px;
+    transition: opacity 0.2s cubic-bezier(0.6, 0, 0.4, 1) 0s, transform 0.2s ease-in-out 0s;
+}
+
+.btn-quit {
+    display: block;
+    
+    border-radius: 4;
+    border: none;
+    font-size: 0.8rem;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    color: #2962ff;
+    background-color: white;   
+}
+
+.sb-avatar__image{
+    border-radius: 100%;
+    object-fit:cover;
+}
+
+.text{
+    font-size: 20px;
+    font-family: Montserrat;
+    font-weight: 600;
+    object-fit:cover;
+}

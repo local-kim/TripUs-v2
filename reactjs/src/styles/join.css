@@ -1,0 +1,357 @@
+/* * {
+    font-family: 'noto sans';
+    font-weight: 400;
+    letter-spacing: 0;
+} */
+.member_join{
+    margin: 0 auto;
+    width: 1080px;
+    text-align: center;
+    margin-top: 50px;
+}
+.member_join_list{
+    width: 640px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.tit {
+    overflow: hidden;
+    width: 1050px;
+    margin: 0 auto;
+    padding: 50px 0 51px;
+    text-align: center;
+}
+.member_join .page_sub {
+    padding-bottom: 10px;
+    font-size: 12px;
+    color: #666;
+    line-height: 17px;
+    text-align: right;
+    margin-right: 200px;
+}
+.member_join .tbl_comm {
+    width: 700px;
+    border-top: 2px solid #333;
+    margin:0 auto;
+    
+}
+.member_join th {
+    width: 159px;
+    padding: 20px 0 0 20px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+    line-height: 20px;
+    vertical-align: top;
+    text-align: left;
+}
+
+
+/* element.style {
+    width: 130px;
+} */
+.member_join input{
+    width: 332px;
+    display:inline-block;
+}
+.type_form textarea, .type_form input{
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: #333;
+    line-height: 20px;
+    border-radius: 3px;
+    background: #fff;
+    outline: none;
+    vertical-align: top;
+}
+.member_join td {
+    padding: 10px 0;
+    border-top: 0;
+    font-size: 14px;
+    vertical-align: top;
+    text-align: left;
+}
+.member_join .birth_day {
+    overflow: hidden;
+    width: 332px;
+    padding-left: 40px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.member_join .birth_day input {
+    float: left;
+    width: 84px;
+    height: 40px;
+    border: 0;
+    text-align: center;
+  
+}
+.member_join .birth .bar {
+    float: left;
+}
+.member_join .birth .bar:after {
+    content: "/";
+    float: left;
+    width: 22px;
+    height: 100%;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 42px;
+    text-align: center;
+}
+.member_join tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.member_join .btn {
+    border: 1px solid  #98dde3;
+    background-color:  #98dde3;
+    color: #fff;
+   
+    width: 140px;
+    margin-left: 5px;
+    vertical-align: top;
+}
+#addressSearch {
+    display: block;
+    overflow: hidden;
+    width: 332px;
+    height: 44px;
+    border: 0;
+    color: #fff;
+    background-color: #98dde3;
+    border-radius: 3px;
+    text-align: center;
+}
+.member_join .ico{
+    color: #1e87f0;
+}
+.btn_active{
+    border: 1px solid #5f0081;
+    background-color: #5f0080;
+    color: #fff;
+
+}
+
+
+.section_login {
+    width: 340px;
+    margin: 0 auto;
+    padding-top: 90px;
+    letter-spacing: -.6px;
+}
+.section_login .tit_login {
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.section_login input{
+    width: 100%;
+    height: 54px;
+    padding: 0 19px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    outline: none;
+    margin-top: 10px;
+}
+.section_login .link {
+    float: left;
+    font-size: 13px;
+    line-height: 1;
+}
+.btn_type1 {
+    margin-top: 10px;
+    border: 0;
+    background-color: #ffc573;
+    color: #fff
+   
+}
+.btn_type2 {
+    border: 1px solid #5f0081;
+    background-color: #fff;
+}
+.btn_type1, .btn_type2 {
+    display: block;
+    overflow: hidden;
+    width: 332px;
+    height: 54px;
+    border-radius: 3px;
+    font-size: 0;
+    text-align: center;
+}
+
+.section_login .btn_member {
+    margin-top: 10px;
+   
+}
+/* .btn_type1 .txt_type {
+    color: #fff;
+} */
+.btn_type2 .txt_type {
+    color: #5f0080;
+}
+.btn_type1 .txt_type, .btn_type2 .txt_type {
+    display: inline-block;
+    height: 100%;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 51px;
+    text-align: center;
+}
+.section_login a{
+    color: #5f0080;
+
+}
+.section_login .login_search .bar {
+    float: left;
+    width: 1px;
+    height: 10px;
+    margin: 3px 6px 0;
+    background-color: #333;
+    margin-top: 12px;
+}
+.section_login .login_search {
+    float: right;
+    padding-top: 13px;
+}
+
+
+.container_login{
+    width: 500px;
+    width: 410px;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: unset;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.container_login .text{
+
+    margin: 0 auto;
+    margin-top: 5%;
+}
+.container_login .text{
+
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    color: #000000;
+}
+.small_text{
+    font-size: 12px;
+    text-align: center;
+    color: #616161;
+    letter-spacing: 1px;
+}
+.form_container .data{
+    height: 45px;
+    width: 100%;
+    margin: 40px 0;
+}
+.form_container .data label{
+    font-size: 14px;
+    cursor: default;
+}
+.form_container .data input{
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0 !important;
+}
+.form_container .forgot_pass a{
+    color: #1e87f0;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+.form_container .signup_link{
+    text-align: center;
+    font-size: 14px;
+  
+}
+.form_container .signup_link a{
+    text-align: center;
+    font-size: 14px;
+    color: #1e87f0;
+}
+#loginBtn{
+    height: 100%;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #98dde3;
+}
+.divider{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1px;
+    width: 100%;
+    background-color: #e0e0e0;
+}
+.divider_container{
+    position: relative;
+    text-align: center;
+    margin: 8px;
+}
+.divider_container span{
+    position: relative;
+    width: 10vw;
+    background-color: #fff;
+    display: inline-block;
+    color: #616161;
+}
+.socialBtn-container{
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    width: 100%;
+    margin: 16px 0;
+}
+.socialBtn-container img{
+    max-height: 48px !important;
+}
+.socialBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.sns_text{
+    font-size: 12px;
+    text-align: center;
+    color: #000;
+    letter-spacing: 1px;
+}
+.container_login #checkbox_id{
+    float: right;
+   
+}
+.container_login .loginPage_text{
+    
+    height: 10px;
+}
+.form_container .id_checked{
+    margin-left: 200px;
+    float: right;
+    margin-bottom: 20px;
+ 
+}

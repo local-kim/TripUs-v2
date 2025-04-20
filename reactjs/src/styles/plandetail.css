@@ -1,0 +1,718 @@
+#plan-detail .plan-header {
+    width: 1291px;
+    height: 64px;
+    margin: 0 auto;
+    /* display: flex; */
+}
+#plan-detail .header-logo {
+    float: left;
+}
+#plan-detail .header-logo img {
+    float: left;
+    width: 60px;
+    height: 60px;
+    line-height: 50px;
+    cursor: pointer;
+}
+#plan-detail .header-left {
+    margin-left: 30px;
+    float: left;
+}
+#plan-detail .header-list {
+    width: 85px;
+    height: 64px;
+    float: left;
+    line-height: 64px;
+    text-align: center;
+    cursor: pointer;
+    /* border: 1px solid black; */
+}
+#plan-detail .header-list:hover {
+    /* font-weight: bold; */
+}
+#plan-detail .header-list .txt {
+    width: 65px;
+    height: 44px;
+    font-size: 14px;
+    /* border: 1px solid black; */
+    margin: 10px 0px 10px 10px;
+    line-height: 44px;
+    border-radius: 10px;
+}
+#plan-detail .header-list .txt:hover {
+    background-color: #f7f7f7;
+}
+
+#plan-detail .header-right {
+    height: 64px;
+    line-height: 64px;
+    margin-right: 30px;
+    float: right;
+}
+
+#plan-detail .all-top{
+    height: 100px;
+    margin-top: 20px;
+}
+
+#plan-detail .clear {
+    clear: both;
+}
+
+#plan-detail .fl {
+    float: left;
+}
+
+#plan-detail .fr {
+    float: right;
+}
+#plan-detail {
+    margin-top: 15px;
+    z-index: 999;
+    background-color: white;
+}
+
+#plan-detail header.MuiPaper-root {
+    position: inherit;
+}
+
+/* scroll-item > left fixed */
+#plan-detail .scroll-item {
+    position: fixed;
+    
+    /* (Header + Menu)'s height */
+    top: (67.18)+15px;
+
+    width: 144px;
+    /* border-top: 2px solid #dedede; */
+    /* border-bottom: 2px solid #dedede; */
+    box-shadow: 0px 0px 6px #e5e5e5;
+    left: 50%;
+    margin-left: -700px;
+    background: white;
+    border-radius: 5px;
+}
+#plan-detail .scroll-item-prev {
+    height: 30px;
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/plan_nav_prev.png) no-repeat;
+    background-position: center center;
+    margin-bottom: 3px;
+    cursor: pointer;
+    border-bottom: 1px solid #f7f7f7;
+}
+#plan-detail .scroll-item-list {
+    width: 100%;
+    /* max-height: 360px; */
+    overflow: hidden;
+}
+
+/* 스크롤 아이템 버튼 이벤트 */
+#plan-detail .scroll-item-btn.first {
+    display: none;
+}
+#plan-detail .scroll-item-btn {
+    height: 30px;
+}
+
+#plan-detail .scroll-item-btn.on a {
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/plan_nav_line_on.gif) no-repeat;
+    /* background-position: left center; */
+    color: #ff9320;
+}
+#plan-detail .scroll-item-btn a {
+    width: 100%;
+    color: #b3b3b3;
+    font-size: 11px;
+    font-weight: bold;
+    padding-left: 50px;
+    /* background: url(https://www.earthtory.com/res/img/mypage/plan/sub/plan_nav_line.gif) no-repeat; */
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/plan_nav_line_last.gif) no-repeat;
+    background-position: left center;
+    height: 30px;
+    line-height: 12px;
+    cursor: pointer;
+}
+#plan-detail .scroll-item-btn:last-child a {
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/plan_nav_line_last.gif) no-repeat;
+    background-position: left center;
+    height: 10px;
+}
+
+#plan-detail .scroll-item-next {
+    height: 30px;
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/plan_nav_next.png) no-repeat;
+    background-position: center center;
+    margin-top: 3px;
+    border-top: 1px solid #f7f7f7;
+}
+
+
+        /* main-image */
+
+#plan-detail .main-image {
+    width: 1092px;
+    height: 350px;
+    margin: 0 auto;
+    background-size: cover;
+    background-image: linear-gradient(white, black);
+    border: 0px solid blueviolet;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 0px 2px 4px #e5e5e5;
+}
+/* 
+#plan-detail .main-image:before {
+    content: '';
+    background: linear-gradient(to bottom,#f8f8fa, black);
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 50%;
+}
+ */
+
+#plan-detail .main-image .top-box {
+    position: relative;
+    top: 20px;
+    right: 20px;
+    float: right;
+    
+    border: 0px solid blue;
+}
+
+#plan-detail .main-image .bottom-box {
+    position: relative;
+    padding-left: 25px;
+    top: 125px;
+    float: left;
+    
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/cover_bg.png) repeat-x;
+    height: 180px;
+    width: 100%;
+    border: 0px solid red;
+}
+
+/* .cover-bottom {
+    width: 100%;
+    height: 204px;
+    position: relative;
+    z-index: 2;
+    left: 0px;
+    bottom: 0px;
+    padding-top: 90px;
+    padding-left: 25px;
+    padding-right: 25px;
+} */
+
+
+
+        /* top-box */
+
+#plan-detail .bottom-body h4 {
+    font-weight: bold;
+}        
+
+/* .top-box .like {
+    border: 1px solid gray;
+    border-radius: 100px;
+    width: 45px;
+    height: 45px;
+} */
+
+/* .top-box .like img {
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+
+    color: white;
+} */
+#plan-detail .like-btn {
+    float: right;
+    border-radius: 50%;
+    background: url(https://www.earthtory.com/res/img/component/bg/bgw_80.png) repeat;
+    margin-left: 15px;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    position: relative;
+    z-index: 30;
+}
+#plan-detail .like-btn .ico {
+    width: 45px;
+    height: 45px;
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/btn_like.png) no-repeat;
+}
+#plan-detail .like-btn.on .ico{
+    width: 45px;
+    height: 45px;
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/btn_like_on.png) no-repeat;
+}
+
+
+        /* bottom-box */
+
+#plan-detail .bottom-box .bottom-head img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background-color: white;
+    margin-right: 15px;
+    padding: 3px 3px;
+    cursor: pointer;
+}
+#plan-detail .bottom-box .bottom-head .material-icons {
+    margin: 0 auto;
+  background-color: #bdbdbd;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 40px;
+  border-radius: 25px;
+  text-align: center;
+  /* object-fit: cover; */
+  background-size: contain;
+  color: white;
+  /* font-size: 50px; */
+  margin-right: 20px;
+}
+#plan-detail .bottom-head span {
+    font-size: 1.7rem;
+    height: 100%;
+    position: relative;
+}
+
+#plan-detail .bottom-box .bottom-body {
+    padding-top: 10px;
+    color: white;
+}
+
+#plan-detail .bottom-bottom-box {
+    display: flex;
+}
+
+#plan-detail .bottom-bottom-box .bottom-count {
+    border: 2px solid white;
+    padding: 0px 5px 0px 0px;
+}
+#plan-detail .bottom-bottom-box .bottom-count img {
+    color: white;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+#plan-detail .bottom-bottom-box .bottom-price {
+    margin-left: 10px;
+    border: 2px solid white;
+    width: 170px;
+}
+
+#plan-detail .bottom-bottom-box .bottom-price .bottom-number {
+    float: right;
+    margin-right: 5px;
+}
+
+#plan-detail .bottom-bottom-box .bottom-price select {
+    background: none;
+    color: white;
+    outline: none;
+}
+
+
+
+        /* main-list */
+
+#plan-detail .main-list {
+    width: 1092px;
+    margin: 0 auto;
+}
+
+#plan-detail .main-list .list-header {
+    position: sticky;
+    top: 0px;
+    height: 70px;
+    background-color: white;
+    border-radius: 0px 0px 5px 5px;
+    /* border: 1px solid #c8c8ca; */
+    box-shadow: 0px 2px 4px #e5e5e5;
+    border-top: none;
+    z-index: 100;
+}
+
+#plan-detail .header-menu {
+    display: block;
+    height: 70px;
+    line-height: 70px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-size: 18px;
+    color: #808080;
+    float: left;
+    cursor: pointer;
+}
+#plan-detail .header-menu.on {
+    color: #49b2e9;
+}
+#plan-detail .header-menu:hover, .header-menu .on {
+    color: #49b2e9;
+}
+
+#plan-detail .header-menu-line {
+    float: left;
+    width: 1px;
+    height: 24px;
+    background: #b3b3b3;
+    margin-top: 22px;
+}
+
+#plan-detail .header-menu-right1 {
+    display: inline-block;
+    background: #ffc573;
+    color: white;
+    border: 1px solid #fff9ed;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 23px;
+    padding-right: 23px;
+    float: right;
+    margin-top: 14px;
+    margin-right: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#plan-detail .header-menu-right2 {
+    display: block;
+    background: #98dde3;
+    border: 1px solid #f0fffe;
+    color: white;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 23px;
+    padding-right: 23px;
+    float: right;
+    margin-top: 14px;
+    margin-right: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+        /* menu list  */
+
+#plan-detail .main-list .wrap-list {
+    display: flex;
+    padding-top: 25px;
+    border: 0px solid black;
+}
+
+
+        /* Left */
+
+#plan-detail .list-left {
+    height: 100%;
+    min-height: 400px;
+    width: 750px;
+    padding-right: 25px;
+    margin-bottom: 200px;
+
+    border: 0px solid hotpink;
+}
+
+
+#plan-detail .list-left .day-box {
+    width: 100%;
+    
+
+    border: 0px solid red;
+}
+
+#plan-detail .day-box-title {
+    width: 100%;
+    height: 60px;
+}
+
+#plan-detail .day-num {
+    float: left;
+    background: #203341;
+    height: 60px;
+    line-height: 60px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    width: 110px;
+    text-align: center;
+    border-radius: 5px 0px 0px 0px;
+}
+
+#plan-detail .day-date {
+    float: left;
+    
+    /* total(750) - (day)110 - padding(25) border's */
+    width: 615px;
+
+    background: white;
+    border-top: 1px solid #f2f2f2;
+    /* border-right: 1px solid #e5e5e5; */
+    border-bottom: 1px solid #f2f2f2;
+    height: 60px;
+    border-radius: 0px 10px 0px 0px;
+}
+
+#plan-detail .day-date-left {
+    float: left;
+    width: 430px;
+    padding-left: 10px;
+}
+#plan-detail .day-date-left .date {
+    font-size: 12px;
+    color: #b3b3b3;
+    font-weight: bold;
+    padding-top: 7px;
+}
+#plan-detail .day-date-left .day-title {
+    color: #363636;
+    font-weight: bold;
+    font-size: 18px;
+    padding-top: 1px;
+}
+
+#plan-detail .day-date-right {
+    /* day-date(611) - -left(430) */
+    width: 179px;
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    color: #555555;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 15px;
+}
+
+        /* 날짜별 일정 리스트 */
+        #plan-detail .day-box-list {
+    width: 100%;
+    /* border: 1px solid #e5e5e5; */
+    box-shadow: 0px 2px 5px #e5e5e5;
+    background: white;
+    min-height: 100px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+
+#plan-detail .undistance {
+    width: 730px;
+    height: 40px;
+    border: 0px solid black;
+    background: white;
+    z-index: 100;
+    margin-top: -23px;
+}
+#plan-detail .day-box:last-child .day-box-distance {
+    display: none;
+}
+#plan-detail .day-box-distance {
+    width: 725px;
+    /* border-left: 1px solid #e5e5e5; */
+    /* border-right: 1px solid #e5e5e5; */
+    height: 28px;
+    line-height: 30px;
+    background: url(https://www.earthtory.com/res/img/mypage/plan/sub/distance_line.gif) no-repeat;
+    background-position: 54px center;
+    padding-left: 117px;
+    color: #555555;
+    font-size: 12px;
+}
+#plan-detail .day-list-num {
+    height: 100%;
+    text-align: center;
+    float: left;
+    width: 110px;
+}
+#plan-detail .list-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    background: #223b68;
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 35px;
+}
+#plan-detail .list-content {
+    width: 604px;
+    float: left;
+    padding-top: 15px;
+}
+    /* spot 박스 */
+#plan-detail .spot-img {
+    float: left;
+    width: 70px;
+    height: 70px;
+    border: 1px solid #b3b3b3;
+}
+#plan-detail .spot-content-box {
+    width: 425px;
+    float: left;
+    padding-left: 10px;
+}
+#plan-detail .spot-name a {
+    font-size: 17px;
+    color: #555555;
+    font-weight: bold;
+    cursor: pointer;
+}
+#plan-detail .spot-info {
+    height: 41px;
+    padding-top: 5px;
+}
+#plan-detail .sinfo-cat2 {
+    float: left;
+    margin-top: 1px;
+    font-size: 0.8rem;
+    color: #555555;
+}
+#plan-detail .sinfo-line {
+    background: #808080;
+    width: 1px;
+    height: 10px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+#plan-detail .sinfo-txt {
+    float: left;
+    font-size: 12px;
+    color: #555555;
+    margin-top: -5px;
+    /* line-height: 23px; */
+    /* 좋아요 이미지 url */
+    /* background: url(https://www.earthtory.com/res/img/city/spot_rate_icon.png) no-repeat; */
+    /* padding-left: 20px; */
+}
+#plan-detail .sinfo-txt span {
+}
+#plan-detail .spot-btn-box {
+    width: 109px;
+    float: left;
+    height: 100%;
+    padding-right: 15px;
+    margin-top: 20px;
+}
+#plan-detail .spot-btn {
+    float: right;
+    margin-left: 15px;
+    cursor: pointer;
+}
+#plan-detail .list-use-price {
+    width: 100%;
+    padding-left: 190px;
+    padding-right: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#plan-detail .use-price {
+    color: #555555;
+    font-size: 13px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+#plan-detail .use-memo {
+    font-size: 13px;
+    color: #808080;
+    line-height: 18px;
+}
+
+        /* Right */
+
+#plan-detail .list-right {
+    position: sticky;
+    margin-top: 15px;
+    top: 95px;
+
+    /* Full - list-lefr ( 1092 - 750 ) */
+    width: 342px;
+    height: 100%;
+    background: white;
+
+    box-shadow: 0px 2px 4px #e5e5e5;
+    border: 0px solid lightpink   
+}
+
+#plan-detail .list-right-map {
+    width: 341px;
+    height: 303px;
+}
+.spot-list-box::-webkit-scrollbar {
+    display: none;
+}
+
+#plan-detail .spot-list-box {
+    width: 341px;
+    height: 135px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    border: 0px solid #dedede;
+    border-top: 1px solid goldenrod;
+    z-index: 10;
+}
+#plan-detail .row {
+    width: 339px;
+    height: 100%;
+    padding: 20px 25px 0px;
+    margin: 0;
+}
+#plan-detail .row .rlist {
+    display: flex;
+    width: 33.33%;
+    height: 18px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    border: 0px solid black;
+}
+#plan-detail .row-more {
+    position: absolute;
+    /* left: -0.5px; */
+    width: 342px;
+    border: 0px solid #dedede;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #555555;
+    background-color: white;
+    z-index: 20;    
+    box-shadow: 0px 2px 4px #e5e5e5;
+}
+#plan-detail .spot-number {
+    float: left;
+    width: 22px;
+    height: 18px;
+    line-height: 18px;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
+    border-radius: 50%;
+    background: #223b68;
+}
+#plan-detail .spot-title {
+    float: left;
+    font-size: 12px;
+    color: #555555;
+    padding-left: 5px;
+    line-height: 18px;
+    width: 54px;
+    overflow: hidden;
+}
+
+#plan-detail .swal-button {
+    background-color: #98DDE3;
+    color: white;
+}
+

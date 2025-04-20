@@ -1,0 +1,236 @@
+#user-page {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+#user-page .profile{
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#user-page .profile .photo{
+  margin: 0 auto;
+  background-color: #c7eef0;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  /* object-fit: cover; */
+  background-size: cover;
+  color: white;
+  /* font-size: 50px; */
+}
+
+#user-page .profile .photo .material-icons{
+  font-size: 60px;
+  line-height: 1.65;
+}
+
+#user-page .profile .name{
+  font-family: 'Montserrat';
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+#user-page .sb-avatar__text{
+  border-radius: 100%;
+}
+
+/* Trip List */
+
+#user-page .trip-list .trip{
+  width: 800px;
+  margin: 20px auto;
+  box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
+  padding: 30px 50px;
+}
+
+#user-page .trip-wrap-1{
+  display: flex;
+
+}
+
+#user-page .trip-wrap-1 .trip-img{
+  width: 140px;
+  overflow: hidden;
+  
+}
+
+#user-page .trip-wrap-1 .trip-img:hover{
+
+
+  transition: 4s;
+ transform: scale(1.2);
+ box-shadow: 0px 0px 7px rgb(0 0 0 / 50%);
+ transition: all 0.2s linear;
+ overflow: hidden;
+}
+
+
+#user-page .trip-wrap-1 .trip-info-wrap{
+  font-family: 'Montserrat';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 200px;
+  margin-left: 10px;
+}
+
+#user-page .trip-wrap-1 .trip-info-wrap .days{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #98dde3;
+  color: white;
+  font-weight: 700;
+}
+
+#user-page .trip-wrap-1 .trip-info-wrap .city-eng-name{
+  font-size: 24px;
+  font-weight: 700;
+}
+
+#user-page .trip-wrap-1 .trip-info-wrap .city-name{
+  color: gray;
+}
+
+#user-page .trip-wrap-2{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 50px;
+  /* padding: 40px; */
+}
+
+#user-page .trip-wrap-2 .trip-name{
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Montserrat';
+}
+
+#user-page .trip-wrap-2 .trip-name:hover{
+cursor: pointer;
+}
+
+/* #user-page .trip-wrap-2 .trip-name .material-icons{
+  font-size: 25px;
+  color: gray;
+} */
+
+#user-page .trip-wrap-2 .trip-date{
+  /* font-size: 18px; */
+  font-weight: 700;
+  font-family: 'Montserrat';
+  color: #568d96;
+}
+
+/* #user-page .trip-info-wrap{
+  font-family: 'Montserrat';
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: #111;
+}
+
+#user-page .trip-info-wrap .trip-name{
+  font-size: 20px;
+}
+
+#user-page .trip-info-wrap .trip-date{
+  font-size: 16px;
+  font-weight: 600;
+} */
+
+#user-page .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  color: rgb(30, 30, 30);
+}
+
+#user-page .css-1aquho2-MuiTabs-indicator{
+  background-color: #98dde3;
+}
+
+#user-page .css-1h9z7r5-MuiButtonBase-root-MuiTab-root{
+  font-size: 1rem;
+}
+
+/* Review List */
+
+#review-list .review{
+  /* border: '1px solid gray'; */
+  width: 750px;
+  /* margin: 20px auto; */
+  margin: 0 auto;
+  padding: 25px 15px;
+  /* box-shadow: 0 5px 15px rgb(0 0 0 / 8%); */
+  /* border-bottom: 1px solid rgb(231, 231, 231); */
+  display: flex;
+  align-items: flex-start;
+}
+
+#review-list .review:not(:last-child){
+  border-bottom: 1px solid #eeeeee;
+}
+
+#review-list .img{
+  max-width: 57px;
+  min-width: 57px;
+  height: 57px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+#review-list .review .place-wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+#review-list .review .place-wrap .place{
+  display: flex;
+  align-items: center;
+}
+
+#review-list .review .place-wrap .title{
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#review-list .review .place-wrap .cat{
+  color: gray;
+  font-size: 15px;
+}
+
+#review-list .review .place-wrap .date{
+  color: rgb(145, 145, 145);
+  font-size: 14px;
+}
+
+#review-list .review .content{
+  margin: 10px 0 0 2px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+#review-list .no-image{
+  min-width: 57px;
+  max-width: 57px;
+  height: 57px;
+  border-radius: 5px;
+  background-color: #eeeeee;
+  color: gray;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
