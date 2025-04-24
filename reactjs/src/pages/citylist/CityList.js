@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import CityItem from './CityItem';
 import '../../styles/citylist.css';
@@ -30,7 +30,7 @@ const CityList = () => {
       // }}
     )
     .then(res => {
-      setList(res.data);
+      setList(res.data.data.cityList);
       console.log(res.data);
     })
     .catch(err => console.log(err));

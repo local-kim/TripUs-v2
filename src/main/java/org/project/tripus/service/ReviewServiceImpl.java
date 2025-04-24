@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.project.tripus.dto.ReviewDto;
-import org.project.tripus.mapper.ReviewMapper;
+import org.project.tripus.mybatismapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

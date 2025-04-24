@@ -34,9 +34,9 @@ public class CityEntity extends BaseEntity {
 
     private String country;
 
-    private int areaCode;
+    private Integer areaCode;
 
-    private int sigunguCode;
+    private Integer sigunguCode;
 
     private String fileName;
 
@@ -44,5 +44,5 @@ public class CityEntity extends BaseEntity {
 
     private String y;
 
-    private int cat;
+    private Integer cat;
 }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.project.tripus.dto.CityDto;
-import org.project.tripus.mapper.MainPageMapper;
+import org.project.tripus.mybatismapper.MainPageMapper;
 import org.project.tripus.service.MainPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

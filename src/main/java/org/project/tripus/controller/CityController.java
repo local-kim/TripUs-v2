@@ -1,14 +1,23 @@
 package org.project.tripus.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.HashMap;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.CityDto;
 import org.project.tripus.dto.PlaceDto;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.service.CityInfoService;
+import org.project.tripus.dto.output.GetCityListOutputDto;
+import org.project.tripus.dto.response.GetCityListResponseDto;
+import org.project.tripus.global.response.CommonResponse;
+import org.project.tripus.mapper.CityMapper;
+import org.project.tripus.service.CityService;
 import org.project.tripus.service.PlanService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,20 +26,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RequiredArgsConstructor
+@Tag(name = "도시 API", description = "도시에 관한 API")
 @RequestMapping("/city")
-@CrossOrigin(origins = "*", exposedHeaders = "**")
-public class CityInfoController {
+@RestController
+public class CityController {
 
-    @Autowired
-    private CityInfoService ciservice;
-
-    @Autowired
-    private PlanService planService;
+    private final CityService cityService;
+    private final PlanService planService;
+    private final CityMapper cityMapper;
 
     @GetMapping("/citydata")
     public CityDto getData(@RequestParam int num) {
-        return ciservice.getData(num);
+        return cityService.getData(num);
     }
 
     // city랑 trip이랑 join 써본거
@@ -49,26 +57,19 @@ public class CityInfoController {
         @RequestParam int loginNum,
         @RequestParam int city_num
     ) {
-        return ciservice.getTripData(loginNum, city_num);
+        return cityService.getTripData(loginNum, city_num);
     }
 
     // 장소 좋아요
     @GetMapping("/like")
     public int getLike(@RequestParam String place_id, @RequestParam int loginNum) {
         System.out.println("mylike");
-        System.out.println(ciservice.getLike(place_id, loginNum));
-        return ciservice.getLike(place_id, loginNum);
+        System.out.println(cityService.getLike(place_id, loginNum));
+        return cityService.getLike(place_id, loginNum);
     }
 
     @PostMapping("/insertlike")
     public void insertLike(@RequestBody HashMap<String, Object> request) {
-//		System.out.println(request.get("place"));
-//		System.out.println(request.get("place").getClass().getName());
-//		LinkedHashMap<String, String> map = (LinkedHashMap<String, String>)request.get("place");
-//		int place_id=Integer.parseInt(String.valueOf(request.get("place_id")));
-//		PlaceDto place = (PlaceDto)request.get("place");
-//		System.out.println(map);
-
         PlaceDto place = new PlaceDto();
 
         place.setCity_num(Integer.parseInt((String) request.get("cityNum")));
@@ -90,22 +91,29 @@ public class CityInfoController {
         int loginNum = (Integer) request.get("loginNum");
         request.get("check");
 
-        ciservice.insertLike(Integer.parseInt(place.getContentid()), loginNum);
+        cityService.insertLike(Integer.parseInt(place.getContentid()), loginNum);
     }
 
     @DeleteMapping("/deletelike")
     public void deleteLike(@RequestParam String place_id, @RequestParam int loginNum) {
-        ciservice.deleteLike(place_id, loginNum);
+        cityService.deleteLike(place_id, loginNum);
     }
 
     @GetMapping("/liketable")
     public List<Integer> getLikeTable(@RequestParam int loginNum) {
-        return ciservice.getLikeTable(loginNum);
+        return cityService.getLikeTable(loginNum);
     }
 
-    // 도시 목록 페이지
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "도시 목록 조회 성공")
+    })
+    @Operation(summary = "도시 목록 조회")
     @GetMapping("/list")
-    public List<CityDto> getCityList() {
-        return ciservice.getCityList();
+    public ResponseEntity<?> getCityList() {
+        GetCityListOutputDto output = cityService.getCityList();
+        GetCityListResponseDto response = cityMapper.toResponse(output);
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(CommonResponse.success("도시 목록 조회 성공", response));
     }
 }

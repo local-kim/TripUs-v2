@@ -3,8 +3,9 @@ package org.project.tripus.service;
 import java.util.List;
 import org.project.tripus.dto.CityDto;
 import org.project.tripus.dto.TripDto;
+import org.project.tripus.dto.output.GetCityListOutputDto;
 
-public interface CityInfoService {
+public interface CityService {
 
 	// wheatherplace 데이터 가져오기
 	public CityDto getData(int num);
@@ -27,8 +28,6 @@ public interface CityInfoService {
 	// like table의 place_id, member_num 가져오기
 	public List<Integer> getLikeTable(int loginNum);
 
-
-	// 현지씌 작품 돈터치!!!
 	// 도시 목록 가져오기
-	public List<CityDto> getCityList();
+	GetCityListOutputDto getCityList();
 }

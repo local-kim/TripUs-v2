@@ -4,7 +4,7 @@ import java.util.List;
 import org.project.tripus.dto.CityTripDto;
 import org.project.tripus.dto.MemberDto;
 import org.project.tripus.dto.ReviewPlaceDto;
-import org.project.tripus.mapper.UserPageMapper;
+import org.project.tripus.mybatismapper.UserPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

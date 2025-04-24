@@ -3,7 +3,7 @@ package org.project.tripus.service;
 import java.util.HashSet;
 import java.util.Set;
 import org.project.tripus.dto.MemberSecurityDto;
-import org.project.tripus.mapper.MemberSecurityMapper;
+import org.project.tripus.mybatismapper.MemberSecurityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

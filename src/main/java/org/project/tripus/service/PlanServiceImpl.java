@@ -13,7 +13,7 @@ import org.project.tripus.dto.PlanMapDto;
 import org.project.tripus.dto.PlanPlaceDto;
 import org.project.tripus.dto.TripDto;
 import org.project.tripus.dto.TripRankDto;
-import org.project.tripus.mapper.PlanMapper;
+import org.project.tripus.mybatismapper.PlanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

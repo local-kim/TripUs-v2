@@ -2,7 +2,7 @@ package org.project.tripus.service;
 
 import java.util.List;
 import org.project.tripus.dto.CityDto;
-import org.project.tripus.mapper.SearchMapper;
+import org.project.tripus.mybatismapper.SearchMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

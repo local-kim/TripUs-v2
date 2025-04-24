@@ -1,11 +1,5 @@
-import { BorderAll, Margin } from '@mui/icons-material';
-import { height, textAlign } from '@mui/system';
-import React ,{useState} from 'react';
-import { ReactDOM } from 'react';
-import { useEffect } from 'react';
-import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import '../main.css';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,20 +15,18 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import MainLogo from '../assets/images/MainLogo.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../modules/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from '../modules/auth';
 import AnimatedNumber from "react-animated-numbers"
-import { Carousel } from 'reactjs-infinite-carousel';
 
-import Fullpage,{FullPageSections,FullpageSection,FullpageNavigation} from '@ap.cx/react-fullpage';
+import Fullpage, {
+  FullpageNavigation,
+  FullpageSection,
+  FullPageSections
+} from '@ap.cx/react-fullpage';
 import Myslide from './Myslide';
 import Myslide2 from './Myslide2';
-
-import '../main.css';
 import axios from 'axios';
-import jQuery from 'jquery';
-import { NavLink } from 'react-router-dom';
-import { setDate } from 'date-fns';
 
 import ButtonGroup from '@mui/material/ButtonGroup';
 
@@ -45,19 +37,13 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 
 import MenuList from '@mui/material/MenuList';
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
-import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
 
 import Beach from './Beach.mp4';
 import Islands from './Islands.mp4';
 import Cliff from './Cliff.mp4';
 import Wave from './Waves.mp4';
-import zIndex from '@mui/material/styles/zIndex';
 
 import page2img from '../assets/images/busan1.jpg';
 import page3img from '../assets/images/junjoo1.jpg';
@@ -65,12 +51,9 @@ import page4img from '../assets/images/seoul1.jpg';
 import page5img from '../assets/images/seoul2.jpg';
 
 import page6img from '../assets/images/seoul4.jpg';
-import page7img from '../assets/images/seoul5.jpg';
 import page8img from '../assets/images/seoul6.jpg';
 
-
-
-//ㅡㅡㅡㅡㅡㅡㅡ배경 랜덤 
+//ㅡㅡㅡㅡㅡㅡㅡ배경 랜덤
 
 const video =[Beach, Cliff, Islands, Wave];
 const video_Number = 4;
@@ -193,7 +176,7 @@ const Main=(row)=>{
    
         })
         .catch(err => {
-            alert(err);
+          // alert(err);
         })
       }
 
@@ -210,7 +193,7 @@ const Main=(row)=>{
      
           })
           .catch(err => {
-              alert(err);
+            // alert(err);
           })
         }
 
@@ -226,7 +209,7 @@ const Main=(row)=>{
        
             })
             .catch(err => {
-                alert(err);
+              // alert(err);
             })
           }
 
@@ -242,7 +225,7 @@ const Main=(row)=>{
          
               })
               .catch(err => {
-                  alert(err);
+                // alert(err);
               })
             }
 

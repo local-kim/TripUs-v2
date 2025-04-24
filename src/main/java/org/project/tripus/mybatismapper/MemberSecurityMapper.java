@@ -1,4 +1,4 @@
-package org.project.tripus.mapper;
+package org.project.tripus.mybatismapper;
 
 import java.util.Map;
 import java.util.Optional;

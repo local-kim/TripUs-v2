@@ -13,7 +13,7 @@ import org.project.tripus.dto.MemberSecurityDto;
 import org.project.tripus.dto.ProfileDto;
 import org.project.tripus.dto.ReviewPlaceDto;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.mapper.MyPageMapper;
+import org.project.tripus.mybatismapper.MyPageMapper;
 import org.project.tripus.service.MemberService;
 import org.project.tripus.service.MypageService;
 import org.project.tripus.service.UserPageService;

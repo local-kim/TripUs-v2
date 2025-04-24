@@ -35,7 +35,7 @@ public class MemberEntity extends BaseEntity {
 
     private String password;
 
-    private int type;
+    private Integer type;
 
     private String email;
 

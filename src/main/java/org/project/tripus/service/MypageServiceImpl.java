@@ -7,7 +7,7 @@ import org.project.tripus.dto.CityTripDto;
 import org.project.tripus.dto.MemberDto;
 import org.project.tripus.dto.ProfileDto;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.mapper.MyPageMapper;
+import org.project.tripus.mybatismapper.MyPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

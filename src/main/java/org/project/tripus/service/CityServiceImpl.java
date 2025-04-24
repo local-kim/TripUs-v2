@@ -3,17 +3,25 @@ package org.project.tripus.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.CityDto;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.mapper.CityInfoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.project.tripus.dto.output.GetCityListOutputDto;
+import org.project.tripus.dto.output.GetCityListOutputDto.CityItem;
+import org.project.tripus.entity.CityEntity;
+import org.project.tripus.mybatismapper.CityInfoMapper;
+import org.project.tripus.repository.CityRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
-public class CityInfoServiceImpl implements CityInfoService {
+public class CityServiceImpl implements CityService {
 
-    @Autowired
-    private CityInfoMapper cimapper;
+    private final CityInfoMapper cimapper;
+
+    private final CityRepository cityRepository;
 
     @Override
     public CityDto getData(int num) {
@@ -69,14 +77,31 @@ public class CityInfoServiceImpl implements CityInfoService {
 
 
     // like table의 place_id, member_num 가져오기
-    @Override
     public List<Integer> getLikeTable(int loginNum) {
         // TODO Auto-generated method stub
         return cimapper.getLikeTable(loginNum);
     }
 
-    @Override
-    public List<CityDto> getCityList() {
-        return cimapper.getCityList();
+    public GetCityListOutputDto getCityList() {
+        List<CityEntity> cityEntityList = cityRepository.findAll();
+
+        List<CityItem> cityList = cityEntityList.stream().map(cityEntity -> {
+            return CityItem.builder()
+                .id(cityEntity.getId())
+                .name(cityEntity.getName())
+                .engName(cityEntity.getEngName())
+                .country(cityEntity.getCountry())
+                .fileName(cityEntity.getFileName())
+                .areaCode(cityEntity.getAreaCode())
+                .sigunguCode(cityEntity.getSigunguCode())
+                .x(cityEntity.getX())
+                .y(cityEntity.getY())
+                .cat(cityEntity.getCat())
+                .build();
+        }).toList();
+
+        return GetCityListOutputDto.builder()
+            .cityList(cityList)
+            .build();
     }
 }

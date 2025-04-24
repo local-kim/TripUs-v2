@@ -34,9 +34,9 @@ public class ItineraryEntity extends BaseEntity {
     @JoinColumn(name = "trip_id")
     private TripEntity trip;
 
-    private int day;
+    private Integer day;
 
-    private int seq;
+    private Integer seq;
 
     @ManyToOne
     @JoinColumn(name = "place_id")

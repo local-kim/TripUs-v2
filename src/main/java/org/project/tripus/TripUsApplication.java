@@ -4,7 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@MapperScan("org.project.tripus.mapper")
+@MapperScan("org.project.tripus.mybatismapper")
 @SpringBootApplication
 public class TripUsApplication {
 
