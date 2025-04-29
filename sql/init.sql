@@ -1,5 +1,5 @@
 -- DDL
-CREATE TABLE `member`
+CREATE TABLE `user`
 (
     `id`                      INT          NOT NULL AUTO_INCREMENT,
     `name`                    VARCHAR(255),
@@ -13,10 +13,6 @@ CREATE TABLE `member`
     `address1`                VARCHAR(255),
     `address2`                VARCHAR(255),
     `profile_file_url` VARCHAR(255),
-    `isAccountNonexpired`     INT,
-    `isAccountNonLocked`      INT,
-    `isCredentialsNonExpired` INT,
-    `isEnabled`               INT,
     `created_at`       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at`       TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
@@ -62,7 +58,7 @@ CREATE TABLE `trip`
 (
     `id`         INT  NOT NULL AUTO_INCREMENT,
     `city_id`    INT  NOT NULL,
-    `member_id`  INT  NOT NULL,
+    `user_id` INT NOT NULL,
     `title`      VARCHAR(255),
     `start_date` DATE NOT NULL,
     `end_date`   DATE NOT NULL,
@@ -70,7 +66,7 @@ CREATE TABLE `trip`
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
-    FOREIGN KEY (`member_id`) REFERENCES `member` (`id`)
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 );
 
 CREATE TABLE `itinerary`
@@ -92,14 +88,14 @@ CREATE TABLE `review`
 (
     `id`         INT          NOT NULL AUTO_INCREMENT,
     `place_id`   INT          NOT NULL,
-    `member_id`  INT          NOT NULL,
+    `user_id` INT NOT NULL,
     `stars`      DOUBLE       NOT NULL,
     `content`    VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`place_id`) REFERENCES `place` (`id`),
-    FOREIGN KEY (`member_id`) REFERENCES `member` (`id`)
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 );
 
 CREATE TABLE `review_photo`
@@ -117,26 +113,26 @@ CREATE TABLE `place_like`
 (
     `id`         INT NOT NULL AUTO_INCREMENT,
     `place_id`   INT NOT NULL,
-    `member_id`  INT NOT NULL,
+    `user_id` INT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`member_id`) REFERENCES `member` (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
     FOREIGN KEY (`place_id`) REFERENCES `place` (`id`),
-    UNIQUE KEY (`place_id`, `member_id`)
+    UNIQUE KEY (`place_id`, `user_id`)
 );
 
 CREATE TABLE `trip_like`
 (
     `id`         INT NOT NULL AUTO_INCREMENT,
     `trip_id`    INT NOT NULL,
-    `member_id`  INT NOT NULL,
+    `user_id` INT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`trip_id`) REFERENCES `trip` (`id`),
-    FOREIGN KEY (`member_id`) REFERENCES `member` (`id`),
-    UNIQUE KEY (`trip_id`, `member_id`)
+    FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+    UNIQUE KEY (`trip_id`, `user_id`)
 );
 
 -- CREATE TABLE `weather`

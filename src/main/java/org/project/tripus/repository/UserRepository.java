@@ -1,12 +1,12 @@
 package org.project.tripus.repository;
 
 import java.util.Optional;
-import org.project.tripus.entity.MemberEntity;
+import org.project.tripus.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    Optional<MemberEntity> findByEmail(String email);
+    Optional<UserEntity> findByUsername(String username);
 }

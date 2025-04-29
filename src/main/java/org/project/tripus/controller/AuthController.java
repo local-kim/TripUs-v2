@@ -1,104 +1,54 @@
 package org.project.tripus.controller;
 
-import java.util.HashMap;
-import org.project.tripus.dto.LoginDto;
-import org.project.tripus.dto.MemberSecurityDto;
-import org.project.tripus.service.MemberService;
-import org.project.tripus.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.project.tripus.dto.input.LoginInput;
+import org.project.tripus.dto.output.LoginOutput;
+import org.project.tripus.dto.request.LoginRequest;
+import org.project.tripus.dto.response.LoginResponse;
+import org.project.tripus.global.response.CommonResponse;
+import org.project.tripus.mapper.AuthMapper;
+import org.project.tripus.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RequiredArgsConstructor
+@Tag(name = "인증 API", description = "인증에 관한 API")
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*", exposedHeaders = "**")
+@RestController
 public class AuthController {
 
-    @Autowired
-    private MemberService service;
+    private final AuthService authService;
+    private final AuthMapper authMapper;
 
-    private final JwtUtil jwtUtil;
-    private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
-    public AuthController(JwtUtil jwtUtil,
-        AuthenticationManagerBuilder authenticationManagerBuilder) {
-        this.jwtUtil = jwtUtil;
-        this.authenticationManagerBuilder = authenticationManagerBuilder;
-    }
-
-    // 로그인시 권한 검증
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "로그인 성공"),
+        @ApiResponse(responseCode = "400", description = "잘못된 입력 형식"),
+        @ApiResponse(responseCode = "404", description = "1. 가입되지 않은 아이디 2. 비밀번호가 일치하지 않음"),
+    })
+    @Operation(summary = "로그인")
     @PostMapping("/login")
-    public ResponseEntity<MemberSecurityDto> login(@RequestBody LoginDto loginDto) {
-        UsernamePasswordAuthenticationToken authenticationToken =
-            new UsernamePasswordAuthenticationToken(loginDto.getId(), loginDto.getPassword());
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        LoginInput input = authMapper.toInput(request);
+        LoginOutput output = authService.login(input);
+        LoginResponse response = authMapper.toResponse(output);
 
-        Authentication authentication = authenticationManagerBuilder.getObject()
-            .authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String jwt = jwtUtil.generateToken(String.valueOf(authentication));
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-
-//        MemberSecurityDto member = (MemberSecurityDto)service.loadUserByUsername(loginDto.getId());
-        MemberSecurityDto member = service.getLoginInfo2(loginDto.getId());    // 프로필 사진도 같이 받아옴
-        member.setToken(jwt);
-
-//        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
-        return new ResponseEntity<>(member, httpHeaders, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(CommonResponse.success("로그인 성공", response));
     }
 
-    @PostMapping("/kakaologin")
-    public MemberSecurityDto kakaoLogin(@RequestBody LoginDto loginDto) {
-        MemberSecurityDto member = service.getLoginInfo2(loginDto.getId());    // 프로필 사진도 같이 받아옴
-//        System.out.println(member);
-
-        return member;
-    }
-
-    @PostMapping("/join")
-    public ResponseEntity<String> join(@RequestBody MemberSecurityDto member) {
-        service.join(member, "ROLE_USER");    // 일반회원 가입시 ROLE_USER로 권한 설정
-        return ResponseEntity.ok("Sign up success");
-    }
-
-    @PostMapping("/kakaojoin")
-    public ResponseEntity<String> kakaoJoin(@RequestBody MemberSecurityDto member) {
-        service.kakaoJoin(member, "ROLE_USER");    // 일반회원 가입시 ROLE_USER로 권한 설정
-        return ResponseEntity.ok("Sign up success");
-    }
-
-    @PostMapping("/findPw")
-    public ResponseEntity<String> findPassword(@RequestBody HashMap<String, Object> request) {
-        if(service.checkId((String) request.get("id")) == 0) {
-            return new ResponseEntity<>("회원정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
-        }
-
-        if(service.checkEmail((String) request.get("email")) == 0) {
-            return new ResponseEntity<>("이메일 주소를 다시 확인해주세요.", HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping("/changePw")
-    public ResponseEntity<String> changePassword(@RequestBody HashMap<String, Object> request) {
-        System.out.println(request);
-
-        service.changePassword((String) request.get("id"), (String) request.get("password"));
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
+//    @PostMapping("/kakaologin")
+//    public MemberSecurityDto kakaoLogin(@RequestBody LoginDto loginDto) {
+//        MemberSecurityDto member = memberService.getLoginInfo2(loginDto.getId());    // 프로필 사진도 같이 받아옴
+////        System.out.println(member);
+//
+//        return member;
+//    }
 }

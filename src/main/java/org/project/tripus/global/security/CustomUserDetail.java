@@ -2,16 +2,16 @@ package org.project.tripus.global.security;
 
 import java.util.Collection;
 import java.util.List;
-import org.project.tripus.entity.MemberEntity;
+import org.project.tripus.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomUserDetail implements UserDetails {
 
-    private final MemberEntity memberEntity;
+    private final UserEntity userEntity;
 
-    public CustomUserDetail(MemberEntity memberEntity) {
-        this.memberEntity = memberEntity;
+    public CustomUserDetail(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     @Override
@@ -21,15 +21,15 @@ public class CustomUserDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return memberEntity.getPassword();
+        return userEntity.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return memberEntity.getEmail();
+        return userEntity.getEmail();
     }
 
-    public MemberEntity getMemberEntity() {
-        return memberEntity;
+    public UserEntity getMemberEntity() {
+        return userEntity;
     }
 }
