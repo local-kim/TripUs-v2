@@ -1,17 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Modal } from '@mui/material';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import '../../styles/join.css';
 // import GoogleLogin from 'react-google-login';
-import KakaoLogin from 'react-kakao-login';
-import { SearchId, SearchPass } from './index.js';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../modules/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../../modules/auth';
 import kakao_icon from '../../assets/images/icon_login_kakao.png';
-import naver_icon from '../../assets/images/naver_icon.png';
-import google_icon from '../../assets/images/google_icon.png';
-
 
 const LoginForm = () => {
    const [ id, setId ] = useState('');
@@ -55,24 +49,6 @@ const LoginForm = () => {
     const REDIRECT_URI = "http://localhost:3000/oauth/kakao/callback";
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
     let loginUrl = `${process.env.REACT_APP_SPRING_URL}auth/login`;
-    
-    // const onSubmit=(e)=>{
-    //     e.preventDefault();
-    //     const url=process.env.REACT_APP_SPRING_URL+"login";
-    //     axios.post(url,{id,password})
-    //     .then(res=>{
-    //         if(res.data===0){
-    //             alert("아아디 또는 비밀번호가 틀렸습니다")
-    //         }else{
-    //             localStorage.loginOk="yes";
-    //             localStorage.myid=id;
-    //             navi(-1);//새로고침
-                
-    //         }
-    //     })
-        
-    // }
-  
 
     const onClickLogin = (e) => {
         e.preventDefault();
@@ -81,7 +57,7 @@ const LoginForm = () => {
         // console.log('ID : ', inputId)
         // console.log('PW : ', inputPw)
 
-        axios.post(loginUrl, {id: inputId, password: inputPw})
+      axios.post(loginUrl, {username: inputId, password: inputPw})
         .then(res => {
           console.log(res.data);
           localStorage.setItem('jwtToken', res.data.token); // 로컬 스토리지에 토큰 저장
