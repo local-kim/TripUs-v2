@@ -1,15 +1,14 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { saveTrip, savePlan } from '../../modules/planner';
-import { DateRangePicker } from 'react-date-range';
-import { differenceInDays, format } from 'date-fns';
+import {useNavigate, useParams} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {savePlan, saveTrip} from '../../modules/planner';
+import {DateRangePicker} from 'react-date-range';
+import {differenceInDays} from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import '../../styles/plan.css';
-import { usePrompt } from '../../utils/Blocker';
 
 const Calendar = ({view, setView}) => {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const Calendar = ({view, setView}) => {
   const {cityNum} = useParams();
   const [cityInfo, setCityInfo] = useState({});
 
-  let cityUrl = process.env.REACT_APP_SPRING_URL + `plan/city-code?cityNum=${cityNum}`;
+  let cityUrl = process.env.REACT_APP_SPRING_URL + `city/${cityNum}`;
 
   useEffect(() => {
     // axios.defaults.headers.common = {'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`}

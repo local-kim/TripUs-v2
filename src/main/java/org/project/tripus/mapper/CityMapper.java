@@ -1,11 +1,15 @@
 package org.project.tripus.mapper;
 
 import org.mapstruct.Mapper;
-import org.project.tripus.dto.output.GetCityListOutputDto;
-import org.project.tripus.dto.response.GetCityListResponseDto;
+import org.project.tripus.dto.output.GetCityListOutput;
+import org.project.tripus.dto.output.GetCityOutput;
+import org.project.tripus.dto.response.GetCityListResponse;
+import org.project.tripus.dto.response.GetCityResponse;
 
 @Mapper(componentModel = "spring")
 public interface CityMapper {
 
-    GetCityListResponseDto toResponse(GetCityListOutputDto output);
+    GetCityListResponse toResponse(GetCityListOutput output);
+
+    GetCityResponse toResponse(GetCityOutput output);
 }

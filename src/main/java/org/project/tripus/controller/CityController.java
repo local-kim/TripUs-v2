@@ -7,19 +7,21 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.HashMap;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.CityDto;
 import org.project.tripus.dto.PlaceDto;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.dto.output.GetCityListOutputDto;
-import org.project.tripus.dto.response.GetCityListResponseDto;
+import org.project.tripus.dto.output.GetCityListOutput;
+import org.project.tripus.dto.output.GetCityOutput;
+import org.project.tripus.dto.response.GetCityListResponse;
+import org.project.tripus.dto.response.GetCityResponse;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.mapper.CityMapper;
 import org.project.tripus.service.CityService;
-import org.project.tripus.service.PlanService;
+import org.project.tripus.service.TripService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,24 +35,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class CityController {
 
     private final CityService cityService;
-    private final PlanService planService;
+    private final TripService tripService;
     private final CityMapper cityMapper;
 
-    @GetMapping("/citydata")
-    public CityDto getData(@RequestParam int num) {
-        return cityService.getData(num);
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "도시 목록 조회 성공")
+    })
+    @Operation(summary = "도시 목록 조회")
+    @GetMapping("")
+    public ResponseEntity<?> getCityList() {
+        GetCityListOutput output = cityService.getCityList();
+        GetCityListResponse response = cityMapper.toResponse(output);
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(CommonResponse.success("도시 목록 조회 성공", response));
     }
 
-    // city랑 trip이랑 join 써본거
-//	@GetMapping("/citydata")
-//	public List<CityDto> getData(@RequestParam int num) {
-//		return ciservice.getData(num);
-//	}
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "도시 조회 성공"),
+        @ApiResponse(responseCode = "404", description = "존재하지 않는 도시")
+    })
+    @Operation(summary = "도시 조회")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCity(@PathVariable Long id) {
+        GetCityOutput output = cityService.getCity(id);
+        GetCityResponse response = cityMapper.toResponse(output);
 
-//	@GetMapping("/placename")
-//	public void getName(@RequestParam String name) {
-//		ciservice.getName(name);
-//	}
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(CommonResponse.success("도시 조회 성공", response));
+    }
 
     @GetMapping("/tripdata")
     public List<TripDto> getTripData(
@@ -84,8 +97,8 @@ public class CityController {
         place.setMapx((String) request.get("mapx"));
         place.setMapy((String) request.get("mapy"));
 
-        if(planService.checkPlace(place.getContentid()) == 0) {
-            planService.insertPlace(place);
+        if(tripService.checkPlace(place.getContentid()) == 0) {
+            tripService.insertPlace(place);
         }
 
         int loginNum = (Integer) request.get("loginNum");
@@ -102,18 +115,5 @@ public class CityController {
     @GetMapping("/liketable")
     public List<Integer> getLikeTable(@RequestParam int loginNum) {
         return cityService.getLikeTable(loginNum);
-    }
-
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "도시 목록 조회 성공")
-    })
-    @Operation(summary = "도시 목록 조회")
-    @GetMapping("/list")
-    public ResponseEntity<?> getCityList() {
-        GetCityListOutputDto output = cityService.getCityList();
-        GetCityListResponseDto response = cityMapper.toResponse(output);
-
-        return ResponseEntity.status(HttpStatus.OK)
-            .body(CommonResponse.success("도시 목록 조회 성공", response));
     }
 }

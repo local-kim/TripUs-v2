@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -8,22 +8,17 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, TextField } from '@mui/material';
+import {CardActionArea, CardActions, TextField} from '@mui/material';
 import axios from "axios";
 import '../../styles/cityinfo.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import CityInfoImage from './CityInfoImage';
-import CityInfoMore from './CityInfoMore';
-import { add, addDays, addYears, differenceInDays, format, subYears } from 'date-fns';
-import { useInView } from "react-intersection-observer"
-import { PlaceItem } from '../plan';
-import { height } from '@mui/system';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import {addYears, differenceInDays, format, subYears} from 'date-fns';
+import {useSelector} from 'react-redux';
 import ko from 'date-fns/locale/ko';
-import { event } from 'jquery';
+import {event} from 'jquery';
 
 const CityInfoMain = () => {
     const contentTypeId = {
@@ -321,7 +316,7 @@ const CityInfoMain = () => {
     
     // URL
     // db city테이블 가져오는 거
-    PlaceUrl=process.env.REACT_APP_SPRING_URL+"city/citydata?num="+num;
+    PlaceUrl = process.env.REACT_APP_SPRING_URL + "city/" + num;
     
     // 날씨 api 받아오는 거   
     let weather_url=`https://apis.data.go.kr/1360000/AsosDalyInfoService/getWthrDataList?serviceKey=${API_KEY}&numOfRows=${days}&dataType=JSON&dataCd=ASOS&dateCd=DAY&startDt=${slastYear}&endDt=${elastYear}&stnIds=${num}`;
