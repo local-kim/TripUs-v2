@@ -6,11 +6,11 @@ import org.project.tripus.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class CustomUserDetail implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private final UserEntity userEntity;
 
-    public CustomUserDetail(UserEntity userEntity) {
+    public CustomUserDetails(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
 
@@ -29,7 +29,7 @@ public class CustomUserDetail implements UserDetails {
         return userEntity.getEmail();
     }
 
-    public UserEntity getMemberEntity() {
+    public UserEntity getUserEntity() {
         return userEntity;
     }
 }

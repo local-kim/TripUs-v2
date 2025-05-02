@@ -2,7 +2,7 @@ package org.project.tripus.util;
 
 import java.util.Optional;
 import org.project.tripus.entity.UserEntity;
-import org.project.tripus.global.security.CustomUserDetail;
+import org.project.tripus.global.security.CustomUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -20,8 +20,8 @@ public class SecurityUtil {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null
-            && authentication.getPrincipal() instanceof CustomUserDetail userDetails) {
-            return Optional.of(userDetails.getMemberEntity());
+            && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
+            return Optional.of(userDetails.getUserEntity());
         }
 
         return Optional.empty();

@@ -4,10 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.HashMap;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.PlaceDto;
 import org.project.tripus.dto.TripDto;
 import org.project.tripus.dto.output.GetCityListOutputDto;
 import org.project.tripus.dto.output.GetCityOutputDto;
@@ -16,14 +14,11 @@ import org.project.tripus.dto.response.GetCityResponseDto;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.mapper.CityMapper;
 import org.project.tripus.service.CityService;
-import org.project.tripus.service.TripService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CityController {
 
     private final CityService cityService;
-    private final TripService tripService;
+    //    private final TripService tripService;
     private final CityMapper cityMapper;
 
     @ApiResponses(value = {
@@ -81,31 +76,31 @@ public class CityController {
         return cityService.getLike(place_id, loginNum);
     }
 
-    @PostMapping("/insertlike")
-    public void insertLike(@RequestBody HashMap<String, Object> request) {
-        PlaceDto place = new PlaceDto();
-
-        place.setCity_num(Integer.parseInt((String) request.get("cityNum")));
-
-        place.setContentid((String) request.get("contentid"));
-        place.setContenttypeid((String) request.get("contenttypeid"));
-        place.setTitle((String) request.get("title"));
-        place.setCat3((String) request.get("cat3"));
-        place.setAddr1((String) request.get("addr1"));
-        place.setAddr2((String) request.get("addr2"));
-        place.setFirstimage((String) request.get("firstimage"));
-        place.setMapx((String) request.get("mapx"));
-        place.setMapy((String) request.get("mapy"));
-
-        if(tripService.checkPlace(place.getContentid()) == 0) {
-            tripService.insertPlace(place);
-        }
-
-        int loginNum = (Integer) request.get("loginNum");
-        request.get("check");
-
-        cityService.insertLike(Integer.parseInt(place.getContentid()), loginNum);
-    }
+//    @PostMapping("/insertlike")
+//    public void insertLike(@RequestBody HashMap<String, Object> request) {
+//        PlaceDto place = new PlaceDto();
+//
+//        place.setCity_num(Integer.parseInt((String) request.get("cityNum")));
+//
+//        place.setContentid((String) request.get("contentid"));
+//        place.setContenttypeid((String) request.get("contenttypeid"));
+//        place.setTitle((String) request.get("title"));
+//        place.setCat3((String) request.get("cat3"));
+//        place.setAddr1((String) request.get("addr1"));
+//        place.setAddr2((String) request.get("addr2"));
+//        place.setFirstimage((String) request.get("firstimage"));
+//        place.setMapx((String) request.get("mapx"));
+//        place.setMapy((String) request.get("mapy"));
+//
+//        if(tripService.checkPlace(place.getContentid()) == 0) {
+//            tripService.insertPlace(place);
+//        }
+//
+//        int loginNum = (Integer) request.get("loginNum");
+//        request.get("check");
+//
+//        cityService.insertLike(Integer.parseInt(place.getContentid()), loginNum);
+//    }
 
     @DeleteMapping("/deletelike")
     public void deleteLike(@RequestParam String place_id, @RequestParam int loginNum) {

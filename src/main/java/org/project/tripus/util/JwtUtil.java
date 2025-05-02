@@ -21,16 +21,16 @@ public class JwtUtil {
         this.expirationTime = expirationTime;
     }
 
-    public String generateToken(String email) {
+    public String generateToken(String username) {
         return Jwts.builder()
-            .setSubject(email)
+            .setSubject(username)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
             .signWith(secretKey, SignatureAlgorithm.HS256)
             .compact();
     }
 
-    public String getEmailFromToken(String token) {
+    public String getUsernameFromToken(String token) {
         return Jwts.parserBuilder()
             .setSigningKey(secretKey)
             .build()

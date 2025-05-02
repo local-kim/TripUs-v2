@@ -22,8 +22,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-        FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
         String authorizationHeader = request.getHeader("Authorization");
 
         // JWT가 헤더에 있는 경우
@@ -32,14 +32,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             // JWT 유효성 검증
             if(jwtUtil.validateToken(token)) {
-                String email = jwtUtil.getEmailFromToken(token);
+                String username = jwtUtil.getUsernameFromToken(token);
 
                 // 유저 존재 시 userDetails 생성
-                UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
+                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 
                 // UserDetails, Role -> 인증 객체 생성
-                Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.getAuthorities());
+                Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                 // Request의 Security Context에 인증 정보 저장
                 SecurityContextHolder.getContext().setAuthentication(authentication);

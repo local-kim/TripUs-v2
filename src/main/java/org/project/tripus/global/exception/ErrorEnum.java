@@ -10,7 +10,7 @@ public enum ErrorEnum {
 
     // 4xx Client Errors
     // 400 Bad Request
-    EMAIL_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "이미 가입된 이메일입니다."),
+    USERNAME_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "이미 가입된 아이디입니다."),
     INVALID_FORMAT(HttpStatus.BAD_REQUEST, "잘못된 입력 형식입니다."),
     FILE_UPLOAD_FAILED(HttpStatus.BAD_REQUEST, "파일 업로드에 실패했습니다."),
 

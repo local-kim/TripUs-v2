@@ -5,31 +5,43 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.MemberDto;
 import org.project.tripus.dto.MemberSecurityDto;
+import org.project.tripus.dto.input.CreateUserInputDto;
+import org.project.tripus.entity.UserEntity;
+import org.project.tripus.global.exception.CustomException;
+import org.project.tripus.global.exception.ErrorEnum;
 import org.project.tripus.mybatismapper.MemberMapper;
 import org.project.tripus.mybatismapper.MemberSecurityMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.project.tripus.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
-public class MemberServiceImpl implements MemberService {
+public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private MemberMapper memberMapper;
+    private final MemberMapper memberMapper;
+    private final MemberSecurityMapper memberSecurityMapper;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private MemberSecurityMapper memberSecurityMapper;
+    @Transactional
+    public void createMember(CreateUserInputDto input) {
+        // 아이디 중복 체크
+        if(userRepository.findByUsername(input.getUsername()).isPresent()) {
+            throw new CustomException(ErrorEnum.USERNAME_ALREADY_EXISTS);
+        }
 
-    @Override
-    public void insertMember(MemberDto dto) {
-        // TODO Auto-generated method stub
-        memberMapper.insertMember(dto);
+        UserEntity userEntity = input.toUserEntity(passwordEncoder);
 
+        userRepository.save(userEntity);
     }
 
     @Override

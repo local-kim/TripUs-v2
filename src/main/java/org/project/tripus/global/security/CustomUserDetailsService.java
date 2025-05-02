@@ -23,6 +23,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         UserEntity userEntity = userRepository.findByUsername(username)
             .orElseThrow(() -> new CustomException(ErrorEnum.USER_NOT_FOUND));
 
-        return new CustomUserDetail(userEntity);
+        return new CustomUserDetails(userEntity);
     }
 }
