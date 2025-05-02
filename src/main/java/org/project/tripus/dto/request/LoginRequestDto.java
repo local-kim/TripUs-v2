@@ -9,13 +9,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class LoginRequest {
+public class LoginRequestDto {
 
     @NotBlank
     @Schema(description = "아이디", example = "johndoe")
     private String username;
 
     @NotBlank
-    @Schema(description = "비밀번호", example = "1234")
+    @Schema(description = "비밀번호", example = "password1!")
     private String password;
 }

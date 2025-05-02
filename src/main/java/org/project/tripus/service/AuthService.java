@@ -1,9 +1,9 @@
 package org.project.tripus.service;
 
-import org.project.tripus.dto.input.LoginInput;
-import org.project.tripus.dto.output.LoginOutput;
+import org.project.tripus.dto.input.LoginInputDto;
+import org.project.tripus.dto.output.LoginOutputDto;
 
 public interface AuthService {
 
-    LoginOutput login(LoginInput input);
+    LoginOutputDto login(LoginInputDto input);
 }

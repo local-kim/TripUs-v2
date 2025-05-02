@@ -1,8 +1,8 @@
 package org.project.tripus.service;
 
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.input.LoginInput;
-import org.project.tripus.dto.output.LoginOutput;
+import org.project.tripus.dto.input.LoginInputDto;
+import org.project.tripus.dto.output.LoginOutputDto;
 import org.project.tripus.global.exception.CustomException;
 import org.project.tripus.global.exception.ErrorEnum;
 import org.project.tripus.util.JwtUtil;
@@ -22,14 +22,14 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtil jwtUtil;
 
     @Override
-    public LoginOutput login(LoginInput input) {
+    public LoginOutputDto login(LoginInputDto input) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(input.getUsername());
 
         if(!passwordEncoder.matches(input.getPassword(), userDetails.getPassword())) {
             throw new CustomException(ErrorEnum.USER_NOT_FOUND);
         }
 
-        return LoginOutput.builder()
+        return LoginOutputDto.builder()
             .token(jwtUtil.generateToken(userDetails.getUsername()))
             .build();
     }

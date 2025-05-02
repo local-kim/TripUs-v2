@@ -5,10 +5,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.input.LoginInput;
-import org.project.tripus.dto.output.LoginOutput;
-import org.project.tripus.dto.request.LoginRequest;
-import org.project.tripus.dto.response.LoginResponse;
+import org.project.tripus.dto.input.LoginInputDto;
+import org.project.tripus.dto.output.LoginOutputDto;
+import org.project.tripus.dto.request.LoginRequestDto;
+import org.project.tripus.dto.response.LoginResponseDto;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.mapper.AuthMapper;
 import org.project.tripus.service.AuthService;
@@ -35,10 +35,10 @@ public class AuthController {
     })
     @Operation(summary = "로그인")
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        LoginInput input = authMapper.toInput(request);
-        LoginOutput output = authService.login(input);
-        LoginResponse response = authMapper.toResponse(output);
+    public ResponseEntity<?> login(@RequestBody LoginRequestDto request) {
+        LoginInputDto input = authMapper.toInput(request);
+        LoginOutputDto output = authService.login(input);
+        LoginResponseDto response = authMapper.toResponse(output);
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.success("로그인 성공", response));

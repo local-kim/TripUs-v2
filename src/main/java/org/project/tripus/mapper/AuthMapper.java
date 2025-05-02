@@ -1,15 +1,15 @@
 package org.project.tripus.mapper;
 
 import org.mapstruct.Mapper;
-import org.project.tripus.dto.input.LoginInput;
-import org.project.tripus.dto.output.LoginOutput;
-import org.project.tripus.dto.request.LoginRequest;
-import org.project.tripus.dto.response.LoginResponse;
+import org.project.tripus.dto.input.LoginInputDto;
+import org.project.tripus.dto.output.LoginOutputDto;
+import org.project.tripus.dto.request.LoginRequestDto;
+import org.project.tripus.dto.response.LoginResponseDto;
 
 @Mapper(componentModel = "spring")
 public interface AuthMapper {
 
-    LoginInput toInput(LoginRequest request);
+    LoginInputDto toInput(LoginRequestDto request);
 
-    LoginResponse toResponse(LoginOutput output);
+    LoginResponseDto toResponse(LoginOutputDto output);
 }

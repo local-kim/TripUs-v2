@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class LoginInput {
+public class LoginInputDto {
 
     private String username;
 
