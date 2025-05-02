@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.dto.output.GetCityListOutput;
-import org.project.tripus.dto.output.GetCityListOutput.CityItem;
-import org.project.tripus.dto.output.GetCityOutput;
+import org.project.tripus.dto.output.GetCityListOutputDto;
+import org.project.tripus.dto.output.GetCityListOutputDto.CityItem;
+import org.project.tripus.dto.output.GetCityOutputDto;
 import org.project.tripus.entity.CityEntity;
 import org.project.tripus.global.exception.CustomException;
 import org.project.tripus.global.exception.ErrorEnum;
@@ -24,8 +24,13 @@ public class CityServiceImpl implements CityService {
     private final CityInfoMapper cimapper;
     private final CityRepository cityRepository;
 
-    public GetCityListOutput getCityList() {
-        List<CityEntity> cityEntityList = cityRepository.findAll();
+    /**
+     * 전체 도시 목록을 조회하여 DTO를 생성하는 메서드
+     *
+     * @return GetCityListOutputDto
+     */
+    public GetCityListOutputDto getCityList() {
+        List<CityEntity> cityEntityList = getCityEntityList();
 
         List<CityItem> cityList = cityEntityList.stream().map(cityEntity -> CityItem.builder()
             .id(cityEntity.getId())
@@ -40,16 +45,30 @@ public class CityServiceImpl implements CityService {
             .cat(cityEntity.getCat())
             .build()).toList();
 
-        return GetCityListOutput.builder()
+        return GetCityListOutputDto.builder()
             .cityList(cityList)
             .build();
     }
 
-    public GetCityOutput getCity(Long id) {
-        CityEntity cityEntity = cityRepository.findById(id)
-            .orElseThrow(() -> new CustomException(ErrorEnum.CITY_NOT_FOUND));
+    /**
+     * 전체 도시 목록을 조회하는 메서드
+     *
+     * @return 전체 도시 목록
+     */
+    public List<CityEntity> getCityEntityList() {
+        return cityRepository.findAll();
+    }
 
-        return GetCityOutput.builder()
+    /**
+     * 도시 ID로 도시 엔티티를 조회하여 DTO를 생성하는 메서드
+     *
+     * @param id 도시 ID
+     * @return GetCityOutputDto
+     */
+    public GetCityOutputDto getCity(Long id) {
+        CityEntity cityEntity = getCityEntityById(id);
+
+        return GetCityOutputDto.builder()
             .id(cityEntity.getId())
             .name(cityEntity.getName())
             .engName(cityEntity.getEngName())
@@ -62,6 +81,19 @@ public class CityServiceImpl implements CityService {
             .cat(cityEntity.getCat())
             .build();
     }
+
+    /**
+     * 도시 ID로 도시 엔티티를 조회하는 메서드
+     *
+     * @param id 도시 ID
+     * @return 도시 엔티티
+     */
+    public CityEntity getCityEntityById(Long id) {
+        return cityRepository.findById(id)
+            .orElseThrow(() -> new CustomException(ErrorEnum.CITY_NOT_FOUND));
+    }
+
+    // 리팩토링 전
 
     public List<TripDto> getTripData(int member_num, int city_num) {
         return cimapper.getTripData(member_num, city_num);

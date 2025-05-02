@@ -2,14 +2,14 @@ package org.project.tripus.service;
 
 import java.util.List;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.dto.output.GetCityListOutput;
-import org.project.tripus.dto.output.GetCityOutput;
+import org.project.tripus.dto.output.GetCityListOutputDto;
+import org.project.tripus.dto.output.GetCityOutputDto;
 
 public interface CityService {
 
-    GetCityListOutput getCityList();
+    GetCityListOutputDto getCityList();
 
-    GetCityOutput getCity(Long id);
+    GetCityOutputDto getCity(Long id);
 
     // Trip데이타 가져오기
     public List<TripDto> getTripData(int member_num, int city_num);

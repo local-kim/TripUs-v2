@@ -9,10 +9,10 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.PlaceDto;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.dto.output.GetCityListOutput;
-import org.project.tripus.dto.output.GetCityOutput;
-import org.project.tripus.dto.response.GetCityListResponse;
-import org.project.tripus.dto.response.GetCityResponse;
+import org.project.tripus.dto.output.GetCityListOutputDto;
+import org.project.tripus.dto.output.GetCityOutputDto;
+import org.project.tripus.dto.response.GetCityListResponseDto;
+import org.project.tripus.dto.response.GetCityResponseDto;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.mapper.CityMapper;
 import org.project.tripus.service.CityService;
@@ -44,8 +44,8 @@ public class CityController {
     @Operation(summary = "도시 목록 조회")
     @GetMapping("")
     public ResponseEntity<?> getCityList() {
-        GetCityListOutput output = cityService.getCityList();
-        GetCityListResponse response = cityMapper.toResponse(output);
+        GetCityListOutputDto output = cityService.getCityList();
+        GetCityListResponseDto response = cityMapper.toResponse(output);
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.success("도시 목록 조회 성공", response));
@@ -58,8 +58,8 @@ public class CityController {
     @Operation(summary = "도시 조회")
     @GetMapping("/{id}")
     public ResponseEntity<?> getCity(@PathVariable Long id) {
-        GetCityOutput output = cityService.getCity(id);
-        GetCityResponse response = cityMapper.toResponse(output);
+        GetCityOutputDto output = cityService.getCity(id);
+        GetCityResponseDto response = cityMapper.toResponse(output);
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.success("도시 조회 성공", response));

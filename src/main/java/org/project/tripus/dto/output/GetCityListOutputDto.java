@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class GetCityListOutput {
+public class GetCityListOutputDto {
 
     List<CityItem> cityList;
 
