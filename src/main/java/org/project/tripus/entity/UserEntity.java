@@ -21,9 +21,9 @@ import org.project.tripus.global.entity.BaseEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "member")
+@Table(name = "user")
 @Entity
-public class MemberEntity extends BaseEntity {
+public class UserEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,12 +50,4 @@ public class MemberEntity extends BaseEntity {
     private String address2;
 
     private String profileFileUrl;
-
-//    private int isAccountNonexpired;
-//
-//    private int isAccountNonLocked;
-//
-//    private int isCredentialsNonExpired;
-//
-//    private int isEnabled;
 }

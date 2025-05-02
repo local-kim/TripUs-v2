@@ -37,7 +37,7 @@ public class TripEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private MemberEntity member;
+    private UserEntity member;
 
     private String title;
 

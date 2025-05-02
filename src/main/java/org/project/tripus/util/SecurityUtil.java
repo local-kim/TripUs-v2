@@ -1,7 +1,7 @@
 package org.project.tripus.util;
 
 import java.util.Optional;
-import org.project.tripus.entity.MemberEntity;
+import org.project.tripus.entity.UserEntity;
 import org.project.tripus.global.security.CustomUserDetail;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +16,7 @@ public class SecurityUtil {
      * @return 현재 인증된 회원의 MemberEntity를 포함하는 Optional,
      * 인증된 회원이 없거나 유효하지 않은 경우 빈 Optional
      */
-    public Optional<MemberEntity> getCurrentMember() {
+    public Optional<UserEntity> getCurrentMember() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if(authentication != null
