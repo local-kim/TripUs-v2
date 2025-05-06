@@ -21,12 +21,14 @@ const Calendar = ({view, setView}) => {
   let cityUrl = process.env.REACT_APP_SPRING_URL + `city/${cityNum}`;
 
   useEffect(() => {
-    // axios.defaults.headers.common = {'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`}
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('jwtToken')}`;
     axios.get(cityUrl)
     .then(res => {
       // console.log(res.data);
-      setCityInfo({...res.data, cityName: res.data.name, cityNum: res.data.num});
+      setCityInfo({
+        ...res.data.data,
+        cityName: res.data.data.name,
+        cityNum: res.data.data.id
+      });
     })
     .catch(err => console.log(err));
   }, []);

@@ -35,6 +35,6 @@ public class PlaceLikeEntity extends BaseEntity {
     private PlaceEntity place;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private UserEntity member;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }

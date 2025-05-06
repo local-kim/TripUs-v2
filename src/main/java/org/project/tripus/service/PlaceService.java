@@ -2,8 +2,9 @@ package org.project.tripus.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.project.tripus.dto.PlaceDto;
+import org.project.tripus.dto.output.GetLikedPlaceListOutputDto;
 import org.project.tripus.entity.PlaceEntity;
+import org.project.tripus.entity.UserEntity;
 
 public interface PlaceService {
 
@@ -11,5 +12,7 @@ public interface PlaceService {
 
     void createPlaceEntity(PlaceEntity placeEntity);
 
-    List<PlaceDto> getMyPlaceList(int cityNum, int memberNum);
+    GetLikedPlaceListOutputDto getLikedPlaceList(Long cityId, UserEntity userEntity);
+
+    List<PlaceEntity> getLikedPlaceEntityList(Long cityId, UserEntity userEntity);
 }
