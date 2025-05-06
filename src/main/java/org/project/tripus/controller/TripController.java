@@ -8,16 +8,16 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.CityTripDto;
 import org.project.tripus.dto.PlanDateDto;
 import org.project.tripus.dto.PlanDto;
 import org.project.tripus.dto.PlanMapDto;
-import org.project.tripus.dto.PlanPlaceDto;
 import org.project.tripus.dto.TripRankDto;
 import org.project.tripus.dto.input.CreateTripInputDto;
 import org.project.tripus.dto.output.CreateTripOutputDto;
+import org.project.tripus.dto.output.GetTripOutputDto;
 import org.project.tripus.dto.request.CreateTripRequestDto;
 import org.project.tripus.dto.response.CreateTripResponseDto;
+import org.project.tripus.dto.response.GetTripResponseDto;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.global.security.CustomUserDetails;
 import org.project.tripus.mapper.TripMapper;
@@ -29,6 +29,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,16 +68,20 @@ public class TripController {
             .body(CommonResponse.success("여행 일정 생성 성공", response));
     }
 
-    // 일정 수정 페이지
-    @GetMapping("/trip-info")
-    public CityTripDto getTripInfo(@RequestParam int tripNum) {
-        return tripService.getTripInfo(tripNum);
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "여행 일정 조회 성공"),
+        @ApiResponse(responseCode = "404", description = "존재하지 않는 일정")
+    })
+    @Operation(summary = "여행 일정 조회")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getTrip(@PathVariable Long id) {
+        GetTripOutputDto output = tripService.getTrip(id);
+        GetTripResponseDto response = tripMapper.toResponse(output);
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(CommonResponse.success("여행 일정 조회 성공", response));
     }
 
-    @GetMapping("/place-list")
-    public List<PlanPlaceDto> getPlaceList(@RequestParam int tripNum) {
-        return tripService.getPlaceList(tripNum);
-    }
 
 //    @PostMapping("/update/{tripNum}/{cityNum}")
 //    public void updatePlan(@PathVariable int tripNum, @PathVariable int cityNum,

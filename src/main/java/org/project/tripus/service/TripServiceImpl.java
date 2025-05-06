@@ -2,11 +2,11 @@ package org.project.tripus.service;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.CityTripDto;
 import org.project.tripus.dto.PlanDateDto;
 import org.project.tripus.dto.PlanDto;
 import org.project.tripus.dto.PlanMapDto;
@@ -16,6 +16,8 @@ import org.project.tripus.dto.input.CreateTripInputDto;
 import org.project.tripus.dto.input.CreateTripInputDto.PlaceItem;
 import org.project.tripus.dto.input.CreateTripInputDto.TripItem;
 import org.project.tripus.dto.output.CreateTripOutputDto;
+import org.project.tripus.dto.output.GetTripOutputDto;
+import org.project.tripus.dto.output.GetTripOutputDto.CityItem;
 import org.project.tripus.entity.CityEntity;
 import org.project.tripus.entity.ItineraryEntity;
 import org.project.tripus.entity.PlaceEntity;
@@ -139,11 +141,91 @@ public class TripServiceImpl implements TripService {
         itineraryRepository.save(itineraryEntity);
     }
 
+    /**
+     * 여행 일정을 조회합니다.
+     *
+     * @param tripId 여행 ID
+     * @return 도시, 여행, 일정 정보가 담긴 DTO
+     */
+    public GetTripOutputDto getTrip(Long tripId) {
+        // 1. 도시, 여행 조회
+        TripEntity tripEntity = getTripEntityWithCityEntity(tripId);
+        CityEntity cityEntity = tripEntity.getCity();
 
-    // 일정 수정 페이지
-    public CityTripDto getTripInfo(int tripNum) {
-        return planMapper.getTripInfo(tripNum);
+        int days = (int) (DAYS.between(tripEntity.getStartDate(), tripEntity.getEndDate()) + 1);
+
+        // 2. 일정 조회
+        List<ItineraryEntity> itineraryEntityList = getItineraryEntityListWithPlaceEntity(tripId);
+
+        // 3. DTO로 변환
+        CityItem cityItem = CityItem.builder()
+            .cityId(cityEntity.getId())
+            .name(cityEntity.getName())
+            .x(cityEntity.getX())
+            .y(cityEntity.getY())
+            .build();
+
+        GetTripOutputDto.TripItem tripItem = GetTripOutputDto.TripItem.builder()
+            .tripId(tripEntity.getId())
+            .title(tripEntity.getTitle())
+            .startDate(tripEntity.getStartDate())
+            .endDate(tripEntity.getEndDate())
+            .days(days)
+            .build();
+
+        // 3-1. 일정의 1차원 배열 -> 장소의 2차원 배열로 바꾸기
+        List<List<GetTripOutputDto.PlaceItem>> placeItemList = new ArrayList<>();
+
+        for(int i = 0; i < days; i++) {
+            placeItemList.add(new ArrayList<>());
+        }
+
+        for(ItineraryEntity itineraryEntity : itineraryEntityList) {
+            GetTripOutputDto.PlaceItem placeItem = GetTripOutputDto.PlaceItem.builder()
+                .contentid(itineraryEntity.getPlace().getContentid())
+                .contenttypeid(itineraryEntity.getPlace().getContenttypeid())
+                .title(itineraryEntity.getPlace().getTitle())
+                .cat3(itineraryEntity.getPlace().getCat3())
+                .addr1(itineraryEntity.getPlace().getAddr1())
+                .addr2(itineraryEntity.getPlace().getAddr2())
+                .firstimage(itineraryEntity.getPlace().getFirstimage())
+                .mapx(itineraryEntity.getPlace().getMapx())
+                .mapy(itineraryEntity.getPlace().getMapy())
+                .build();
+
+            placeItemList.get(itineraryEntity.getDay() - 1).add(placeItem);
+        }
+
+        return GetTripOutputDto.builder()
+            .city(cityItem)
+            .trip(tripItem)
+            .itinerary(placeItemList)
+            .build();
     }
+
+    /**
+     * 여행 ID로 여행 엔티티와 연관된 도시 엔티티를 함께 조회합니다.
+     *
+     * @param tripId 조회할 여행 ID
+     * @return 도시 엔티티가 포함된 여행 엔티티
+     * @throws CustomException 조회 결과가 없는 경우 {@code TRIP_NOT_FOUND} 예외를 발생시킵니다.
+     */
+    public TripEntity getTripEntityWithCityEntity(Long tripId) {
+        return tripRepository.findByIdWithCity(tripId)
+            .orElseThrow(() -> new CustomException(ErrorEnum.TRIP_NOT_FOUND));
+    }
+
+    /**
+     * 여행 ID로 일정 엔티티와 연관된 장소 엔티티의 리스트를 조회합니다.
+     *
+     * @param tripId 조회할 여행 ID
+     * @return day, seq를 기준으로 정렬된 장소 엔티티를 포함한 일정 엔티티 리스트. 조회 결과가 없는 경우 빈 리스트
+     */
+    public List<ItineraryEntity> getItineraryEntityListWithPlaceEntity(Long tripId) {
+        return itineraryRepository.findByTripIdWithPlace(tripId);
+    }
+
+    // 리팩토링 전
 
     public List<PlanPlaceDto> getPlaceList(int tripNum) {
         return planMapper.getPlaceList(tripNum);
