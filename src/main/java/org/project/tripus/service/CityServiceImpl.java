@@ -87,6 +87,7 @@ public class CityServiceImpl implements CityService {
      *
      * @param id 도시 ID
      * @return 도시 엔티티
+     * @throws CustomException 조회 결과가 없는 경우
      */
     public CityEntity getCityEntityById(Long id) {
         return cityRepository.findById(id)

@@ -92,7 +92,7 @@ public class CityController {
 //        place.setMapx((String) request.get("mapx"));
 //        place.setMapy((String) request.get("mapy"));
 //
-//        if(tripService.checkPlace(place.getContentid()) == 0) {
+//        if(tripService.existsPlace(place.getContentid()) == 0) {
 //            tripService.insertPlace(place);
 //        }
 //

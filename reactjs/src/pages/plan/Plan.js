@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import { NumPlaceItem, PlaceItem } from './index';
+import {NumPlaceItem} from './index';
 import '../../styles/plan.css';
-import { format } from 'date-fns';
-import { resetPlan } from '../../modules/planner';
-import { usePrompt } from '../../utils/Blocker';
+import {format} from 'date-fns';
+import {resetPlan} from '../../modules/planner';
 
 const { kakao } = window;
 
@@ -20,13 +19,13 @@ const Plan = ({view, setView, day, setDay, setIsBlocking, focus, setFocus}) => {
 
   const navigate = useNavigate();
 
-  let insertUrl = process.env.REACT_APP_SPRING_URL + `plan/insert`;
+  let insertUrl = process.env.REACT_APP_SPRING_URL + `trip`;
 
   const insertPlan = () => {
     setIsBlocking(false); // usePrompt 비활성화
 
     axios.post(insertUrl, {
-      plan: plan,
+      itinerary: plan,
       trip: {
         ...trip,
         startDate: format(trip.startDate, "yyyy-MM-dd"),

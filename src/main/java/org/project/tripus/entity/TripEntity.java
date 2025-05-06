@@ -36,8 +36,8 @@ public class TripEntity extends BaseEntity {
     private CityEntity city;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private UserEntity member;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     private String title;
 

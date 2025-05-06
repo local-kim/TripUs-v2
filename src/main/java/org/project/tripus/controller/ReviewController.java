@@ -8,10 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import org.project.tripus.dto.PlaceDto;
 import org.project.tripus.dto.ReviewDto;
-import org.project.tripus.service.PlanService;
 import org.project.tripus.service.ReviewService;
+import org.project.tripus.service.TripService;
 import org.project.tripus.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,7 +32,7 @@ public class ReviewController {
    private ReviewService reviewService;
    
    @Autowired
-   private PlanService planService;
+   private TripService tripService;
    
    List<String> photoName=new ArrayList<String>(); //리엑트에서 업로드한 이미지명
    //@Autowired
@@ -196,41 +195,41 @@ public class ReviewController {
       System.out.println(reviewService.getLike(place_id,loginNum));
       return reviewService.getLike(place_id,loginNum);
    }
-   
-   @PostMapping("/insertlike")
-   public void insertLike(@RequestBody HashMap<String, Object> request){
-//      int member_num=18;
-      System.out.println(request);
-	   
-	   PlaceDto place = new PlaceDto();
-		
-	   place.setCity_num(Integer.parseInt((String)request.get("cityNum")));
-		
-		place.setContentid((String)request.get("contentid"));
-		place.setContenttypeid((String)request.get("contenttypeid"));
-		place.setTitle((String)request.get("title"));
-		place.setCat3((String)request.get("cat3"));
-		place.setAddr1((String)request.get("addr1"));
-		place.setAddr2((String)request.get("addr2"));
-		place.setFirstimage((String)request.get("firstimage"));
-		place.setMapx((String)request.get("mapx"));
-		place.setMapy((String)request.get("mapy"));
-		
-		System.out.println(place);
-		
-		if(planService.checkPlace(place.getContentid()) == 0) {
-			planService.insertPlace(place);
-		}
-		
-      int place_id=Integer.parseInt(String.valueOf(request.get("place_id")));
-      int loginNum=(Integer)request.get("loginNum");
-      request.get("check");
-//      ReviewDto dto=new ReviewDto();
-//      dto.setMember_num(loginNum);
-//      System.out.println(dto);
-      reviewService.insertLike(place_id,loginNum);
-//      int num=reviewService.insertLike(member_num);
-   }
+
+//   @PostMapping("/insertlike")
+//   public void insertLike(@RequestBody HashMap<String, Object> request){
+////      int member_num=18;
+//      System.out.println(request);
+//
+//	   PlaceDto place = new PlaceDto();
+//
+//	   place.setCity_num(Integer.parseInt((String)request.get("cityNum")));
+//
+//		place.setContentid((String)request.get("contentid"));
+//		place.setContenttypeid((String)request.get("contenttypeid"));
+//		place.setTitle((String)request.get("title"));
+//		place.setCat3((String)request.get("cat3"));
+//		place.setAddr1((String)request.get("addr1"));
+//		place.setAddr2((String)request.get("addr2"));
+//		place.setFirstimage((String)request.get("firstimage"));
+//		place.setMapx((String)request.get("mapx"));
+//		place.setMapy((String)request.get("mapy"));
+//
+//		System.out.println(place);
+//
+//      if(tripService.existsPlace(place.getContentid()) == 0) {
+//         tripService.insertPlace(place);
+//		}
+//
+//      int place_id=Integer.parseInt(String.valueOf(request.get("place_id")));
+//      int loginNum=(Integer)request.get("loginNum");
+//      request.get("check");
+////      ReviewDto dto=new ReviewDto();
+////      dto.setMember_num(loginNum);
+////      System.out.println(dto);
+//      reviewService.insertLike(place_id,loginNum);
+////      int num=reviewService.insertLike(member_num);
+//   }
    
    @DeleteMapping("/deletelike")
    public void deleteLike(@RequestParam String place_id,@RequestParam int loginNum) {
