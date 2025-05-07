@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import { alpha, styled } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux'
-import { savePlan } from '../../modules/planner';
-import { useInView } from 'react-intersection-observer';
-import { PlaceItem, MyPlaceList, NumPlaceItem, DayPlaceList } from '.';
+import {styled} from '@mui/material/styles';
+import {useDispatch, useSelector} from 'react-redux'
+import {savePlan} from '../../modules/planner';
+import {useInView} from 'react-intersection-observer';
+import {DayPlaceList, MyPlaceList, PlaceItem} from '.';
 import '../../styles/plan.css';
-import setAuthorizationToken from '../../utils/setAuthorizationToken';
-import { addDays, format, add } from 'date-fns'
+import {add, format} from 'date-fns'
 import ko from 'date-fns/locale/ko';
-import { usePrompt } from '../../utils/Blocker';
 
 const { kakao } = window;
 
@@ -39,7 +37,7 @@ const DayPlan = ({view, setView, day, setDay, focus, setFocus}) => {
   const navigate = useNavigate();
   // const {day} = useParams();
 
-  const API_KEY = process.env.REACT_APP_TOUR_API_KEY_SY;  // 뒷 두글자만 바꾸면 됨
+  const API_KEY = process.env.REACT_APP_TOUR_API_KEY;  // 뒷 두글자만 바꾸면 됨
 
   // redux에서 변수 얻기
   const dispatch = useDispatch();
@@ -90,17 +88,17 @@ const DayPlan = ({view, setView, day, setDay, focus, setFocus}) => {
   }, [inView]);
 
   // 추천 장소 url(arrange=P)
-  let areaUrl = `http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=${API_KEY}&areaCode=${trip.area_code}&numOfRows=10&arrange=B&MobileOS=ETC&MobileApp=AppTest&_type=json`;
+  let areaUrl = `https://apis.data.go.kr/B551011/KorService1/areaBasedList1?MobileOS=ETC&MobileApp=TripUs&_type=json&serviceKey=${API_KEY}&areaCode=${trip.areaCode}`;
 
-  if(trip.sigungu_code){  // 시군구 코드가 있는 도시이면
-    areaUrl += `&sigunguCode=${trip.sigungu_code}`;
+  if (trip.sigunguCode) {  // 시군구 코드가 있는 도시이면
+    areaUrl += `&sigunguCode=${trip.sigunguCode}`;
   }
 
   // 키워드 검색 url
-  let keywordUrl = `http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=${API_KEY}&keyword=${keyword}&areaCode=${trip.area_code}&numOfRows=10&arrange=B&MobileOS=ETC&MobileApp=AppTest&_type=json`;
+  let keywordUrl = `http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=${API_KEY}&keyword=${keyword}&areaCode=${trip.areaCode}&numOfRows=10&arrange=B&MobileOS=ETC&MobileApp=AppTest&_type=json`;
 
-  if(trip.sigungu_code){  // 시군구 코드가 있는 도시이면
-    keywordUrl += `&sigunguCode=${trip.sigungu_code}`;
+  if (trip.sigunguCode) {  // 시군구 코드가 있는 도시이면
+    keywordUrl += `&sigunguCode=${trip.sigunguCode}`;
   }
 
   useEffect(() => {
@@ -324,27 +322,11 @@ const DayPlan = ({view, setView, day, setDay, focus, setFocus}) => {
         <div className='left'>
           <div style={{textAlign:'center',color:'gray',fontSize:'14px'}}>{format(add(new Date(trip.startDate), {days: day - 1}), "MM/dd (eee)", {locale: ko})}</div>
           <div className='title-wrap'>
-            {/* {
-              // day1이면 이전 날짜 버튼 안보임
-              day == 1 ? <button type='button' className='btn btn-sm btn-arrow' style={{opacity:'0',cursor:'default'}}>ᐸ</button> : <button type='button' className='btn btn-sm btn-arrow' onClick={prevDay}>ᐸ</button>
-            } */}
-            {/* {
-              // day1이면 이전 날짜 버튼 안보임
-              day == 1 ? <span class="material-icons-outlined" style={{opacity:'0',cursor:'default',fontSize:'24px',lineHeight:'34px'}}>arrow_back_ios</span> : <span class="material-icons-outlined" style={{cursor:'pointer',fontSize:'24px',lineHeight:'34px'}} onClick={prevDay}>arrow_back_ios</span>
-            } */}
             {
               // day1이면 이전 날짜 버튼 안보임
               day == 1 ? <span class="material-symbols-rounded btn-arrow" style={{opacity:'0',cursor:'default'}}>chevron_left</span> : <span class="material-symbols-rounded btn-arrow" style={{cursor:'pointer'}} onClick={prevDay}>chevron_left</span>
             }
             <span className='title'>DAY {day}</span>
-            {/* {
-              // 마지막 날이면 다음 날짜 버튼 안보임
-              day == trip.days ? <button type='button' className='btn btn-sm btn-arrow' style={{opacity:'0',cursor:'default'}}>ᐳ</button> : <button type='button' className='btn btn-sm btn-arrow' onClick={nextDay}>ᐳ</button>
-            } */}
-            {/* {
-              // 마지막 날이면 다음 날짜 버튼 안보임
-              day == trip.days ? <span class="material-icons-outlined" style={{opacity:'0',cursor:'default',fontSize:'24px',lineHeight:'34px'}}>arrow_forward_ios</span> : <span class="material-icons-outlined" style={{cursor:'pointer',fontSize:'24px',lineHeight:'34px'}} onClick={nextDay}>arrow_forward_ios</span>
-            } */}
             {
               // 마지막 날이면 다음 날짜 버튼 안보임
               day == trip.days ? <span class="material-symbols-rounded btn-arrow" style={{opacity:'0',cursor:'default'}}>chevron_right</span> : <span class="material-symbols-rounded btn-arrow" style={{cursor:'pointer'}} onClick={nextDay}>chevron_right</span>

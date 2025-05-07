@@ -27,7 +27,7 @@ const Calendar = ({view, setView}) => {
       setCityInfo({
         ...res.data.data,
         cityName: res.data.data.name,
-        cityNum: res.data.data.id
+        cityId: res.data.data.id
       });
     })
     .catch(err => console.log(err));

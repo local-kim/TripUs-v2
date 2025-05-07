@@ -1,26 +1,17 @@
 import axios from 'axios';
-import React, { useEffect,useRef,useState } from 'react';
-import { useNavigate,useLocation, useParams, Link} from 'react-router-dom';
+import React, {useEffect, useRef, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
 import '../../styles/placeinfo.css';
 import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Ayong from '../../assets/images/IMG_1503.JPG';
-import User from '../../assets/images/User-Profile-PNG-Image.png'
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal, Pagination } from '@mui/material';
-import { useSelector } from 'react-redux';
+import {Button, Modal} from '@mui/material';
+import {useSelector} from 'react-redux';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Component from './Component';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-
 
 //kakao map
 const { kakao } = window;
@@ -80,7 +71,7 @@ const PlaceInfo=()=>{
     // const contentId=126078; //임시 contentid 값 추후 cityInfo에서 contentid 넘겨받기 [ 광안리해수욕장 : 126078] [강화도 : 125502] [강화도 동막해변:127291]
      //const placeApikey="sRb6GSV%2FXAgOAdS%2FpBID9d0lsR8QfJ78C4bJYMZCu2MItPGIbX8JvFumAqXoFD61AoXODAxJdlrUaDwDavWlsg%3D%3D"; //내인증키
      //env opentour api key
-     const placeApikey=process.env.REACT_APP_TOUR_API_KEY_SY;
+  const placeApikey = process.env.REACT_APP_TOUR_API_KEY;
      //const placeApikey="hG2QkKkmuiN38w%2BeGu53VbRK%2BBNzKRpnjbLE%2BHDXZ0dHzgbBQ67K67NsuR5xOAs%2BErSqbSpOpk1UKBnj4dvlnA%3D%3D"; //재호님 인증키
     // const placeApikey="YHbvEJEqXIWLqYGKEDkCqF7V08yazpZHKk3gWVyGKJpuhY5ZowEIwkt9i8nmTs%2F5BMBmSKWuyX349VO5JN6Tsg%3D%3D"; //현지언니 인증키
     //const placeApikey="7Et3sUoEnYoi9UiGk4tJayBnDo4ZMQ%2FM%2FOkEKTJMSjXkoukxdqrTDOu3WAzTgO5QsOTQOBSKfwMMuIbl8LyblA%3D%3D"; // 일웅님 인증키

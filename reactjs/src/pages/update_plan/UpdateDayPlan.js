@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import { useDispatch, useSelector } from 'react-redux'
-import { savePlan } from '../../modules/planner';
-import { useInView } from 'react-intersection-observer';
-import { PlaceItem, MyPlaceList, NumPlaceItem, DayPlaceList } from "../plan";
+import {useDispatch, useSelector} from 'react-redux'
+import {savePlan} from '../../modules/planner';
+import {useInView} from 'react-intersection-observer';
+import {DayPlaceList, MyPlaceList, PlaceItem} from "../plan";
 import '../../styles/plan.css';
-import setAuthorizationToken from '../../utils/setAuthorizationToken';
-import { addDays, format, add } from 'date-fns'
+import {add, format} from 'date-fns'
 import ko from 'date-fns/locale/ko';
 
 const { kakao } = window;
 
 const UpdateDayPlan = ({view, setView, day, setDay, focus, setFocus}) => {
-  const API_KEY = process.env.REACT_APP_TOUR_API_KEY_SY;  // 뒷 두글자만 바꾸면 됨
+  const API_KEY = process.env.REACT_APP_TOUR_API_KEY;  // 뒷 두글자만 바꾸면 됨
 
   const navigate = useNavigate();
   // const {tripNum, day} = useParams();
