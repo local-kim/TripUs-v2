@@ -7,8 +7,11 @@ import org.project.tripus.dto.PlanMapDto;
 import org.project.tripus.dto.PlanPlaceDto;
 import org.project.tripus.dto.TripRankDto;
 import org.project.tripus.dto.input.CreateTripInputDto;
+import org.project.tripus.dto.input.SaveTripPlaceItemInputDto;
+import org.project.tripus.dto.input.UpdateTripInputDto;
 import org.project.tripus.dto.output.CreateTripOutputDto;
 import org.project.tripus.dto.output.GetTripOutputDto;
+import org.project.tripus.entity.CityEntity;
 import org.project.tripus.entity.ItineraryEntity;
 import org.project.tripus.entity.TripEntity;
 import org.project.tripus.entity.UserEntity;
@@ -16,6 +19,8 @@ import org.project.tripus.entity.UserEntity;
 public interface TripService {
 
     CreateTripOutputDto createTrip(CreateTripInputDto input, UserEntity userEntity);
+
+    void createItinerary(List<List<SaveTripPlaceItemInputDto>> itinerary, TripEntity tripEntity, CityEntity cityEntity);
 
     void createTripEntity(TripEntity tripEntity);
 
@@ -26,6 +31,10 @@ public interface TripService {
     TripEntity getTripEntityWithCityEntity(Long tripId);
 
     List<ItineraryEntity> getItineraryEntityListWithPlaceEntity(Long tripId);
+
+    void updateTrip(Long tripId, UpdateTripInputDto input, UserEntity userEntity);
+
+    int deleteAllItineraryEntity(Long tripId);
 
     //	좋아요
     int getPlanLike(int num, int loginNum);
@@ -38,7 +47,6 @@ public interface TripService {
 
     List<PlanPlaceDto> getPlaceList(int tripNum);
 
-    void deleteAllItinerary(int tripNum);
 
     // 인기 일정
     List<TripRankDto> getTripRank();

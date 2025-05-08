@@ -39,9 +39,9 @@ const Plan = ({view, setView, day, setDay, setIsBlocking, focus, setFocus}) => {
           }
         })
     .then(res => {
-      // 해당 일정 상세 페이지로 이동(trip_num 이용)
+      // 해당 일정 상세 페이지로 이동(tripId 이용)
       dispatch(resetPlan());
-      navigate(`/plan/detail/${res.data}`);
+      navigate(`/plan/detail/${res.data.data.tripId}`);
     })
     .catch(err => console.log(err));
   }

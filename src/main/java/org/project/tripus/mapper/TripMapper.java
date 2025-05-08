@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
 import org.project.tripus.dto.input.CreateTripInputDto;
-import org.project.tripus.dto.input.CreateTripInputDto.PlaceItem;
+import org.project.tripus.dto.input.SaveTripPlaceItemInputDto;
+import org.project.tripus.dto.input.UpdateTripInputDto;
 import org.project.tripus.dto.output.CreateTripOutputDto;
 import org.project.tripus.dto.output.GetTripOutputDto;
 import org.project.tripus.dto.request.CreateTripRequestDto;
+import org.project.tripus.dto.request.SaveTripPlaceItemRequestDto;
+import org.project.tripus.dto.request.UpdateTripRequestDto;
 import org.project.tripus.dto.response.CreateTripResponseDto;
 import org.project.tripus.dto.response.GetTripResponseDto;
 
@@ -30,10 +33,11 @@ public interface TripMapper {
             .build();
     }
 
-    default List<List<PlaceItem>> mapItineraryCreateTrip(List<List<CreateTripRequestDto.PlaceItem>> request) {
+    default List<List<SaveTripPlaceItemInputDto>> mapItineraryCreateTrip(List<List<SaveTripPlaceItemRequestDto>> request) {
         if(request == null) {
             return null;
         }
+
         return request.stream()
             .map(innerList -> innerList.stream()
                 .map(this::mapPlaceItem)
@@ -41,8 +45,8 @@ public interface TripMapper {
             .collect(Collectors.toList());
     }
 
-    default CreateTripInputDto.PlaceItem mapPlaceItem(CreateTripRequestDto.PlaceItem request) {
-        return CreateTripInputDto.PlaceItem.builder()
+    default SaveTripPlaceItemInputDto mapPlaceItem(SaveTripPlaceItemRequestDto request) {
+        return SaveTripPlaceItemInputDto.builder()
             .contentid(request.getContentid())
             .contenttypeid(request.getContenttypeid())
             .title(request.getTitle())
@@ -58,8 +62,6 @@ public interface TripMapper {
     CreateTripResponseDto toResponse(CreateTripOutputDto output);
 
     // 여행 일정 조회
-//    GetTripResponseDto toResponse(GetTripOutputDto output);
-
     default GetTripResponseDto toResponse(GetTripOutputDto output) {
         return GetTripResponseDto.builder()
             .city(mapCityItem(output.getCity()))
@@ -91,6 +93,7 @@ public interface TripMapper {
         if(output == null) {
             return null;
         }
+
         return output.stream()
             .map(innerList -> innerList.stream()
                 .map(this::mapPlaceItem)
@@ -110,5 +113,24 @@ public interface TripMapper {
             .mapx(output.getMapx())
             .mapy(output.getMapy())
             .build();
+    }
+
+    // 여행 일정 수정
+    default UpdateTripInputDto toInput(UpdateTripRequestDto request) {
+        return UpdateTripInputDto.builder()
+            .itinerary(mapItineraryUpdateTrip(request.getItinerary()))
+            .build();
+    }
+
+    default List<List<SaveTripPlaceItemInputDto>> mapItineraryUpdateTrip(List<List<SaveTripPlaceItemRequestDto>> request) {
+        if(request == null) {
+            return null;
+        }
+
+        return request.stream()
+            .map(innerList -> innerList.stream()
+                .map(this::mapPlaceItem)
+                .collect(Collectors.toList()))
+            .collect(Collectors.toList());
     }
 }

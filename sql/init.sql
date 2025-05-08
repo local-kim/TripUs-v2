@@ -41,10 +41,10 @@ CREATE TABLE `place`
 (
     `id`            INT          NOT NULL AUTO_INCREMENT,
     `city_id`       INT          NOT NULL,
-    `contentid`     VARCHAR(255) NOT NULL UNIQUE COMMENT 'API의 장소 ID',
+    `contentid` VARCHAR(255) NOT NULL UNIQUE COMMENT 'TOUR API의 콘텐츠 ID',
     `contenttypeid` VARCHAR(45)  NOT NULL,
     `title`         VARCHAR(255) NOT NULL,
-    `cat3`          VARCHAR(255) NOT NULL,
+    `cat3`      VARCHAR(255),
     `addr1`         VARCHAR(255),
     `addr2`         VARCHAR(255),
     `firstimage`    VARCHAR(255),

@@ -96,14 +96,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<CommonResponse<ErrorResponse>> handleAuthorizationDeniedException(
         AuthorizationDeniedException e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
-            .code(ErrorEnum.AUTHORIZATION_FAILED.name())
-            .message(List.of(ErrorEnum.AUTHORIZATION_FAILED.getMessage()))
+            .code(ErrorEnum.AUTHENTICATION_FAILED.name())
+            .message(List.of(ErrorEnum.AUTHENTICATION_FAILED.getMessage()))
             .build();
 
-        log.warn("[{}] {}", ErrorEnum.AUTHORIZATION_FAILED.name(),
-            ErrorEnum.AUTHORIZATION_FAILED.getMessage());
+        log.warn("[{}] {}", ErrorEnum.AUTHENTICATION_FAILED.name(),
+            ErrorEnum.AUTHENTICATION_FAILED.getMessage());
 
-        return ResponseEntity.status(ErrorEnum.AUTHORIZATION_FAILED.getHttpStatus())
+        return ResponseEntity.status(ErrorEnum.AUTHENTICATION_FAILED.getHttpStatus())
             .body(CommonResponse.fail(errorResponse));
     }
 

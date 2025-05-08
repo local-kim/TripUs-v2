@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.PlanDateDto;
 import org.project.tripus.dto.PlanDto;
@@ -13,8 +14,9 @@ import org.project.tripus.dto.PlanMapDto;
 import org.project.tripus.dto.PlanPlaceDto;
 import org.project.tripus.dto.TripRankDto;
 import org.project.tripus.dto.input.CreateTripInputDto;
-import org.project.tripus.dto.input.CreateTripInputDto.PlaceItem;
 import org.project.tripus.dto.input.CreateTripInputDto.TripItem;
+import org.project.tripus.dto.input.SaveTripPlaceItemInputDto;
+import org.project.tripus.dto.input.UpdateTripInputDto;
 import org.project.tripus.dto.output.CreateTripOutputDto;
 import org.project.tripus.dto.output.GetTripOutputDto;
 import org.project.tripus.dto.output.GetTripOutputDto.CityItem;
@@ -43,12 +45,11 @@ public class TripServiceImpl implements TripService {
     private final ItineraryRepository itineraryRepository;
 
     /**
-     * 여행과 일정을 생성하는 메서드
+     * 여행과 일정을 생성합니다.
      *
      * @param input      여행과 일정 정보가 담긴 DTO
      * @param userEntity 현재 인증한 사용자 엔티티
      * @return 여행 ID가 담긴 DTO
-     * @throws CustomException 일정 배열의 크기가 여행 일수와 다른 경우
      */
     @Transactional
     public CreateTripOutputDto createTrip(CreateTripInputDto input, UserEntity userEntity) {
@@ -70,8 +71,24 @@ public class TripServiceImpl implements TripService {
         createTripEntity(tripEntity);
 
         // 2. 일정
-        List<List<PlaceItem>> itinerary = input.getItinerary();
+        createItinerary(input.getItinerary(), tripEntity, cityEntity);
 
+        // 3. 여행 ID 반환
+        return CreateTripOutputDto.builder()
+            .tripId(tripEntity.getId())
+            .build();
+    }
+
+    /**
+     * 일정 리스트를 기반으로 장소와 일정을 저장합니다.
+     *
+     * @param itinerary  저장할 일정 리스트
+     * @param tripEntity 여행 엔티티
+     * @param cityEntity 도시 엔티티
+     * @throws CustomException 일정 배열의 크기가 여행 일수와 다른 경우 {@code INVALID_FORMAT} 예외를 발생시킵니다.
+     */
+    @Transactional
+    public void createItinerary(List<List<SaveTripPlaceItemInputDto>> itinerary, TripEntity tripEntity, CityEntity cityEntity) {
         // 일정 배열의 크기가 여행 일수와 다를 때 예외 발생
         if(itinerary.size() != DAYS.between(tripEntity.getStartDate(), tripEntity.getEndDate()) + 1) {
             throw new CustomException(ErrorEnum.INVALID_FORMAT, "일정 배열의 크기는 여행 일수와 같아야 합니다.");
@@ -79,12 +96,12 @@ public class TripServiceImpl implements TripService {
 
         for(int i = 0; i < itinerary.size(); i++) {
             for(int j = 0; j < itinerary.get(i).size(); j++) {
-                PlaceItem place = itinerary.get(i).get(j);
+                SaveTripPlaceItemInputDto place = itinerary.get(i).get(j);
 
-                // 2-1. 장소가 테이블에 존재하는지 확인
+                // 1-1. 장소가 테이블에 존재하는지 확인
                 PlaceEntity placeEntity = placeService.findPlaceByContentid(place.getContentid())
                     .orElseGet(() -> {
-                        // 2-2. 존재하지 않으면 장소 엔티티로 변환 후 저장
+                        // 1-2. 존재하지 않으면 장소 엔티티로 변환 후 저장
                         PlaceEntity newPlaceEntity = PlaceEntity.builder()
                             .city(cityEntity)
                             .contentid(place.getContentid())
@@ -103,7 +120,7 @@ public class TripServiceImpl implements TripService {
                         return newPlaceEntity;
                     });
 
-                // 2-3. 일정 엔티티로 변환 후 저장
+                // 2. 일정 엔티티로 변환 후 저장
                 ItineraryEntity itineraryEntity = ItineraryEntity.builder()
                     .trip(tripEntity)
                     .day(i + 1)
@@ -114,15 +131,10 @@ public class TripServiceImpl implements TripService {
                 createItineraryEntity(itineraryEntity);
             }
         }
-
-        // 3. 여행 ID 반환
-        return CreateTripOutputDto.builder()
-            .tripId(tripEntity.getId())
-            .build();
     }
 
     /**
-     * 여행 엔티티를 저장하는 메서드
+     * 여행 엔티티를 저장합니다.
      *
      * @param tripEntity 여행 엔티티
      */
@@ -132,7 +144,7 @@ public class TripServiceImpl implements TripService {
     }
 
     /**
-     * 일정 엔티티를 저장하는 메서드
+     * 일정 엔티티를 저장합니다.
      *
      * @param itineraryEntity 일정 엔티티
      */
@@ -225,15 +237,47 @@ public class TripServiceImpl implements TripService {
         return itineraryRepository.findByTripIdWithPlace(tripId);
     }
 
+    /**
+     * 여행 일정을 수정합니다.
+     *
+     * @param tripId     수정할 여행 ID
+     * @param input      일정 정보가 담긴 DTO
+     * @param userEntity 현재 인증한 사용자 엔티티
+     * @throws CustomException 해당 여행에 접근할 수 없는 경우 {@code PERMISSION_DENIED} 예외를 발생시킵니다.
+     */
+    @Transactional
+    public void updateTrip(Long tripId, UpdateTripInputDto input, UserEntity userEntity) {
+        // 1. 수정 권한 검증
+        TripEntity tripEntity = getTripEntityWithCityEntity(tripId);
+
+        if(!Objects.equals(tripEntity.getUser().getId(), userEntity.getId())) {
+            throw new CustomException(ErrorEnum.PERMISSION_DENIED);
+        }
+
+        // 2. 기존의 모든 일정 삭제
+        deleteAllItineraryEntity(tripId);
+
+        // 3. 새로운 일정 저장
+        createItinerary(input.getItinerary(), tripEntity, tripEntity.getCity());
+    }
+
+    /**
+     * 여행 ID로 일정 엔티티를 모두 삭제합니다.
+     *
+     * @param tripId 일정을 삭제할 여행 ID
+     * @return 삭제된 데이터 개수
+     */
+    @Transactional
+    public int deleteAllItineraryEntity(Long tripId) {
+        return itineraryRepository.deleteByTripId(tripId);
+    }
+
     // 리팩토링 전
 
     public List<PlanPlaceDto> getPlaceList(int tripNum) {
         return planMapper.getPlaceList(tripNum);
     }
 
-    public void deleteAllItinerary(int tripNum) {
-        planMapper.deleteAllItinerary(tripNum);
-    }
 
     // 인기 일정
     public List<TripRankDto> getTripRank() {
