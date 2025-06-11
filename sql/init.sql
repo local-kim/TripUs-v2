@@ -3,20 +3,20 @@ SET NAMES utf8mb4;
 -- DDL
 CREATE TABLE `user`
 (
-    `id`                      INT          NOT NULL AUTO_INCREMENT,
-    `name`                    VARCHAR(255),
-    `username`                VARCHAR(255) NOT NULL UNIQUE,
-    `password`                VARCHAR(255) NOT NULL,
-    `type`                    TINYINT      NOT NULL DEFAULT '1',
-    `email`                   VARCHAR(255),
-    `tel`                     VARCHAR(255),
+    `id`         INT          NOT NULL AUTO_INCREMENT,
+    `username`   VARCHAR(255) NOT NULL UNIQUE COMMENT '아이디',
+    `password`   VARCHAR(255) NOT NULL,
+    `name`       VARCHAR(255) COMMENT '닉네임',
+    `type`       TINYINT      NOT NULL DEFAULT '1',
+    `email`      VARCHAR(255),
+    `tel`        VARCHAR(255),
     `birthday`         DATE,
-    `zonecode`                VARCHAR(255),
-    `address1`                VARCHAR(255),
-    `address2`                VARCHAR(255),
+    `zonecode`   VARCHAR(255),
+    `address1`   VARCHAR(255),
+    `address2`   VARCHAR(255),
     `profile_file_url` VARCHAR(255),
-    `created_at`       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at`       TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` TIMESTAMP             DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP             DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 );
 
@@ -41,10 +41,10 @@ CREATE TABLE `place`
 (
     `id`            INT          NOT NULL AUTO_INCREMENT,
     `city_id`       INT          NOT NULL,
-    `contentid` VARCHAR(255) NOT NULL UNIQUE COMMENT 'TOUR API의 콘텐츠 ID',
+    `contentid`  VARCHAR(255) NOT NULL UNIQUE COMMENT 'TOUR API의 콘텐츠 ID',
     `contenttypeid` VARCHAR(45)  NOT NULL,
     `title`         VARCHAR(255) NOT NULL,
-    `cat3`      VARCHAR(255),
+    `cat3`       VARCHAR(255),
     `addr1`         VARCHAR(255),
     `addr2`         VARCHAR(255),
     `firstimage`    VARCHAR(255),
@@ -136,16 +136,6 @@ CREATE TABLE `trip_like`
     FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
     UNIQUE KEY (`trip_id`, `user_id`)
 );
-
--- CREATE TABLE `weather`
--- (
---     `id`         INT         NOT NULL AUTO_INCREMENT,
---     `placename`  VARCHAR(45) NOT NULL,
---     `placenum`   VARCHAR(20) NOT NULL,
---     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
---     PRIMARY KEY (`id`)
--- );
 
 CREATE TABLE `content_type_id`
 (

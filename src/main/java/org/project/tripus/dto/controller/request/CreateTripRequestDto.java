@@ -1,6 +1,5 @@
 package org.project.tripus.dto.controller.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.project.tripus.global.annotation.ValidItinerary;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -108,12 +108,12 @@ public class CreateTripRequestDto {
         private Long cityId;
 
         @NotNull
-        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         @Schema(description = "시작날짜", example = "2025-05-01")
         private LocalDate startDate;
 
         @NotNull
-        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         @Schema(description = "종료날짜", example = "2025-05-03")
         private LocalDate endDate;
     }
