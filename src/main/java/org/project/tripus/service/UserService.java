@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.project.tripus.dto.MemberDto;
 import org.project.tripus.dto.MemberSecurityDto;
-import org.project.tripus.dto.input.CreateUserInputDto;
+import org.project.tripus.dto.service.input.CreateUserInputDto;
 
 public interface UserService {
 

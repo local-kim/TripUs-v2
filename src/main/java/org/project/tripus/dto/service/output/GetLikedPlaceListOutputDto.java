@@ -1,4 +1,4 @@
-package org.project.tripus.dto.output;
+package org.project.tripus.dto.service.output;
 
 import java.util.List;
 import lombok.Builder;

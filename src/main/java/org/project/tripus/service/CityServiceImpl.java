@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.dto.output.GetCityListOutputDto;
-import org.project.tripus.dto.output.GetCityListOutputDto.CityItem;
-import org.project.tripus.dto.output.GetCityOutputDto;
+import org.project.tripus.dto.service.output.GetCityListOutputDto;
+import org.project.tripus.dto.service.output.GetCityListOutputDto.CityItem;
+import org.project.tripus.dto.service.output.GetCityOutputDto;
 import org.project.tripus.entity.CityEntity;
 import org.project.tripus.global.exception.CustomException;
 import org.project.tripus.global.exception.ErrorEnum;
@@ -94,6 +94,8 @@ public class CityServiceImpl implements CityService {
             .orElseThrow(() -> new CustomException(ErrorEnum.CITY_NOT_FOUND));
     }
 
+
+    /***************************************************/
     // 리팩토링 전
 
     public List<TripDto> getTripData(int member_num, int city_num) {

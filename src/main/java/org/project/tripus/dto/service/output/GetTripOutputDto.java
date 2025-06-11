@@ -1,6 +1,5 @@
-package org.project.tripus.dto.output;
+package org.project.tripus.dto.service.output;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.Builder;
@@ -41,10 +40,8 @@ public class GetTripOutputDto {
 
         private String title;
 
-        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private LocalDate startDate;
 
-        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private LocalDate endDate;
 
         private int days;

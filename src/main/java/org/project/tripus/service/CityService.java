@@ -2,8 +2,8 @@ package org.project.tripus.service;
 
 import java.util.List;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.dto.output.GetCityListOutputDto;
-import org.project.tripus.dto.output.GetCityOutputDto;
+import org.project.tripus.dto.service.output.GetCityListOutputDto;
+import org.project.tripus.dto.service.output.GetCityOutputDto;
 import org.project.tripus.entity.CityEntity;
 
 public interface CityService {

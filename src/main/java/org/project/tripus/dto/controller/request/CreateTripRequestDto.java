@@ -1,6 +1,10 @@
-package org.project.tripus.dto.request;
+package org.project.tripus.dto.controller.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +14,10 @@ import org.project.tripus.global.annotation.ValidItinerary;
 @Getter
 @Setter
 @Builder
-public class UpdateTripRequestDto {
+public class CreateTripRequestDto {
+
+    @Valid
+    private TripItem trip;
 
     @ValidItinerary
     @Schema(example = """
@@ -90,4 +97,24 @@ public class UpdateTripRequestDto {
           ]
         """)
     private List<List<SaveTripPlaceItemRequestDto>> itinerary;
+
+    @Getter
+    @Setter
+    @Builder
+    public static class TripItem {
+
+        @NotNull
+        @Schema(description = "도시 ID", example = "159")
+        private Long cityId;
+
+        @NotNull
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+        @Schema(description = "시작날짜", example = "2025-05-01")
+        private LocalDate startDate;
+
+        @NotNull
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+        @Schema(description = "종료날짜", example = "2025-05-03")
+        private LocalDate endDate;
+    }
 }

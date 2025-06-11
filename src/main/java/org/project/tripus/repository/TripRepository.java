@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TripRepository extends JpaRepository<TripEntity, Long> {
+public interface TripRepository extends JpaRepository<TripEntity, Long>, TripCustomRepository {
 
     @Query("SELECT t FROM TripEntity t JOIN FETCH t.city WHERE t.id = :id")
     Optional<TripEntity> findByIdWithCity(Long id);

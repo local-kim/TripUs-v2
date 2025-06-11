@@ -1,4 +1,4 @@
-package org.project.tripus.dto.output;
+package org.project.tripus.dto.controller.response;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class GetCityOutputDto {
+public class GetCityResponseDto {
 
     private Long id;
 

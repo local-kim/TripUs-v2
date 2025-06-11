@@ -1,4 +1,4 @@
-package org.project.tripus.dto.response;
+package org.project.tripus.dto.controller.response;
 
 import java.util.List;
 import lombok.Builder;

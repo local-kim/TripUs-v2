@@ -1,4 +1,4 @@
-package org.project.tripus.dto.input;
+package org.project.tripus.dto.service.input;
 
 import java.time.LocalDate;
 import java.util.List;

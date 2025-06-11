@@ -1,7 +1,7 @@
 package org.project.tripus.service;
 
-import org.project.tripus.dto.input.LoginInputDto;
-import org.project.tripus.dto.output.LoginOutputDto;
+import org.project.tripus.dto.service.input.LoginInputDto;
+import org.project.tripus.dto.service.output.LoginOutputDto;
 
 public interface AuthService {
 

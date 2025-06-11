@@ -8,7 +8,7 @@ import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.MemberDto;
 import org.project.tripus.dto.MemberSecurityDto;
-import org.project.tripus.dto.input.CreateUserInputDto;
+import org.project.tripus.dto.service.input.CreateUserInputDto;
 import org.project.tripus.entity.UserEntity;
 import org.project.tripus.global.exception.CustomException;
 import org.project.tripus.global.exception.ErrorEnum;
@@ -43,6 +43,10 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(userEntity);
     }
+
+
+    /***************************************************/
+    // 리팩토링 전
 
     @Override
     public String getName(String id) {

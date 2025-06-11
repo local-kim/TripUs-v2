@@ -3,16 +3,18 @@ package org.project.tripus.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
-import org.project.tripus.dto.input.CreateTripInputDto;
-import org.project.tripus.dto.input.SaveTripPlaceItemInputDto;
-import org.project.tripus.dto.input.UpdateTripInputDto;
-import org.project.tripus.dto.output.CreateTripOutputDto;
-import org.project.tripus.dto.output.GetTripOutputDto;
-import org.project.tripus.dto.request.CreateTripRequestDto;
-import org.project.tripus.dto.request.SaveTripPlaceItemRequestDto;
-import org.project.tripus.dto.request.UpdateTripRequestDto;
-import org.project.tripus.dto.response.CreateTripResponseDto;
-import org.project.tripus.dto.response.GetTripResponseDto;
+import org.project.tripus.dto.controller.request.CreateTripRequestDto;
+import org.project.tripus.dto.controller.request.SaveTripPlaceItemRequestDto;
+import org.project.tripus.dto.controller.request.UpdateTripRequestDto;
+import org.project.tripus.dto.controller.response.CreateTripResponseDto;
+import org.project.tripus.dto.controller.response.GetTripListResponseDto;
+import org.project.tripus.dto.controller.response.GetTripResponseDto;
+import org.project.tripus.dto.service.input.CreateTripInputDto;
+import org.project.tripus.dto.service.input.SaveTripPlaceItemInputDto;
+import org.project.tripus.dto.service.input.UpdateTripInputDto;
+import org.project.tripus.dto.service.output.CreateTripOutputDto;
+import org.project.tripus.dto.service.output.GetTripListOutputDto;
+import org.project.tripus.dto.service.output.GetTripOutputDto;
 
 @Mapper(componentModel = "spring")
 public interface TripMapper {
@@ -132,5 +134,56 @@ public interface TripMapper {
                 .map(this::mapPlaceItem)
                 .collect(Collectors.toList()))
             .collect(Collectors.toList());
+    }
+
+    // 여행 목록 조회
+    default GetTripListResponseDto toResponse(GetTripListOutputDto output) {
+        return GetTripListResponseDto.builder()
+            .list(mapTripList(output.getList()))
+            .build();
+    }
+
+    default List<GetTripListResponseDto.TripListItem> mapTripList(List<GetTripListOutputDto.TripListItem> list) {
+        if(list == null) {
+            return null;
+        }
+
+        return list.stream()
+            .map(this::mapTripListItem)
+            .collect(Collectors.toList());
+    }
+
+    default GetTripListResponseDto.TripListItem mapTripListItem(GetTripListOutputDto.TripListItem output) {
+        return GetTripListResponseDto.TripListItem.builder()
+            .trip(mapTripItem(output.getTrip()))
+            .city(mapCityItem(output.getCity()))
+            .user(mapUserItem(output.getUser()))
+            .build();
+    }
+
+    default GetTripListResponseDto.TripListItem.TripItem mapTripItem(GetTripListOutputDto.TripListItem.TripItem output) {
+        return GetTripListResponseDto.TripListItem.TripItem.builder()
+            .id(output.getId())
+            .title(output.getTitle())
+            .startDate(output.getStartDate())
+            .endDate(output.getEndDate())
+            .days(output.getDays())
+            .likes(output.getLikes())
+            .build();
+    }
+
+    default GetTripListResponseDto.TripListItem.CityItem mapCityItem(GetTripListOutputDto.TripListItem.CityItem output) {
+        return GetTripListResponseDto.TripListItem.CityItem.builder()
+            .id(output.getId())
+            .name(output.getName())
+            .image(output.getImage())
+            .build();
+    }
+
+    default GetTripListResponseDto.TripListItem.UserItem mapUserItem(GetTripListOutputDto.TripListItem.UserItem output) {
+        return GetTripListResponseDto.TripListItem.UserItem.builder()
+            .id(output.getId())
+            .username(output.getUsername())
+            .build();
     }
 }

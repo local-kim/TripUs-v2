@@ -6,11 +6,12 @@ import org.project.tripus.dto.PlanDto;
 import org.project.tripus.dto.PlanMapDto;
 import org.project.tripus.dto.PlanPlaceDto;
 import org.project.tripus.dto.TripRankDto;
-import org.project.tripus.dto.input.CreateTripInputDto;
-import org.project.tripus.dto.input.SaveTripPlaceItemInputDto;
-import org.project.tripus.dto.input.UpdateTripInputDto;
-import org.project.tripus.dto.output.CreateTripOutputDto;
-import org.project.tripus.dto.output.GetTripOutputDto;
+import org.project.tripus.dto.service.input.CreateTripInputDto;
+import org.project.tripus.dto.service.input.SaveTripPlaceItemInputDto;
+import org.project.tripus.dto.service.input.UpdateTripInputDto;
+import org.project.tripus.dto.service.output.CreateTripOutputDto;
+import org.project.tripus.dto.service.output.GetTripListOutputDto;
+import org.project.tripus.dto.service.output.GetTripOutputDto;
 import org.project.tripus.entity.CityEntity;
 import org.project.tripus.entity.ItineraryEntity;
 import org.project.tripus.entity.TripEntity;
@@ -49,7 +50,7 @@ public interface TripService {
 
 
     // 인기 일정
-    List<TripRankDto> getTripRank();
+    GetTripListOutputDto getTripList(String sort);
 
     List<TripRankDto> getTripRank3();
 

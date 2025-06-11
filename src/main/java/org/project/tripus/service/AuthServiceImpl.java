@@ -1,8 +1,8 @@
 package org.project.tripus.service;
 
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.input.LoginInputDto;
-import org.project.tripus.dto.output.LoginOutputDto;
+import org.project.tripus.dto.service.input.LoginInputDto;
+import org.project.tripus.dto.service.output.LoginOutputDto;
 import org.project.tripus.global.exception.CustomException;
 import org.project.tripus.global.exception.ErrorEnum;
 import org.project.tripus.util.JwtUtil;

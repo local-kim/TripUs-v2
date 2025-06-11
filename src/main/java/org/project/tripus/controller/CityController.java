@@ -7,10 +7,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.TripDto;
-import org.project.tripus.dto.output.GetCityListOutputDto;
-import org.project.tripus.dto.output.GetCityOutputDto;
-import org.project.tripus.dto.response.GetCityListResponseDto;
-import org.project.tripus.dto.response.GetCityResponseDto;
+import org.project.tripus.dto.controller.response.GetCityListResponseDto;
+import org.project.tripus.dto.controller.response.GetCityResponseDto;
+import org.project.tripus.dto.service.output.GetCityListOutputDto;
+import org.project.tripus.dto.service.output.GetCityOutputDto;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.mapper.CityMapper;
 import org.project.tripus.service.CityService;
@@ -59,6 +59,10 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.success("도시 조회 성공", response));
     }
+
+
+    /***************************************************/
+    // 리팩토링 전
 
     @GetMapping("/tripdata")
     public List<TripDto> getTripData(

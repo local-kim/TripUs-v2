@@ -14,14 +14,16 @@ import org.project.tripus.dto.PlanDateDto;
 import org.project.tripus.dto.PlanDto;
 import org.project.tripus.dto.PlanMapDto;
 import org.project.tripus.dto.TripRankDto;
-import org.project.tripus.dto.input.CreateTripInputDto;
-import org.project.tripus.dto.input.UpdateTripInputDto;
-import org.project.tripus.dto.output.CreateTripOutputDto;
-import org.project.tripus.dto.output.GetTripOutputDto;
-import org.project.tripus.dto.request.CreateTripRequestDto;
-import org.project.tripus.dto.request.UpdateTripRequestDto;
-import org.project.tripus.dto.response.CreateTripResponseDto;
-import org.project.tripus.dto.response.GetTripResponseDto;
+import org.project.tripus.dto.controller.request.CreateTripRequestDto;
+import org.project.tripus.dto.controller.request.UpdateTripRequestDto;
+import org.project.tripus.dto.controller.response.CreateTripResponseDto;
+import org.project.tripus.dto.controller.response.GetTripListResponseDto;
+import org.project.tripus.dto.controller.response.GetTripResponseDto;
+import org.project.tripus.dto.service.input.CreateTripInputDto;
+import org.project.tripus.dto.service.input.UpdateTripInputDto;
+import org.project.tripus.dto.service.output.CreateTripOutputDto;
+import org.project.tripus.dto.service.output.GetTripListOutputDto;
+import org.project.tripus.dto.service.output.GetTripOutputDto;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.global.security.CustomUserDetails;
 import org.project.tripus.mapper.TripMapper;
@@ -107,18 +109,28 @@ public class TripController {
             .body(CommonResponse.success("여행 일정 수정 성공"));
     }
 
-    // 인기 일정
-    @GetMapping("/rank")
-    public List<TripRankDto> getTripRank() {
-        return tripService.getTripRank();
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "여행 목록 조회 성공"),
+        @ApiResponse(responseCode = "400", description = "정렬 기준이 올바르지 않은 경우"),
+    })
+    @Operation(summary = "여행 목록 조회", description = "정렬 기준 : latest(최신순), likes(좋아요 수)")
+    @GetMapping("")
+    public ResponseEntity<?> getTripList(@RequestParam(defaultValue = "latest") String sort) {
+        GetTripListOutputDto output = tripService.getTripList(sort);
+        GetTripListResponseDto response = tripMapper.toResponse(output);
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(CommonResponse.success("여행 목록 조회 성공", response));
     }
+
+
+    /***************************************************/
+    // 리팩토링 전
 
     @GetMapping("/rank3")
     public List<TripRankDto> getTripRank3() {
         return tripService.getTripRank3();
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @GetMapping("/nav")
     public List<PlanDto> getNavNum(@RequestParam int num) {

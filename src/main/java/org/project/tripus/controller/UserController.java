@@ -12,8 +12,8 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.MemberDto;
 import org.project.tripus.dto.MemberSecurityDto;
-import org.project.tripus.dto.input.CreateUserInputDto;
-import org.project.tripus.dto.request.CreateUserRequestDto;
+import org.project.tripus.dto.controller.request.CreateUserRequestDto;
+import org.project.tripus.dto.service.input.CreateUserInputDto;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.mapper.UserMapper;
 import org.project.tripus.service.UserService;
@@ -51,6 +51,8 @@ public class UserController {
             .body(CommonResponse.success("회원가입 성공"));
     }
 
+
+    /***************************************************/
     // 리팩토링 전
 
     @GetMapping("/idcheck")

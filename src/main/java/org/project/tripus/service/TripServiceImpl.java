@@ -2,6 +2,7 @@ package org.project.tripus.service;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,13 +14,17 @@ import org.project.tripus.dto.PlanDto;
 import org.project.tripus.dto.PlanMapDto;
 import org.project.tripus.dto.PlanPlaceDto;
 import org.project.tripus.dto.TripRankDto;
-import org.project.tripus.dto.input.CreateTripInputDto;
-import org.project.tripus.dto.input.CreateTripInputDto.TripItem;
-import org.project.tripus.dto.input.SaveTripPlaceItemInputDto;
-import org.project.tripus.dto.input.UpdateTripInputDto;
-import org.project.tripus.dto.output.CreateTripOutputDto;
-import org.project.tripus.dto.output.GetTripOutputDto;
-import org.project.tripus.dto.output.GetTripOutputDto.CityItem;
+import org.project.tripus.dto.repository.output.GetTripListRepositoryOutputDto;
+import org.project.tripus.dto.service.input.CreateTripInputDto;
+import org.project.tripus.dto.service.input.CreateTripInputDto.TripItem;
+import org.project.tripus.dto.service.input.SaveTripPlaceItemInputDto;
+import org.project.tripus.dto.service.input.UpdateTripInputDto;
+import org.project.tripus.dto.service.output.CreateTripOutputDto;
+import org.project.tripus.dto.service.output.GetTripListOutputDto;
+import org.project.tripus.dto.service.output.GetTripListOutputDto.TripListItem;
+import org.project.tripus.dto.service.output.GetTripListOutputDto.TripListItem.UserItem;
+import org.project.tripus.dto.service.output.GetTripOutputDto;
+import org.project.tripus.dto.service.output.GetTripOutputDto.CityItem;
 import org.project.tripus.entity.CityEntity;
 import org.project.tripus.entity.ItineraryEntity;
 import org.project.tripus.entity.PlaceEntity;
@@ -154,6 +159,17 @@ public class TripServiceImpl implements TripService {
     }
 
     /**
+     * 기간의 일 수를 계산합니다.
+     *
+     * @param startDate 기간의 시작 날짜
+     * @param endDate   기간의 종료 날짜
+     * @return 일 수
+     */
+    private int calculateDays(LocalDate startDate, LocalDate endDate) {
+        return (int) (DAYS.between(startDate, endDate) + 1);
+    }
+
+    /**
      * 여행 일정을 조회합니다.
      *
      * @param tripId 여행 ID
@@ -164,7 +180,7 @@ public class TripServiceImpl implements TripService {
         TripEntity tripEntity = getTripEntityWithCityEntity(tripId);
         CityEntity cityEntity = tripEntity.getCity();
 
-        int days = (int) (DAYS.between(tripEntity.getStartDate(), tripEntity.getEndDate()) + 1);
+        int days = calculateDays(tripEntity.getStartDate(), tripEntity.getEndDate());
 
         // 2. 일정 조회
         List<ItineraryEntity> itineraryEntityList = getItineraryEntityListWithPlaceEntity(tripId);
@@ -272,16 +288,69 @@ public class TripServiceImpl implements TripService {
         return itineraryRepository.deleteByTripId(tripId);
     }
 
+    /**
+     * 정렬 기준에 따라 여행 목록을 조회합니다.
+     *
+     * @param sort 정렬 기준 - 최신순, 좋아요 수
+     * @return 여행, 도시, 사용자 정보, 좋아요 수의 리스트가 담긴 DTO
+     * @throws CustomException 정렬 기준이 올바르지 않은 경우 {@code INVALID_FORMAT} 예외를 발생시킵니다.
+     */
+    public GetTripListOutputDto getTripList(String sort) {
+        if(!"latest".equals(sort) && !"likes".equals(sort)) {
+            throw new CustomException(ErrorEnum.INVALID_FORMAT);
+        }
+
+        List<GetTripListRepositoryOutputDto> tripList = getTripListSortedBy(sort);
+
+        List<TripListItem> tripListItems = tripList.stream().map(trip -> {
+            TripListItem.TripItem tripItem = TripListItem.TripItem.builder()
+                .id(trip.getTripId())
+                .title(trip.getTitle())
+                .startDate(trip.getStartDate())
+                .endDate(trip.getEndDate())
+                .days(calculateDays(trip.getStartDate(), trip.getEndDate()))
+                .likes(trip.getLikes())
+                .build();
+
+            TripListItem.CityItem cityItem = TripListItem.CityItem.builder()
+                .id(trip.getCityId())
+                .name(trip.getCityName())
+                .image(trip.getFileName())
+                .build();
+
+            UserItem userItem = UserItem.builder()
+                .id(trip.getUserId())
+                .username(trip.getUsername())
+                .build();
+
+            return TripListItem.builder()
+                .trip(tripItem)
+                .city(cityItem)
+                .user(userItem)
+                .build();
+        }).toList();
+
+        return GetTripListOutputDto.builder()
+            .list(tripListItems)
+            .build();
+    }
+
+    /**
+     * 여행 엔티티와 연관된 도시 엔티티, 사용자 엔티티, 그리고 좋아요 수의 리스트를 조회합니다.
+     *
+     * @param sort 정렬 기준 - 최신순, 좋아요 수
+     * @return 여행, 도시, 사용자 정보, 좋아요 수를 포함한 리스트. 조회 결과가 없는 경우 빈 리스트
+     */
+    public List<GetTripListRepositoryOutputDto> getTripListSortedBy(String sort) {
+        return tripRepository.findAllOrderBy(sort);
+    }
+
+
+    /***************************************************/
     // 리팩토링 전
 
     public List<PlanPlaceDto> getPlaceList(int tripNum) {
         return planMapper.getPlaceList(tripNum);
-    }
-
-
-    // 인기 일정
-    public List<TripRankDto> getTripRank() {
-        return planMapper.getTripRank();
     }
 
     public List<TripRankDto> getTripRank3() {

@@ -1,4 +1,4 @@
-package org.project.tripus.dto.response;
+package org.project.tripus.dto.controller.response;
 
 import java.util.List;
 import lombok.Builder;
@@ -18,14 +18,23 @@ public class GetCityListResponseDto {
     public static class CityItem {
 
         private Long id;
+
         private String name;
+
         private String engName;
+
         private String country;
+
         private String fileName;
+
         private Integer areaCode;
+
         private Integer sigunguCode;
+
         private String x;
+
         private String y;
+
         private Integer cat;
     }
 }

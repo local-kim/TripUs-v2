@@ -1,4 +1,4 @@
-package org.project.tripus.dto.input;
+package org.project.tripus.dto.service.input;
 
 import lombok.Builder;
 import lombok.Getter;
