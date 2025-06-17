@@ -8,6 +8,7 @@ logging:
 spring:
   application:
     name: TripUs
+
   devtools:
     livereload:
       enabled: true
@@ -17,6 +18,11 @@ spring:
     url: jdbc:mysql://localhost:3306/tripus
     username: root
     password: root
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
   jpa:
     hibernate:
@@ -32,7 +38,8 @@ mybatis:
   mapper-locations:
   - /mapper/**/*.xml
 
-# spring security
+# Spring Security
 jwt:
-  expiration_time: 86400000
   secret_key: wXVmY9q+3FgDjsKqP7C8F8zJ5bQx9sd9vpl9xAyj/B0=
+  access_token_expiration_time: 1800000 # 30분(ms)
+  refresh_token_expiration_time: 604800000  # 7일(ms)

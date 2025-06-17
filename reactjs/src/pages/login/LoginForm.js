@@ -60,8 +60,8 @@ const LoginForm = () => {
       axios.post(loginUrl, {username: inputId, password: inputPw})
         .then(res => {
           console.log(res.data);
-          localStorage.setItem('jwtToken', res.data.token); // 로컬 스토리지에 토큰 저장
-          dispatch(login(isChecked, res.data)); // redux에 로그인 유저 정보 저장
+          localStorage.setItem('jwtToken', res.data.data.accessToken); // 로컬 스토리지에 토큰 저장
+          dispatch(login(isChecked, res.data.data)); // redux에 로그인 유저 정보 저장
           navi(-1);
           // navi("/");
         })

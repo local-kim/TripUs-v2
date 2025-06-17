@@ -9,5 +9,7 @@ import lombok.Setter;
 @Builder
 public class LoginOutputDto {
 
-    private String token;
+    private String accessToken;
+
+    private String refreshToken;
 }

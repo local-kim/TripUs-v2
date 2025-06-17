@@ -13,19 +13,31 @@ import org.springframework.stereotype.Component;
 public class JwtUtil {
 
     private final Key secretKey;
-    private final Long expirationTime;
+    private final long accessTokenExpirationTime;
+    private final long refreshTokenExpirationTime;
 
     public JwtUtil(@Value("${jwt.secret_key}") String secretKey,
-        @Value("${jwt.expiration_time}") Long expirationTime) {
+        @Value("${jwt.access_token_expiration_time}") long accessTokenExpirationTime,
+        @Value("${jwt.refresh_token_expiration_time}") long refreshTokenExpirationTime) {
         this.secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
-        this.expirationTime = expirationTime;
+        this.accessTokenExpirationTime = accessTokenExpirationTime;
+        this.refreshTokenExpirationTime = refreshTokenExpirationTime;
     }
 
-    public String generateToken(String username) {
+    public String generateAccessToken(String username) {
         return Jwts.builder()
             .setSubject(username)
             .setIssuedAt(new Date())
-            .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+            .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpirationTime))
+            .signWith(secretKey, SignatureAlgorithm.HS256)
+            .compact();
+    }
+
+    public String generateRefreshToken(String username) {
+        return Jwts.builder()
+            .setSubject(username)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpirationTime))
             .signWith(secretKey, SignatureAlgorithm.HS256)
             .compact();
     }

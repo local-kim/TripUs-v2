@@ -32,4 +32,8 @@ public class CustomUserDetails implements UserDetails {
     public UserEntity getUserEntity() {
         return userEntity;
     }
+
+    public Long getId() {
+        return userEntity.getId();
+    }
 }
