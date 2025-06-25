@@ -43,3 +43,10 @@ jwt:
   secret_key: wXVmY9q+3FgDjsKqP7C8F8zJ5bQx9sd9vpl9xAyj/B0=
   access_token_expiration_time: 1800000 # 30분(ms)
   refresh_token_expiration_time: 604800000  # 7일(ms)
+
+# Prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus"
