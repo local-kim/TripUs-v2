@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.service.input.LoginInputDto;
 import org.project.tripus.dto.service.output.LoginOutputDto;
 import org.project.tripus.global.exception.CustomException;
-import org.project.tripus.global.exception.ErrorEnum;
+import org.project.tripus.global.exception.ErrorCode;
 import org.project.tripus.global.security.CustomUserDetails;
 import org.project.tripus.util.JwtUtil;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,7 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
         // 비밀번호 일치하는지 확인
         if(!passwordEncoder.matches(input.getPassword(), userDetails.getPassword())) {
-            throw new CustomException(ErrorEnum.USER_NOT_FOUND);
+            throw new CustomException(ErrorCode.USER_NOT_FOUND);
         }
 
         // Access Token, Refresh Token 발급

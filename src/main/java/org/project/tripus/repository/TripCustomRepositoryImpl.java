@@ -13,7 +13,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.repository.output.GetTripListRepositoryOutputDto;
 import org.project.tripus.global.exception.CustomException;
-import org.project.tripus.global.exception.ErrorEnum;
+import org.project.tripus.global.exception.ErrorCode;
 import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
@@ -54,7 +54,7 @@ public class TripCustomRepositoryImpl implements TripCustomRepository {
         } else if("likes".equals(sort)) {
             return new OrderSpecifier<>(Order.DESC, tripLikeEntity.count());
         } else {
-            throw new CustomException(ErrorEnum.INVALID_FORMAT);
+            throw new CustomException(ErrorCode.INVALID_FORMAT);
         }
     }
 }

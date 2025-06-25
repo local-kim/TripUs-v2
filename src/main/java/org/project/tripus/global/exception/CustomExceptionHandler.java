@@ -26,13 +26,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = CustomException.class)
     public ResponseEntity<CommonResponse<ErrorResponse>> handleCustomException(CustomException e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
-            .code(e.getErrorEnum().name())
-            .message(List.of(e.getErrorEnum().getMessage()))
+            .code(e.getErrorCode().name())
+            .message(List.of(e.getErrorCode().getMessage()))
             .build();
 
-        log.warn("[{}] {}", e.getErrorEnum().name(), e.getErrorEnum().getMessage());
+        log.warn("[{}] {}", e.getErrorCode().name(), e.getErrorCode().getMessage());
 
-        return ResponseEntity.status(e.getErrorEnum().getHttpStatus())
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
             .body(CommonResponse.fail(e.getMessage(), errorResponse));
     }
 
@@ -45,15 +45,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
             .toList();
 
         ErrorResponse errorResponse = ErrorResponse.builder()
-            .code(ErrorEnum.INVALID_FORMAT.name())
+            .code(ErrorCode.INVALID_FORMAT.name())
             .message(messages)
             .build();
 
         for(String message : messages) {
-            log.warn("[{}] {}", ErrorEnum.INVALID_FORMAT.name(), message);
+            log.warn("[{}] {}", ErrorCode.INVALID_FORMAT.name(), message);
         }
 
-        return ResponseEntity.status(ErrorEnum.INVALID_FORMAT.getHttpStatus())
+        return ResponseEntity.status(ErrorCode.INVALID_FORMAT.getHttpStatus())
             .body(CommonResponse.fail(errorResponse));
     }
 
@@ -96,14 +96,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<CommonResponse<ErrorResponse>> handleAuthorizationDeniedException(
         AuthorizationDeniedException e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
-            .code(ErrorEnum.AUTHENTICATION_FAILED.name())
-            .message(List.of(ErrorEnum.AUTHENTICATION_FAILED.getMessage()))
+            .code(ErrorCode.AUTHENTICATION_FAILED.name())
+            .message(List.of(ErrorCode.AUTHENTICATION_FAILED.getMessage()))
             .build();
 
-        log.warn("[{}] {}", ErrorEnum.AUTHENTICATION_FAILED.name(),
-            ErrorEnum.AUTHENTICATION_FAILED.getMessage());
+        log.warn("[{}] {}", ErrorCode.AUTHENTICATION_FAILED.name(),
+            ErrorCode.AUTHENTICATION_FAILED.getMessage());
 
-        return ResponseEntity.status(ErrorEnum.AUTHENTICATION_FAILED.getHttpStatus())
+        return ResponseEntity.status(ErrorCode.AUTHENTICATION_FAILED.getHttpStatus())
             .body(CommonResponse.fail(errorResponse));
     }
 
@@ -111,14 +111,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<CommonResponse<ErrorResponse>> handleException(Exception e) {
         ErrorResponse errorResponse = ErrorResponse.builder()
-            .code(ErrorEnum.INTERNAL_SERVER_ERROR.name())
-            .message(List.of(ErrorEnum.INTERNAL_SERVER_ERROR.getMessage()))
+            .code(ErrorCode.INTERNAL_SERVER_ERROR.name())
+            .message(List.of(ErrorCode.INTERNAL_SERVER_ERROR.getMessage()))
             .build();
 
-        log.error("[{}] {}", ErrorEnum.INTERNAL_SERVER_ERROR.name(),
-            ErrorEnum.INTERNAL_SERVER_ERROR.getMessage(), e);
+        log.error("[{}] {}", ErrorCode.INTERNAL_SERVER_ERROR.name(),
+            ErrorCode.INTERNAL_SERVER_ERROR.getMessage(), e);
 
-        return ResponseEntity.status(ErrorEnum.INTERNAL_SERVER_ERROR.getHttpStatus())
+        return ResponseEntity.status(ErrorCode.INTERNAL_SERVER_ERROR.getHttpStatus())
             .body(CommonResponse.fail(errorResponse));
     }
 }

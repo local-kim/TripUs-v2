@@ -11,7 +11,7 @@ import org.project.tripus.dto.MemberSecurityDto;
 import org.project.tripus.dto.service.input.CreateUserInputDto;
 import org.project.tripus.entity.UserEntity;
 import org.project.tripus.global.exception.CustomException;
-import org.project.tripus.global.exception.ErrorEnum;
+import org.project.tripus.global.exception.ErrorCode;
 import org.project.tripus.mybatismapper.MemberMapper;
 import org.project.tripus.mybatismapper.MemberSecurityMapper;
 import org.project.tripus.repository.UserRepository;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     public void createMember(CreateUserInputDto input) {
         // 아이디 중복 체크
         if(userRepository.findByUsername(input.getUsername()).isPresent()) {
-            throw new CustomException(ErrorEnum.USERNAME_ALREADY_EXISTS);
+            throw new CustomException(ErrorCode.USERNAME_ALREADY_EXISTS);
         }
 
         UserEntity userEntity = input.toUserEntity(passwordEncoder);

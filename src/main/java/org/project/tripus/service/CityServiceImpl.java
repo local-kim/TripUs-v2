@@ -10,7 +10,7 @@ import org.project.tripus.dto.service.output.GetCityListOutputDto.CityItem;
 import org.project.tripus.dto.service.output.GetCityOutputDto;
 import org.project.tripus.entity.CityEntity;
 import org.project.tripus.global.exception.CustomException;
-import org.project.tripus.global.exception.ErrorEnum;
+import org.project.tripus.global.exception.ErrorCode;
 import org.project.tripus.mybatismapper.CityInfoMapper;
 import org.project.tripus.repository.CityRepository;
 import org.springframework.stereotype.Service;
@@ -91,7 +91,7 @@ public class CityServiceImpl implements CityService {
      */
     public CityEntity getCityEntityById(Long id) {
         return cityRepository.findById(id)
-            .orElseThrow(() -> new CustomException(ErrorEnum.CITY_NOT_FOUND));
+            .orElseThrow(() -> new CustomException(ErrorCode.CITY_NOT_FOUND));
     }
 
 

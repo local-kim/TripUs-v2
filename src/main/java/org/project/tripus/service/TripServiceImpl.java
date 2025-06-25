@@ -31,7 +31,7 @@ import org.project.tripus.entity.PlaceEntity;
 import org.project.tripus.entity.TripEntity;
 import org.project.tripus.entity.UserEntity;
 import org.project.tripus.global.exception.CustomException;
-import org.project.tripus.global.exception.ErrorEnum;
+import org.project.tripus.global.exception.ErrorCode;
 import org.project.tripus.mybatismapper.PlanMapper;
 import org.project.tripus.repository.ItineraryRepository;
 import org.project.tripus.repository.TripRepository;
@@ -96,7 +96,7 @@ public class TripServiceImpl implements TripService {
     public void createItinerary(List<List<SaveTripPlaceItemInputDto>> itinerary, TripEntity tripEntity, CityEntity cityEntity) {
         // 일정 배열의 크기가 여행 일수와 다를 때 예외 발생
         if(itinerary.size() != DAYS.between(tripEntity.getStartDate(), tripEntity.getEndDate()) + 1) {
-            throw new CustomException(ErrorEnum.INVALID_FORMAT, "일정 배열의 크기는 여행 일수와 같아야 합니다.");
+            throw new CustomException(ErrorCode.INVALID_FORMAT, "일정 배열의 크기는 여행 일수와 같아야 합니다.");
         }
 
         for(int i = 0; i < itinerary.size(); i++) {
@@ -240,7 +240,7 @@ public class TripServiceImpl implements TripService {
      */
     public TripEntity getTripEntityWithCityEntity(Long tripId) {
         return tripRepository.findByIdWithCity(tripId)
-            .orElseThrow(() -> new CustomException(ErrorEnum.TRIP_NOT_FOUND));
+            .orElseThrow(() -> new CustomException(ErrorCode.TRIP_NOT_FOUND));
     }
 
     /**
@@ -267,7 +267,7 @@ public class TripServiceImpl implements TripService {
         TripEntity tripEntity = getTripEntityWithCityEntity(tripId);
 
         if(!Objects.equals(tripEntity.getUser().getId(), userEntity.getId())) {
-            throw new CustomException(ErrorEnum.PERMISSION_DENIED);
+            throw new CustomException(ErrorCode.PERMISSION_DENIED);
         }
 
         // 2. 기존의 모든 일정 삭제
@@ -297,7 +297,7 @@ public class TripServiceImpl implements TripService {
      */
     public GetTripListOutputDto getTripList(String sort) {
         if(!"latest".equals(sort) && !"likes".equals(sort)) {
-            throw new CustomException(ErrorEnum.INVALID_FORMAT);
+            throw new CustomException(ErrorCode.INVALID_FORMAT);
         }
 
         List<GetTripListRepositoryOutputDto> tripList = getTripListSortedBy(sort);
