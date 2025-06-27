@@ -1,12 +1,19 @@
 package org.project.tripus.global.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.project.tripus.global.exception.ErrorCode;
+import org.project.tripus.global.response.CommonResponse;
+import org.project.tripus.global.response.ErrorResponse;
 import org.project.tripus.util.JwtUtil;
+import org.project.tripus.util.JwtUtil.TokenStatus;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,7 +38,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String token = authorizationHeader.substring(7);
 
             // JWT 유효성 검증
-            if(jwtUtil.validateToken(token)) {
+            TokenStatus tokenStatus = jwtUtil.validateToken(token);
+
+            if(tokenStatus == TokenStatus.VALID) {
                 String username = jwtUtil.getUsernameFromToken(token);
 
                 // 유저 존재 시 userDetails 생성
@@ -42,6 +51,32 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 // Request의 Security Context에 인증 정보 저장
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+            } else if(tokenStatus == TokenStatus.EXPIRED) {
+                CommonResponse<Object> responseBody = CommonResponse.fail(ErrorResponse.builder()
+                    .code(ErrorCode.TOKEN_EXPIRED.name())
+                    .message(List.of(ErrorCode.TOKEN_EXPIRED.getMessage()))
+                    .build());
+
+                ObjectMapper mapper = new ObjectMapper();
+
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().write(mapper.writeValueAsString(responseBody));
+
+                return;
+            } else if(tokenStatus == TokenStatus.INVALID) {
+                CommonResponse<Object> responseBody = CommonResponse.fail(ErrorResponse.builder()
+                    .code(ErrorCode.AUTHENTICATION_FAILED.name())
+                    .message(List.of(ErrorCode.AUTHENTICATION_FAILED.getMessage()))
+                    .build());
+
+                ObjectMapper mapper = new ObjectMapper();
+
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().write(mapper.writeValueAsString(responseBody));
+
+                return;
             }
         }
 
