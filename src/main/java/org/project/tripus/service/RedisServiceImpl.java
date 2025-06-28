@@ -21,4 +21,9 @@ public class RedisServiceImpl implements RedisService {
         redisTemplate.opsForValue()
             .set(redisKeyFactory.refreshTokenKey(userId), refreshToken, refreshTokenExpirationTime, TimeUnit.MILLISECONDS);
     }
+
+    public String getRefreshToken(Long userId) {
+        return (String) redisTemplate.opsForValue()
+            .get(redisKeyFactory.refreshTokenKey(userId));
+    }
 }

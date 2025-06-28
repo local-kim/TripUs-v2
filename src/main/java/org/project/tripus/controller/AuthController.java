@@ -4,19 +4,24 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.controller.request.LoginRequestDto;
 import org.project.tripus.dto.controller.response.LoginResponseDto;
+import org.project.tripus.dto.controller.response.ReissueResponseDto;
 import org.project.tripus.dto.service.input.LoginInputDto;
 import org.project.tripus.dto.service.output.LoginOutputDto;
+import org.project.tripus.dto.service.output.ReissueOutputDto;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.mapper.AuthMapper;
 import org.project.tripus.service.AuthService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,22 +52,38 @@ public class AuthController {
         LoginResponseDto response = authMapper.toResponse(output);
 
         // Refresh Token을 담은 쿠키 생성
-        Cookie refreshTokenCookie = new Cookie("refreshToken", output.getRefreshToken());
-        refreshTokenCookie.setHttpOnly(true);
-        refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge((int) (refreshTokenExpirationTime / 1000));    // ms -> s
-
-        httpServletResponse.addCookie(refreshTokenCookie);
+        ResponseCookie cookie = ResponseCookie
+            .from("refreshToken", output.getRefreshToken())
+            .httpOnly(true)
+            .path("/")
+            .maxAge(Duration.ofMillis(refreshTokenExpirationTime))
+            .build();
 
         return ResponseEntity.status(HttpStatus.OK)
+            .header(HttpHeaders.SET_COOKIE, cookie.toString())
             .body(CommonResponse.success("로그인 성공", response));
     }
 
-//    @PostMapping("/kakaologin")
-//    public MemberSecurityDto kakaoLogin(@RequestBody LoginDto loginDto) {
-//        MemberSecurityDto member = memberService.getLoginInfo2(loginDto.getId());    // 프로필 사진도 같이 받아옴
-////        System.out.println(member);
-//
-//        return member;
-//    }
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "토큰 재발급 성공"),
+        @ApiResponse(responseCode = "401", description = "Refresh Token이 유효하지 않음"),
+    })
+    @Operation(summary = "토큰 재발급", description = "")
+    @PostMapping("/reissue")
+    public ResponseEntity<?> reissue(@CookieValue(required = true) String refreshToken, HttpServletResponse httpServletResponse) {
+        ReissueOutputDto output = authService.reissue(refreshToken);
+        ReissueResponseDto response = authMapper.toResponse(output);
+
+        // Refresh Token을 담은 쿠키 생성
+        ResponseCookie cookie = ResponseCookie
+            .from("refreshToken", output.getRefreshToken())
+            .httpOnly(true)
+            .path("/")
+            .maxAge(Duration.ofMillis(refreshTokenExpirationTime))
+            .build();
+
+        return ResponseEntity.status(HttpStatus.OK)
+            .header(HttpHeaders.SET_COOKIE, cookie.toString())
+            .body(CommonResponse.success("토큰 재발급 성공", response));
+    }
 }
