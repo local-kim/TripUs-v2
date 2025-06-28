@@ -1,11 +1,7 @@
 package org.project.tripus.service;
 
 import java.util.List;
-import org.project.tripus.dto.PlanDateDto;
-import org.project.tripus.dto.PlanDto;
-import org.project.tripus.dto.PlanMapDto;
-import org.project.tripus.dto.PlanPlaceDto;
-import org.project.tripus.dto.TripRankDto;
+import org.project.tripus.dto.repository.output.GetTripListRepositoryOutputDto;
 import org.project.tripus.dto.service.input.CreateTripInputDto;
 import org.project.tripus.dto.service.input.SaveTripPlaceItemInputDto;
 import org.project.tripus.dto.service.input.UpdateTripInputDto;
@@ -37,31 +33,7 @@ public interface TripService {
 
     int deleteAllItineraryEntity(Long tripId);
 
-    //	좋아요
-    int getPlanLike(int num, int loginNum);
-
-    int insertPlanLike(int num, int loginNum);
-
-    int deletePlanLike(int num, int loginNum);
-
-    int getTotalLike(int num);
-
-    List<PlanPlaceDto> getPlaceList(int tripNum);
-
-
-    // 인기 일정
     GetTripListOutputDto getTripList(String sort);
 
-    List<TripRankDto> getTripRank3();
-
-    //////////////////////////////////////////
-    List<PlanDto> getNavNum(int num);
-
-    List<PlanDto> getPlanDatas(int num);
-
-    List<PlanDateDto> getDate(int num);
-
-    List<PlanDateDto> getPlanMember(int num);
-
-    List<PlanMapDto> mapKakao(int num);
+    List<GetTripListRepositoryOutputDto> getTripListSortedBy(String sort);
 }

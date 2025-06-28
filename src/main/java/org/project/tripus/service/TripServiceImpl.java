@@ -4,16 +4,9 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.PlanDateDto;
-import org.project.tripus.dto.PlanDto;
-import org.project.tripus.dto.PlanMapDto;
-import org.project.tripus.dto.PlanPlaceDto;
-import org.project.tripus.dto.TripRankDto;
 import org.project.tripus.dto.repository.output.GetTripListRepositoryOutputDto;
 import org.project.tripus.dto.service.input.CreateTripInputDto;
 import org.project.tripus.dto.service.input.CreateTripInputDto.TripItem;
@@ -32,7 +25,6 @@ import org.project.tripus.entity.TripEntity;
 import org.project.tripus.entity.UserEntity;
 import org.project.tripus.global.exception.CustomException;
 import org.project.tripus.global.exception.ErrorCode;
-import org.project.tripus.mybatismapper.PlanMapper;
 import org.project.tripus.repository.ItineraryRepository;
 import org.project.tripus.repository.TripRepository;
 import org.springframework.stereotype.Service;
@@ -43,7 +35,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TripServiceImpl implements TripService {
 
-    private final PlanMapper planMapper;
     private final CityService cityService;
     private final PlaceService placeService;
     private final TripRepository tripRepository;
@@ -343,71 +334,5 @@ public class TripServiceImpl implements TripService {
      */
     public List<GetTripListRepositoryOutputDto> getTripListSortedBy(String sort) {
         return tripRepository.findAllOrderBy(sort);
-    }
-
-
-    /***************************************************/
-    // 리팩토링 전
-
-    public List<PlanPlaceDto> getPlaceList(int tripNum) {
-        return planMapper.getPlaceList(tripNum);
-    }
-
-    public List<TripRankDto> getTripRank3() {
-        return planMapper.getTripRank3();
-    }
-
-    //////////////////////////////////////////
-    public List<PlanDto> getNavNum(int num) {
-        return planMapper.getNavNum(num);
-    }
-
-    public List<PlanDto> getPlanDatas(int num) {
-        return planMapper.getPlanDatas(num);
-    }
-
-    public List<PlanDateDto> getDate(int num) {
-        return planMapper.getDate(num);
-    }
-
-    public List<PlanDateDto> getPlanMember(int num) {
-        return planMapper.getPlanMember(num);
-    }
-
-    public List<PlanMapDto> mapKakao(int num) {
-        return planMapper.mapKakao(num);
-    }
-
-    //	PlanLike 좋아요
-    @Override
-    public int getPlanLike(int num, int loginNum) {
-        // TODO Auto-generated method stub
-        Map<String, Integer> map = new HashMap<>();
-        map.put("num", num);
-        map.put("loginNum", loginNum);
-        return planMapper.getPlanLike(map);
-    }
-
-    @Override
-    public int insertPlanLike(int num, int loginNum) {
-        // TODO Auto-generated method stub
-        Map<String, Integer> map = new HashMap<>();
-        map.put("num", num);
-        map.put("loginNum", loginNum);
-        return planMapper.insertPlanLike(map);
-    }
-
-    @Override
-    public int deletePlanLike(int num, int loginNum) {
-        // TODO Auto-generated method stub
-        Map<String, Integer> map = new HashMap<>();
-        map.put("num", num);
-        map.put("loginNum", loginNum);
-        return planMapper.deletePlanLike(map);
-    }
-
-    @Override
-    public int getTotalLike(int num) {
-        return planMapper.getTotalLike(num);
     }
 }

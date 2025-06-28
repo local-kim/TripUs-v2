@@ -1,23 +1,11 @@
 package org.project.tripus.service;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.MemberDto;
-import org.project.tripus.dto.MemberSecurityDto;
 import org.project.tripus.dto.service.input.CreateUserInputDto;
 import org.project.tripus.entity.UserEntity;
 import org.project.tripus.global.exception.CustomException;
 import org.project.tripus.global.exception.ErrorCode;
-import org.project.tripus.mybatismapper.MemberMapper;
-import org.project.tripus.mybatismapper.MemberSecurityMapper;
 import org.project.tripus.repository.UserRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final MemberMapper memberMapper;
-    private final MemberSecurityMapper memberSecurityMapper;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * 회원을 생성합니다.
+     *
+     * @param input 회원 정보가 담긴 DTO
+     * @throws CustomException 이미 가입된 아이디인 경우 {@code USERNAME_ALREADY_EXISTS} 예외를 발생시킵니다.
+     */
     @Transactional
     public void createMember(CreateUserInputDto input) {
         // 아이디 중복 체크
@@ -42,126 +34,5 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = input.toUserEntity(passwordEncoder);
 
         userRepository.save(userEntity);
-    }
-
-
-    /***************************************************/
-    // 리팩토링 전
-
-    @Override
-    public String getName(String id) {
-        // TODO Auto-generated method stub
-        return memberMapper.getName(id);
-    }
-
-//	@Override
-//	public int loginCheck(String id, String password) {
-//		// TODO Auto-generated method stub
-//		Map<String, String> map=new HashMap<>();
-//		map.put("id", id);
-//		map.put("password", password);
-//		return memberMapper.logincheck(map);
-//	}
-
-    @Override
-    public void deleteMember(int num) {
-        // TODO Auto-generated method stub
-        memberMapper.deleteMember(num);
-
-    }
-
-    @Override
-    public int idcheck(String id) {
-        // TODO Auto-generated method stub
-        return memberMapper.idcheck(id);
-    }
-
-    @Override
-    public int emailcheck(String email) {
-        // TODO Auto-generated method stub
-        return memberMapper.emailcheck(email);
-    }
-
-    @Override
-    public boolean login(String id, String password) {
-        // TODO Auto-generated method stub
-        Map<String, String> map = new HashMap<>();
-        map.put("id", id);
-        map.put("password", password);
-
-        return memberMapper.login(map) == 1 ? true : false;
-    }
-
-    @Override
-    public List<Map<String, Object>> getLoginInfo(String id) {
-        // TODO Auto-generated method stub
-        return memberMapper.getLoginInfo(id);
-    }
-
-    @Override
-    public int checkKakaoMember(MemberDto dto) {
-        // TODO Auto-generated method stub
-        return memberMapper.checkKakaoMember(dto);
-    }
-
-    @Transactional
-    public void join(MemberSecurityDto member, String role) {
-//        member.setPassword(passwordEncoder.encode(member.getPassword()));
-        member.setAccountNonExpired(true);
-        member.setAccountNonLocked(true);
-        member.setCredentialsNonExpired(true);
-        member.setEnabled(true);
-
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(role));
-
-        member.setAuthorities(grantedAuthorities);
-        member.setType(1);    // 1 : 일반회원
-        memberSecurityMapper.saveMember(member);
-
-        Map<String, String> map = new HashMap<>();
-        map.put("id", member.getId());
-        map.put("authority_name", role);
-        memberSecurityMapper.saveAuthority(map);
-    }
-
-    @Transactional
-    public void kakaoJoin(MemberSecurityDto member, String role) {
-        member.setAccountNonExpired(true);
-        member.setAccountNonLocked(true);
-        member.setCredentialsNonExpired(true);
-        member.setEnabled(true);
-
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(role));
-
-        member.setAuthorities(grantedAuthorities);
-        member.setType(2);    // 1 : 일반회원
-        memberSecurityMapper.saveMember(member);
-
-        Map<String, String> map = new HashMap<>();
-        map.put("id", member.getId());
-        map.put("authority_name", role);
-        memberSecurityMapper.saveAuthority(map);
-    }
-
-    public int checkId(String id) {
-        return memberSecurityMapper.checkId(id);
-    }
-
-    public int checkEmail(String email) {
-        return memberSecurityMapper.checkEmail(email);
-    }
-
-    public void changePassword(String id, String password) {
-        Map<String, String> map = new HashMap<>();
-        map.put("id", id);
-//		map.put("password", passwordEncoder.encode(password));
-
-        memberSecurityMapper.changePassword(map);
-    }
-
-    public MemberSecurityDto getLoginInfo2(String id) throws UsernameNotFoundException {
-        return memberSecurityMapper.getLoginInfo(id);
     }
 }

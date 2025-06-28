@@ -7,13 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.PlanDateDto;
-import org.project.tripus.dto.PlanDto;
-import org.project.tripus.dto.PlanMapDto;
-import org.project.tripus.dto.TripRankDto;
 import org.project.tripus.dto.controller.request.CreateTripRequestDto;
 import org.project.tripus.dto.controller.request.UpdateTripRequestDto;
 import org.project.tripus.dto.controller.response.CreateTripResponseDto;
@@ -32,7 +26,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -121,61 +114,5 @@ public class TripController {
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.success("여행 목록 조회 성공", response));
-    }
-
-
-    /***************************************************/
-    // 리팩토링 전
-
-    @GetMapping("/rank3")
-    public List<TripRankDto> getTripRank3() {
-        return tripService.getTripRank3();
-    }
-
-    @GetMapping("/nav")
-    public List<PlanDto> getNavNum(@RequestParam int num) {
-        return tripService.getNavNum(num);
-    }
-
-    @GetMapping("/list")
-    public List<PlanDto> getPlanDatas(@RequestParam int num) {
-        return tripService.getPlanDatas(num);
-    }
-
-    @GetMapping("/pdate")
-    public List<PlanDateDto> getDate(@RequestParam int num) {
-        return tripService.getDate(num);
-    }
-
-    @GetMapping("/name")
-    public List<PlanDateDto> getPlanMember(@RequestParam int num) {
-        return tripService.getPlanMember(num);
-    }
-
-    @GetMapping("/map")
-    public List<PlanMapDto> mapKakao(@RequestParam int num) {
-        return tripService.mapKakao(num);
-    }
-
-//	PlanLike 좋아요관련
-
-    @GetMapping("/like")
-    public int getPlanLike(@RequestParam int num, @RequestParam int loginNum) {
-        return tripService.getPlanLike(num, loginNum);
-    }
-
-    @PostMapping("/insertlike")
-    public void insertPlanLike(@RequestBody Map<String, Integer> map) {
-        tripService.insertPlanLike(map.get("num"), map.get("loginNum"));
-    }
-
-    @DeleteMapping("/deletelike")
-    public void deleteLike(@RequestParam int num, @RequestParam int loginNum) {
-        tripService.deletePlanLike(num, loginNum);
-    }
-
-    @GetMapping("totallike")
-    public int getTotalLike(@RequestParam int num) {
-        return tripService.getTotalLike(num);
     }
 }

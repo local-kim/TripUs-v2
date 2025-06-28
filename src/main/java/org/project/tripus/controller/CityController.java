@@ -4,9 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.dto.TripDto;
 import org.project.tripus.dto.controller.response.GetCityListResponseDto;
 import org.project.tripus.dto.controller.response.GetCityResponseDto;
 import org.project.tripus.dto.service.output.GetCityListOutputDto;
@@ -16,11 +14,9 @@ import org.project.tripus.mapper.CityMapper;
 import org.project.tripus.service.CityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -30,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class CityController {
 
     private final CityService cityService;
-    //    private final TripService tripService;
     private final CityMapper cityMapper;
 
     @ApiResponses(value = {
@@ -58,61 +53,5 @@ public class CityController {
 
         return ResponseEntity.status(HttpStatus.OK)
             .body(CommonResponse.success("도시 조회 성공", response));
-    }
-
-
-    /***************************************************/
-    // 리팩토링 전
-
-    @GetMapping("/tripdata")
-    public List<TripDto> getTripData(
-        @RequestParam int loginNum,
-        @RequestParam int city_num
-    ) {
-        return cityService.getTripData(loginNum, city_num);
-    }
-
-    // 장소 좋아요
-    @GetMapping("/like")
-    public int getLike(@RequestParam String place_id, @RequestParam int loginNum) {
-        System.out.println("mylike");
-        System.out.println(cityService.getLike(place_id, loginNum));
-        return cityService.getLike(place_id, loginNum);
-    }
-
-//    @PostMapping("/insertlike")
-//    public void insertLike(@RequestBody HashMap<String, Object> request) {
-//        PlaceDto place = new PlaceDto();
-//
-//        place.setCity_num(Integer.parseInt((String) request.get("cityNum")));
-//
-//        place.setContentid((String) request.get("contentid"));
-//        place.setContenttypeid((String) request.get("contenttypeid"));
-//        place.setTitle((String) request.get("title"));
-//        place.setCat3((String) request.get("cat3"));
-//        place.setAddr1((String) request.get("addr1"));
-//        place.setAddr2((String) request.get("addr2"));
-//        place.setFirstimage((String) request.get("firstimage"));
-//        place.setMapx((String) request.get("mapx"));
-//        place.setMapy((String) request.get("mapy"));
-//
-//        if(tripService.existsPlace(place.getContentid()) == 0) {
-//            tripService.insertPlace(place);
-//        }
-//
-//        int loginNum = (Integer) request.get("loginNum");
-//        request.get("check");
-//
-//        cityService.insertLike(Integer.parseInt(place.getContentid()), loginNum);
-//    }
-
-    @DeleteMapping("/deletelike")
-    public void deleteLike(@RequestParam String place_id, @RequestParam int loginNum) {
-        cityService.deleteLike(place_id, loginNum);
-    }
-
-    @GetMapping("/liketable")
-    public List<Integer> getLikeTable(@RequestParam int loginNum) {
-        return cityService.getLikeTable(loginNum);
     }
 }

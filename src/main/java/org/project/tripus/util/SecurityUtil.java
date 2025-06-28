@@ -19,8 +19,7 @@ public class SecurityUtil {
     public Optional<UserEntity> getCurrentMember() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if(authentication != null
-            && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
+        if(authentication != null && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
             return Optional.of(userDetails.getUserEntity());
         }
 

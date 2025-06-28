@@ -29,6 +29,7 @@ public class AuthServiceImpl implements AuthService {
      *
      * @param input 로그인 정보가 담긴 DTO
      * @return Access Token과 Refresh Token이 담긴 DTO
+     * @throws CustomException 비밀번호가 일치하지 않는 경우 {@code USER_NOT_FOUND} 예외를 발생시킵니다.
      */
     public LoginOutputDto login(LoginInputDto input) {
         CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(input.getUsername());
@@ -56,6 +57,7 @@ public class AuthServiceImpl implements AuthService {
      *
      * @param refreshToken 기존의 Refresh Token
      * @return 재발급한 Access Token과 Refresh Token이 담긴 DTO
+     * @throws CustomException Refresh Token이 유효하지 않거나 저장된 Refresh Token과 일치하지 않는 경우 {@code AUTHENTICATION_FAILED} 예외를 발생시킵니다.
      */
     public ReissueOutputDto reissue(String refreshToken) {
         // Refresh Token 유효성 검사
