@@ -3,7 +3,7 @@ server:
 
 logging:
   level:
-    data: DEBUG
+    root: INFO
 
 spring:
   application:
@@ -32,11 +32,6 @@ spring:
       hibernate:
         format_sql: true
         auto_quote_keyword: true
-
-mybatis:
-  type-aliases-package: org.project.tripus.mapper, org.project.tripus.dto
-  mapper-locations:
-  - /mapper/**/*.xml
 
 # Spring Security
 jwt:
