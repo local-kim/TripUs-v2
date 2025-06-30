@@ -9,10 +9,34 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
-  - job_name: spring
+  - job_name: debug-logs
     static_configs:
       - targets:
           - localhost
         labels:
-          job: spring
-          __path__: /app/logs/*.log
+          job: debug-logs
+          __path__: /app/logs/debug.log
+
+  - job_name: info-logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: info-logs
+          __path__: /app/logs/info.log
+
+  - job_name: warn-logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: warn-logs
+          __path__: /app/logs/warn.log
+
+  - job_name: error-logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: error-logs
+          __path__: /app/logs/error.log
