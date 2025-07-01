@@ -2,8 +2,8 @@ package org.project.tripus.global.security;
 
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.entity.UserEntity;
+import org.project.tripus.global.enums.ErrorCode;
 import org.project.tripus.global.exception.CustomException;
-import org.project.tripus.global.exception.ErrorCode;
 import org.project.tripus.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

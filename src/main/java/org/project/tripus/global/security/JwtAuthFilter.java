@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.project.tripus.global.exception.ErrorCode;
+import org.project.tripus.global.enums.ErrorCode;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.global.response.ErrorResponse;
 import org.project.tripus.util.JwtUtil;

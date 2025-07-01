@@ -3,6 +3,7 @@ package org.project.tripus.global.exception;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.project.tripus.global.enums.ErrorCode;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.global.response.ErrorResponse;
 import org.springframework.http.HttpHeaders;
@@ -82,6 +83,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
             log.warn("[{}] {}", statusCode.toString().split(" ")[1],
                 errorResponse.getBody().getDetail());
+            log.warn(ex.getMessage(), ex);
         }
 
         if(statusCode.equals(HttpStatus.INTERNAL_SERVER_ERROR) && body == null) {

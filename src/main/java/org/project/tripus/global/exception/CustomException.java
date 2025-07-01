@@ -1,6 +1,7 @@
 package org.project.tripus.global.exception;
 
 import lombok.Getter;
+import org.project.tripus.global.enums.ErrorCode;
 
 @Getter
 public class CustomException extends RuntimeException {

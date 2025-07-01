@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.project.tripus.UserFixture;
 import org.project.tripus.dto.controller.request.LoginRequestDto;
 import org.project.tripus.entity.UserEntity;
-import org.project.tripus.global.exception.ErrorCode;
+import org.project.tripus.global.enums.ErrorCode;
 import org.project.tripus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

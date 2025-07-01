@@ -33,6 +33,11 @@ spring:
         format_sql: true
         auto_quote_keyword: true
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 15MB
+
 # Spring Security
 jwt:
   secret_key: wXVmY9q+3FgDjsKqP7C8F8zJ5bQx9sd9vpl9xAyj/B0=
@@ -45,3 +50,13 @@ management:
     web:
       exposure:
         include: "prometheus"
+
+# AWS S3
+cloud:
+  aws:
+    s3:
+      bucket: market-api-bucket-2
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2
