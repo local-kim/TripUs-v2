@@ -40,15 +40,15 @@ public class S3Service implements FileService {
 
     public String uploadReviewImage(MultipartFile file) {
         // 파일명 형식 : review/UUID_원본파일명
-        String fileName = FileType.REVIEW_IMAGE.getFolder() + UUID.randomUUID() + "_" + file.getOriginalFilename();
-        return resizeAndUpload(file, fileName);
+        String key = FileType.REVIEW_IMAGE.getFolder() + UUID.randomUUID() + "_" + file.getOriginalFilename();
+        return resizeAndUpload(file, key);
     }
 
     public List<String> uploadReviewImage(List<MultipartFile> files) {
         return files.stream().map(this::uploadReviewImage).toList();
     }
 
-    private String resizeAndUpload(MultipartFile file, String fileName) {
+    private String resizeAndUpload(MultipartFile file, String key) {
         try {
             // 리사이즈
             BufferedImage originalImage = null;
@@ -65,35 +65,35 @@ public class S3Service implements FileService {
             InputStream resizedInputStream = new ByteArrayInputStream(resizedBytes);
 
             // 업로드
-            return upload(fileName, resizedInputStream, resizedBytes.length);
+            return upload(key, resizedInputStream, resizedBytes.length);
         } catch(IOException e) {
             throw new CustomException(ErrorCode.FILE_UPLOAD_FAILED);
         }
     }
 
-    private String upload(String filename, InputStream inputStream, long contentLength) throws IOException {
+    private String upload(String key, InputStream inputStream, long contentLength) throws IOException {
         PutObjectRequest request = PutObjectRequest.builder()
             .bucket(bucket)
-            .key(filename)
+            .key(key)
             .contentType("image/jpeg")
             .contentLength(contentLength)
             .build();
 
         s3Client.putObject(request, RequestBody.fromInputStream(inputStream, contentLength));
 
-        return filename;
+        return key;
     }
 
-    public void delete(String fileName) {
+    public void delete(String key) {
         DeleteObjectRequest request = DeleteObjectRequest.builder()
             .bucket(bucket)
-            .key(fileName)
+            .key(key)
             .build();
 
         s3Client.deleteObject(request);
     }
 
-    public void delete(List<String> fileNames) {
-        fileNames.forEach(this::delete);
+    public void delete(List<String> keys) {
+        keys.forEach(this::delete);
     }
 }

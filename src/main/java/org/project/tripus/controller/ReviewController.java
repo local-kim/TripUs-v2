@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +57,8 @@ public class ReviewController {
         @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         // 후기 이미지 업로드
-        List<String> imageUrls = null;
+        List<String> imageUrls = new ArrayList<>();
+
         if(images != null && !images.isEmpty()) {
             imageUrls = fileService.uploadReviewImage(images);
         }

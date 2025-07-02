@@ -36,7 +36,9 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public CreateReviewOutputDto createReview(CreateReviewInputDto input, List<String> imageUrls, UserEntity userEntity) {
         // 트랜잭션 롤백 시 저장된 파일을 비동기적으로 삭제하는 이벤트 발행
-        eventPublisher.publishEvent(new DeleteFileEvent(imageUrls));
+        if(!imageUrls.isEmpty()) {
+            eventPublisher.publishEvent(new DeleteFileEvent(imageUrls));
+        }
 
         // 장소 엔티티 조회
         PlaceEntity placeEntity = placeRepository.findById(input.getPlaceId())
