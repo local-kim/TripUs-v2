@@ -1,9 +1,10 @@
-package org.project.tripus.global.annotation;
+package org.project.tripus.global.validator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.util.List;
 import org.project.tripus.dto.controller.request.SaveTripPlaceItemRequestDto;
+import org.project.tripus.global.annotation.ValidItinerary;
 
 public class ItineraryValidator implements ConstraintValidator<ValidItinerary, List<List<SaveTripPlaceItemRequestDto>>> {
 

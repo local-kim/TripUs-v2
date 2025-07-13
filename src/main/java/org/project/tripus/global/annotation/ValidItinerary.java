@@ -7,6 +7,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.project.tripus.global.validator.ItineraryValidator;
 
 @Documented
 @Constraint(validatedBy = ItineraryValidator.class)
