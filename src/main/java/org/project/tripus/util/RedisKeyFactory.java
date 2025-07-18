@@ -8,4 +8,8 @@ public class RedisKeyFactory {
     public String refreshTokenKey(Long userId) {
         return "refresh-token:" + userId;
     }
+
+    public String idempotencyKey(String idempotencyKey) {
+        return "idempotency-key:" + idempotencyKey;
+    }
 }

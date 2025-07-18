@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.project.tripus.dto.controller.request.CreateUserRequestDto;
 import org.project.tripus.dto.service.input.CreateUserInputDto;
+import org.project.tripus.global.annotation.Idempotent;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.mapper.UserMapper;
 import org.project.tripus.service.UserService;
@@ -32,6 +33,7 @@ public class UserController {
         @ApiResponse(responseCode = "400", description = "1. 잘못된 입력 형식 2. 이미 가입된 아이디"),
     })
     @Operation(summary = "회원가입", description = "비밀번호: 8~16자의 영문, 숫자, 특수문자를 1개 이상 포함한 문자열")
+    @Idempotent
     @PostMapping("")
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequestDto request) {
         CreateUserInputDto input = userMapper.toInput(request);

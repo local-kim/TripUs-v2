@@ -18,6 +18,7 @@ import org.project.tripus.dto.service.input.UpdateTripInputDto;
 import org.project.tripus.dto.service.output.CreateTripOutputDto;
 import org.project.tripus.dto.service.output.GetTripListOutputDto;
 import org.project.tripus.dto.service.output.GetTripOutputDto;
+import org.project.tripus.global.annotation.Idempotent;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.global.security.CustomUserDetails;
 import org.project.tripus.mapper.TripMapper;
@@ -53,6 +54,7 @@ public class TripController {
     @Operation(summary = "여행 일정 생성")
     @SecurityRequirement(name = "JWT")
     @PreAuthorize("isAuthenticated()")
+    @Idempotent
     @PostMapping("")
     public ResponseEntity<?> createTrip(
         @RequestBody @Valid CreateTripRequestDto request,

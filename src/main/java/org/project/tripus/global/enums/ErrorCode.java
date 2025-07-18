@@ -13,6 +13,7 @@ public enum ErrorCode {
     USERNAME_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "이미 가입된 아이디입니다."),
     INVALID_FORMAT(HttpStatus.BAD_REQUEST, "잘못된 입력 형식입니다."),
     FILE_UPLOAD_FAILED(HttpStatus.BAD_REQUEST, "파일 업로드에 실패했습니다."),
+    IDEMPOTENCY_KEY_MISSING(HttpStatus.BAD_REQUEST, "멱등키가 필요한 요청입니다."),
 
     // 401 Unauthorized
     AUTHENTICATION_FAILED(HttpStatus.UNAUTHORIZED, "인증에 실패했습니다."),
@@ -26,6 +27,9 @@ public enum ErrorCode {
     CITY_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 도시입니다."),
     TRIP_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 여행입니다."),
     PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 장소입니다."),
+
+    // 409 Conflict
+    PROCESSING_REQUEST(HttpStatus.CONFLICT, "처리 중인 요청입니다."),
 
     // 5xx Server Errors
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다."),

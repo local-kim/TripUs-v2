@@ -15,6 +15,7 @@ import org.project.tripus.dto.controller.request.CreateReviewRequestDto;
 import org.project.tripus.dto.controller.response.CreateReviewResponseDto;
 import org.project.tripus.dto.service.input.CreateReviewInputDto;
 import org.project.tripus.dto.service.output.CreateReviewOutputDto;
+import org.project.tripus.global.annotation.Idempotent;
 import org.project.tripus.global.response.CommonResponse;
 import org.project.tripus.global.security.CustomUserDetails;
 import org.project.tripus.mapper.ReviewMapper;
@@ -50,6 +51,7 @@ public class ReviewController {
     @Operation(summary = "후기 생성")
     @SecurityRequirement(name = "JWT")
     @PreAuthorize("isAuthenticated()")
+    @Idempotent
     @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createReview(
         @RequestPart("data") @Valid CreateReviewRequestDto request,
