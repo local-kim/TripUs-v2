@@ -8,7 +8,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.project.tripus.global.annotation.ValidItinerary;
+import org.project.tripus.global.annotation.ValidNestedList;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
@@ -19,7 +19,7 @@ public class CreateTripRequestDto {
     @Valid
     private TripItem trip;
 
-    @ValidItinerary
+    @ValidNestedList
     @Schema(example = """
           [
             [

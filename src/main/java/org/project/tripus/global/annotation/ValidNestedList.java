@@ -7,13 +7,13 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.project.tripus.global.validator.ItineraryValidator;
+import org.project.tripus.global.validator.NestedListValidator;
 
 @Documented
-@Constraint(validatedBy = ItineraryValidator.class)
-@Target({ElementType.FIELD})
+@Constraint(validatedBy = NestedListValidator.class)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidItinerary {
+public @interface ValidNestedList {
 
     String message() default "contentid, contenttypeid, title은 필수입니다.";
 

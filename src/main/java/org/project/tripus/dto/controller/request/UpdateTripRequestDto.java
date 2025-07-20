@@ -5,14 +5,14 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.project.tripus.global.annotation.ValidItinerary;
+import org.project.tripus.global.annotation.ValidNestedList;
 
 @Getter
 @Setter
 @Builder
 public class UpdateTripRequestDto {
 
-    @ValidItinerary
+    @ValidNestedList
     @Schema(example = """
           [
             [

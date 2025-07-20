@@ -42,7 +42,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
         HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         List<String> messages = ex.getBindingResult().getFieldErrors().stream()
-            .map(e -> e.getDefaultMessage() + " : " + e.getField())
+            .map(e -> e.getField() + ": " + e.getDefaultMessage())
             .toList();
 
         ErrorResponse errorResponse = ErrorResponse.builder()
